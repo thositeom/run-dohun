@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="testMap">
+	<typeAlias alias="test" type="com.spring.vo.testVO" />
+
+	<resultMap id="testMap" class="test">
+		<result property="id" column="ID" columnIndex="1" />
+		<result property="pwd" column="PWD" columnIndex="2" />
+	</resultMap>
+
+
+	<select id="testInfo" parameterClass="test" resultMap="testMap">
+		SELECT * FROM TEST WHERE ID = #id#
+	</select>
+	
+	<select id="testInfoList" parameterClass="test" resultMap="testMap">
+		SELECT * FROM TEST
+	</select>
+
+	<insert id="instTestInfo" parameterClass="test">
+		INSERT INTO TEST (ID, PWD) VALUES (#id#, #pwd#)
+	</insert>
+
+	<update id="updateTestInfo" parameterClass="test">
+		UPDATE TEST SET ID = #id#, PWD=#pwd# WHERE ID=#id# 
+	</update>	
+
+	<delete id="deleteTestInfo" parameterClass="test">
+		DELETE FROM TEST WHERE ID=#id# 
+	</delete>
+
+</sqlMap>

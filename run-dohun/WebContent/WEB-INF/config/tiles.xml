@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.main" template="/WEB-INF/jsp/main/main.jsp">
+	  	<put-attribute name="aaa" value="데이터야 나와라라라라라" ></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/layout/footer.jsp"></put-attribute>
+	</definition> 
+	
+	<definition name="*.main" extends="base.main">
+		<put-attribute name="content"  value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+</tiles-definitions>

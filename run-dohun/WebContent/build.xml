@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<project name="run-dohun-3.0.5 Deployer" default="compile">
+	<property name="copyJsp" value="copyJsp"/>
+	<property name="copyProject" value="copyProject"/>
+	
+    <property file="build.properties"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+	</path>
+    <target name="clean" description="Clean output directories">
+		<delete dir="${build.dir}"/>
+    </target>
+	
+	<target name="compile" description="Compile main source tree java file">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" optimize="false"
+			deprecation="false" failonerror="true" encoding="UTF-8"
+			classpathref="classpath" includeantruntime="true" verbose="true">
+		</javac>
+		<mkdir dir="${build.dir}"/>
+		<copy todir="${classes.dir}" verbose="true">
+			<fileset dir="${src.dir}" includes="**/*.xml" />
+		</copy>
+		<echo>${copyProject}</echo>
+	
+		<mkdir dir="${webcontent.dir}"/>
+		<copy todir="${web.dir/WebContent}" verbose="true">
+			<fileset dir="${webcontent.dir}" >
+				<include name="**/*.jsp"/>
+			</fileset>
+		</copy>
+		<echo>${copyJsp}</echo>
+	</target>
+	
+</project>
