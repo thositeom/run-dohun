@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="honeySqlMap">
+	<typeAlias alias="honey" type="kr.dohun.honey.honeyVO" />
+
+	<resultMap id="honeyMap" class="honey">
+		<result property="no" column="COL00" columnIndex="1" />
+		<result property="col01" column="COL01" columnIndex="2" />
+		<result property="col02" column="COL02" columnIndex="3" />
+		<result property="col03" column="COL03" columnIndex="4" />
+		<result property="col04" column="COL04" columnIndex="5" />
+		<result property="col05" column="COL05" columnIndex="6" />
+		<result property="col06" column="COL06" columnIndex="7" />
+		<result property="col07" column="COL07" columnIndex="8" />
+		<result property="col08" column="COL08" columnIndex="9" />
+		<result property="col09" column="COL09" columnIndex="10" />
+		<result property="col10" column="COL10" columnIndex="11" />
+		<result property="col11" column="COL11" columnIndex="12" />
+		<result property="col12" column="COL12" columnIndex="13" />
+		<result property="col13" column="COL13" columnIndex="14" />
+	</resultMap>
+
+	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM TEST WHERE ID = #id#
+	</select> -->
+	
+	<select id="honeyList" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM HONEY
+	</select>
+	
+	<select id="honeyInfo" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM HONEY WHERE COL00 = #no#
+	</select>
+
+	<insert id="honeyInsertInfo" parameterClass="honey">
+		INSERT INTO HONEY 
+		(COL01,COL02,COL03,COL04
+		,COL05,COL06,COL07,COL08,COL09
+		,COL10,COL11,COL12,COL13) 
+		VALUES 
+		(#col01#,#col02#,#col03#,#col04#
+		,#col05#,#col06#,#col07#,#col08#,#col09#,#col10#
+		,#col11#,#col12#,#col13#)
+	</insert>
+
+	<update id="honeyUpdateInfo" parameterClass="honey">
+		UPDATE HONEY SET 
+			COL01=#col01#,
+			COL02=#col02#,
+			COL03=#col03#,
+			COL04=#col04#,
+			COL05=#col05#,
+			COL06=#col06#,
+			COL07=#col07#,
+			COL08=#col08#,
+			COL09=#col09#,
+			COL10=#col10#,
+			COL11=#col11#,
+			COL12=#col12#,
+			COL13=#col13#
+		WHERE COL00=#no# 
+	</update>	
+ 
+	<delete id="honeyDeleteInfo" parameterClass="honey">
+		DELETE FROM HONEY WHERE COL00 = #no#
+	</delete>
+
+</sqlMap>

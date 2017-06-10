@@ -12,6 +12,18 @@
 </style>
 
 <script type="text/javascript">
+
+function aaa(element) {
+	$(element).keyup(function(){
+		var val1 = element.value;
+        var num = new Number(val1);
+         if(isNaN(num)){
+          alert("Please enter a valid number");
+          element.value = '';
+         }
+        });
+}
+
 $(function(){
 	//jQgrid START
 	$("#list01").jqGrid({
@@ -32,9 +44,22 @@ $(function(){
 	   			editrules:{required:true}
    			},		//이름
 	   		{name:'col02',index:'col02',width:90,frozen:true,editable:true,editrules:{required:true}},      //전화번호
-	   		{name:'col03',index:'col03',width:300,frozen:true,editable:true,editrules:{required:true}},     //주소
+	   		{name:'col03',index:'col03',width:250,frozen:true,editable:true,editrules:{required:true}},     //주소
 	   		{name:'col04',index:'col04',width:100,frozen:true,editable:true},                            	//비고
-	   		{name:'col05',index:'col05',width:90,editable:true,editrules:{required:true}},		         	//주문일자
+	   		{name:'col05',index:'col05',width:90,editable:true,editrules:{required:true},
+	   			editoptions: {
+	   				readonly:true,	   				
+	   				dataInit: function (element) {
+	   					$(element).datepicker({
+	   						id: 'orderDate_datePicker',
+                            dateFormat: 'yy-m-d',
+                            //minDate: new Date(2010, 0, 1),
+                            maxDate: new Date(2020, 0, 1),
+                            showOn: 'focus'
+                        });
+                    }
+                }
+	   		},		         	//주문일자
 	   		{name:'col06',index:'col06',width:50,editable:true,align:"center",								//결재여부
                 edittype: "select",                                                                     
                 editoptions: {                                                                          
@@ -42,11 +67,48 @@ $(function(){
                 }                                                                                       
 	   		},                                                                                          
 	   		{name:'col07',index:'col07',width:100,editable:true},                                       //주문내역
-	   		{name:'col08',index:'col08',width:100,editable:true,editrules:{required:true},formatter: "integer"},                  //수량
-	   		{name:'col09',index:'col09',width:100,editable:true,editrules:{required:true},formatter: "integer"},                  //단가
-	   		{name:'col10',index:'col10',width:100,editable:true,formatter: "integer"},                  //금액
+	   		{name:'col08',index:'col08',width:100,editable:true,editrules:{required:true},formatter: "integer",
+	   			editoptions: {
+	   				dataInit: function (element) {
+	   					$(element).keyup(function(){
+	   						$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+	   					})
+	   				}
+	   			}
+	   		},                  //수량
+	   		{name:'col09',index:'col09',width:100,editable:true,editrules:{required:true},formatter: "integer",
+	   			editoptions: {
+	   				dataInit: function (element) {
+	   					$(element).keyup(function(){
+	   						$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+	   					})
+	   				}
+	   			}
+	   		},                  //단가
+	   		{name:'col10',index:'col10',width:100,editable:true,formatter: "integer",
+	   			editoptions: {
+	   				dataInit: function (element) {
+	   					$(element).keyup(function(){
+	   						$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+	   					})
+	   				}
+	   			} 
+	   		},                  //금액
 	   		{name:'col11',index:'col11',width:100,editable:true},                                       //운송장번호
-	   		{name:'col12',index:'col12',width:100,editable:true}                                        //배송일자
+	   		{name:'col12',index:'col12',width:100,editable:true,
+	   			editoptions: {
+	   				readonly:true,	   				
+	   				dataInit: function (element) {
+	   					$(element).datepicker({
+	   						id: 'deliverDate_datePicker',
+                            dateFormat: 'yy-m-d',
+                            //minDate: new Date(2010, 0, 1),
+                            maxDate: new Date(2020, 0, 1),
+                            showOn: 'focus'
+                        });
+                    }
+                }
+	   		}                                        //배송일자
 	   	],
 	   	height: 250,
 		width:900,

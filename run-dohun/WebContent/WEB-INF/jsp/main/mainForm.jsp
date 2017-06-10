@@ -15,7 +15,7 @@
 <form action="">
 	<div class="col-sm-8 text-left"> 
 		<h1>run-dohun</h1>
-	    <p>나는 달린다. 왜냐 살뺄거니까| ${contextPath }</p>
+	    <p>나는 달린다. 왜냐 살뺄거니까</p>
 	    <hr>
 	    <h3>Test</h3>
 	    <p>Lorem ipsum...</p>

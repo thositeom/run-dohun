@@ -8,7 +8,7 @@
 <head>
 	<title>run-dohun</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.css">
 	<script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>

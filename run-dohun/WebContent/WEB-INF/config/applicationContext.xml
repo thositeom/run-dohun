@@ -23,12 +23,16 @@
 		<property name="password" value="test" />
 	</bean>
  -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
 		<property name="url" value="jdbc:mysql://localhost:3306/t" /> 
 		<property name="username" value="" /> 
 		<property name="password" value="" /> 
-	</bean> 
+	</bean>  -->
+	<!-- JNDI -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/comp/env/jdbc/thositeom" />
+	</bean>
  
 	<!-- ibatis -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
