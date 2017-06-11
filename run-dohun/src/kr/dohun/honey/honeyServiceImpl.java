@@ -36,4 +36,10 @@ public class honeyServiceImpl implements honeyService {
 	public int honeyDeleteInfo(honeyVO vo) throws Exception {
 		return honeyDao.honeyDeleteInfo(vo);
 	}
+	
+	@Override
+	public List honeySubList(honeyVO vo) throws Exception {
+		return (List) honeyDao.honeySubList(vo);
+	}
+	
 }

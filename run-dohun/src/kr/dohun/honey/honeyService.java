@@ -8,6 +8,8 @@ public interface honeyService {
 	public int honeyInsertInfo(honeyVO vo) throws Exception;
 	public int honeyUpdateInfo(honeyVO vo) throws Exception;
 	public int honeyDeleteInfo(honeyVO vo) throws Exception;
+
+	public List honeySubList(honeyVO vo) throws Exception;
 	
 	
 }

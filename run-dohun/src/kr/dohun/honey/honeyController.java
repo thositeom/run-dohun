@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.map.HashedMap;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -105,6 +104,19 @@ public class honeyController {
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "/honeyJqgridSub.do")
+	public ModelAndView honeyJqgridSub(HttpServletRequest request, honeyVO vo) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		try {
+			List list = new ArrayList();
+			list = honeyService.honeySubList(vo);
+			mv.addObject("resultSub",list);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;

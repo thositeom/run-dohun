@@ -64,5 +64,9 @@
 	<delete id="honeyDeleteInfo" parameterClass="honey">
 		DELETE FROM HONEY WHERE COL00 = #no#
 	</delete>
+	
+	<select id="honeySubList" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM HONEY WHERE COL00 = #no#
+	</select>
 
 </sqlMap>
