@@ -1,103 +1,76 @@
 package kr.dohun.honey;
 
 public class honeyVO {
-	String no;
-	String col01;
-	String col02;
-	String col03;
-	String col04;
-	String col05;
-	String col06;
-	String col07;
-	String col08;
-	String col09;
-	String col10;
-	String col11;
-	String col12;
-	String col13;
+	String honeyId;
+	String honeyOrderDate;
+	String honeyPayment;
+	String honeyOrderList;
+	String honeyQty;
+	String honeyCost;
+	String honeyAmount;
+	String honeyWaybill;
+	String honeyDeliveryDate;
+	String honeyEtc01;
 	
-	public String getNo() {
-		return no;
+	public String getHoneyId() {
+		return honeyId;
 	}
-	public void setNo(String no) {
-		this.no = no;
+	public void setHoneyId(String honeyId) {
+		this.honeyId = honeyId;
 	}
-	public String getCol01() {
-		return col01;
+	public String getHoneyOrderDate() {
+		return honeyOrderDate;
 	}
-	public void setCol01(String col01) {
-		this.col01 = col01;
+	public void setHoneyOrderDate(String honeyOrderDate) {
+		this.honeyOrderDate = honeyOrderDate;
 	}
-	public String getCol02() {
-		return col02;
+	public String getHoneyPayment() {
+		return honeyPayment;
 	}
-	public void setCol02(String col02) {
-		this.col02 = col02;
+	public void setHoneyPayment(String honeyPayment) {
+		this.honeyPayment = honeyPayment;
 	}
-	public String getCol03() {
-		return col03;
+	public String getHoneyOrderList() {
+		return honeyOrderList;
 	}
-	public void setCol03(String col03) {
-		this.col03 = col03;
+	public void setHoneyOrderList(String honeyOrderList) {
+		this.honeyOrderList = honeyOrderList;
 	}
-	public String getCol04() {
-		return col04;
+	public String getHoneyQty() {
+		return honeyQty;
 	}
-	public void setCol04(String col04) {
-		this.col04 = col04;
+	public void setHoneyQty(String honeyQty) {
+		this.honeyQty = honeyQty;
 	}
-	public String getCol05() {
-		return col05;
+	public String getHoneyCost() {
+		return honeyCost;
 	}
-	public void setCol05(String col05) {
-		this.col05 = col05;
+	public void setHoneyCost(String honeyCost) {
+		this.honeyCost = honeyCost;
 	}
-	public String getCol06() {
-		return col06;
+	public String getHoneyAmount() {
+		return honeyAmount;
 	}
-	public void setCol06(String col06) {
-		this.col06 = col06;
+	public void setHoneyAmount(String honeyAmount) {
+		this.honeyAmount = honeyAmount;
 	}
-	public String getCol07() {
-		return col07;
+	public String getHoneyWaybill() {
+		return honeyWaybill;
 	}
-	public void setCol07(String col07) {
-		this.col07 = col07;
+	public void setHoneyWaybill(String honeyWaybill) {
+		this.honeyWaybill = honeyWaybill;
 	}
-	public String getCol08() {
-		return col08;
+	public String getHoneyDeliveryDate() {
+		return honeyDeliveryDate;
 	}
-	public void setCol08(String col08) {
-		this.col08 = col08;
+	public void setHoneyDeliveryDate(String honeyDeliveryDate) {
+		this.honeyDeliveryDate = honeyDeliveryDate;
 	}
-	public String getCol09() {
-		return col09;
+	public String getHoneyEtc01() {
+		return honeyEtc01;
 	}
-	public void setCol09(String col09) {
-		this.col09 = col09;
+	public void setHoneyEtc01(String honeyEtc01) {
+		this.honeyEtc01 = honeyEtc01;
 	}
-	public String getCol10() {
-		return col10;
-	}
-	public void setCol10(String col10) {
-		this.col10 = col10;
-	}
-	public String getCol11() {
-		return col11;
-	}
-	public void setCol11(String col11) {
-		this.col11 = col11;
-	}
-	public String getCol12() {
-		return col12;
-	}
-	public void setCol12(String col12) {
-		this.col12 = col12;
-	}
-	public String getCol13() {
-		return col13;
-	}
-	public void setCol13(String col13) {
-		this.col13 = col13;
-	}
+	
 }

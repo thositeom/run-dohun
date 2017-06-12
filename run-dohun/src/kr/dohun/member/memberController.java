@@ -34,7 +34,7 @@ public class memberController {
 		String userPwd = request.getParameter("loginPwd");
 		
 		memberVo.setUserName(userName);
-		memberVo.setUserPwd(userPwd);
+		memberVo.setUserPassword(userPwd);
 		
 		mv.setViewName("redirect:/index.do");
 	
@@ -84,7 +84,7 @@ public class memberController {
 		
 		memberVo.getUserName();
 		memberVo.getUserEmail();
-		memberVo.getUserPwd();
+		memberVo.getUserPassword();
 		
 		mv.setViewName("jsonView");
 		return mv;

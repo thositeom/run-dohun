@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="memberSqlMap">
+	<typeAlias alias="member" type="kr.dohun.member.memberVO" />
+
+	<resultMap id="memberMap" class="member">
+		<result property="userId" column="M_ID" columnIndex="1" />
+		<result property="userName" column="M_NAME" columnIndex="2" />
+		<result property="userEmail" column="M_EMAIL" columnIndex="3" />
+		<result property="userPhone" column="M_PHONE" columnIndex="4" />
+		<result property="userAddress" column="M_ADDRESS" columnIndex="5" />
+		<result property="userPassword" column="M_PASSWORD" columnIndex="6" />
+		<result property="userEtc01" column="M_ETC01" columnIndex="8" />
+		<result property="userEtc02" column="M_ETC02" columnIndex="9" />
+		<result property="userEtc03" column="M_ETC03" columnIndex="10" />
+		<result property="userEtc04" column="M_ETC04" columnIndex="11" />
+		<result property="userEtc05" column="M_ETC05" columnIndex="12" />
+	</resultMap>
+
+	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM TEST WHERE ID = #id#
+	</select> -->
+	
+	<select id="memberList" parameterClass="member" resultMap="memberMap">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<select id="memberInfo" parameterClass="member" resultMap="memberMap">
+		SELECT * FROM MEMBER WHERE M_ID = #userId#
+	</select>
+
+	<insert id="memberInsertInfo" parameterClass="member">
+		INSERT INTO MEMBER 
+		(M_ID,M_NAME,M_EMAIL,M_PHONE,M_ADDRESS
+		,M_PASSWORD,M_CREATEDATE
+		,M_ETC01,M_ETC02,M_ETC03,M_ETC04,M_ETC05) 
+		VALUES 
+		(#userId#,#userName#,#userEmail#,#userPhone#,#userAddress#
+		,#userPassword#,SYSDATE
+		,#userEtc01#,#userEtc02#,#userEtc03#,#userEtc04#,#userEtc05#)
+	</insert>
+	
+	<update id="memberUpdateInfo" parameterClass="member">
+		UPDATE MEMBER SET 
+			M_NAME=#userName#,
+			M_EMAIL=#userEmail#,
+			M_PHONE=#userPhone#,
+			M_ADDRESS=#userAddress#,
+			M_PASSWORD=#userPassword#,
+			M_ETC01=#userEtc01#,
+		WHERE M_ID=#userId# 
+	</update>	
+ 
+	<delete id="memberDeleteInfo" parameterClass="member">
+		DELETE FROM MEMBER WHERE M_ID = #userId#
+	</delete>
+
+</sqlMap>

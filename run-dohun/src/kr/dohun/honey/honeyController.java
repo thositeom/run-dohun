@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.service.commonService;
 
+import kr.dohun.member.memberService;
+
 @Controller
 public class honeyController {
 	
@@ -25,7 +27,9 @@ public class honeyController {
 	private commonService commonService;
 	@Autowired
 	private honeyService honeyService;
-
+	@Autowired
+	private memberService memberService;
+	
 	
 	@RequestMapping(value = "/honeyForm.do")
 	public ModelAndView honeyFrom(HttpServletRequest request, HttpServletResponse response) {
@@ -90,14 +94,16 @@ public class honeyController {
 			switch (oper){
 			case "add":
 				if(honeyVo == null){
-					honeyService.honeyInsertInfo(vo);
+//					honeyService.honeyInsertInfo(vo);
+					memberService.mem
+					
 				}
 				break;
 			case "edit":
 					honeyService.honeyUpdateInfo(vo);
 				break;
 			default ://del
-				vo.setNo(request.getParameter("no"));
+				vo.setHoneyId(request.getParameter("no"));
 				honeyService.honeyDeleteInfo(vo);
 				break;
 			}
