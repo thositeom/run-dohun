@@ -1,7 +1,9 @@
 package kr.dohun.honey;
 
 import java.io.PrintWriter;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.tomcat.util.descriptor.web.InjectionTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.service.commonService;
 
 import kr.dohun.member.memberService;
+import kr.dohun.member.memberVO;
 
 @Controller
 public class honeyController {
@@ -52,26 +56,8 @@ public class honeyController {
 		Map map = new HashedMap();
 		
 		try {
-			list = (List) honeyService.honeyList();
-
-			/*map.put("No", "001");
-			map.put("col1", "value01");
-			map.put("col2", "value02");
-			map.put("col3", "value03");
-			map.put("col4", "value04");
-			map.put("col5", "value05");
-			map.put("col6", "value06");
-			map.put("col7", "value07");
-			map.put("col8", "value08");
-			map.put("col9", "value09");
-			map.put("col10", "value10");
-			map.put("col11", "value11");
-			map.put("col12", "value12");
+			list = (List) memberService.memberList();
 			
-			list.add(map);
-			list.add(map);
-			list.add(map);
-		*/	
 			mv.addObject("result", list); // 실제 jqgrid에서 뿌려져야 할 데이터
 		
 			response.setContentType("text/xml; charset=UTF-8");
@@ -85,26 +71,26 @@ public class honeyController {
 	}
 	
 	@RequestMapping(value = "/honeyJqgridMerge.do")
-	public ModelAndView honeyJqgridMerge(HttpServletRequest request, honeyVO vo) {
+	public ModelAndView honeyJqgridMerge(HttpServletRequest request, memberVO vo) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		try {
 			String oper = request.getParameter("oper");
-			honeyVO honeyVo = honeyService.honeyInfo(vo);
+			
 			
 			switch (oper){
 			case "add":
-				if(honeyVo == null){
-//					honeyService.honeyInsertInfo(vo);
-					memberService.mem
-					
-				}
+					vo.setUserId(getCurrentDate());
+					vo.setUserPassword("createAuto"); //자동가입시 createAuto
+					vo.setUserEtc02("A"); //A:자동가입
+//					cal.set(Calendar.MILLISECOND, 0);
+					memberService.memberInsertInfo(vo);
 				break;
 			case "edit":
-					honeyService.honeyUpdateInfo(vo);
+					memberService.memberUpdateInfo(vo);
 				break;
 			default ://del
-				vo.setHoneyId(request.getParameter("no"));
-				honeyService.honeyDeleteInfo(vo);
+				vo.setUserId(request.getParameter("userId"));
+				memberService.memberDeleteInfo(vo);
 				break;
 			}
 		} catch (DuplicateKeyException e) {
@@ -115,16 +101,69 @@ public class honeyController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/honeyJqgridSub.do")
-	public ModelAndView honeyJqgridSub(HttpServletRequest request, honeyVO vo) {
+	@RequestMapping(value = "/honeyJqgridSubList.do")
+	public ModelAndView honeyJqgridSub(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		try {
 			List list = new ArrayList();
-			list = honeyService.honeySubList(vo);
+			list = honeyService.honeySubList(request.getParameter("userId"));
+			mv.addObject("userId",request.getParameter("userId"));
 			mv.addObject("resultSub",list);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value = "/honeyJqgridSubMerge.do")
+	public ModelAndView honeyJqgridSubMerge(HttpServletRequest request, honeyVO vo) {
+		ModelAndView mv = new ModelAndView("jsonView");
+		try {
+			String oper = request.getParameter("oper");
+			
+			switch (oper){
+			case "add":
+					request.getParameter("honeyUserId");
+					System.out.println(vo.toString());
+				
+//					vo.setUserId(getCurrentDate());
+//					vo.setUserPassword("createAuto"); //자동가입시 createAuto
+//					vo.setUserEtc02("A"); //A:자동가입
+//					cal.set(Calendar.MILLISECOND, 0);
+//					memberService.memberInsertInfo(vo);
+				break;
+			case "edit":
+//					honeyService.honeyUpdateInfo(vo);
+				break;
+			default ://del
+//				vo.setHoneyId(request.getParameter("no"));
+//				honeyService.honeyDeleteInfo(vo);
+				break;
+			}
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	
+	
+	private String getCurrentDate() {
+		String currentDate;
+		Calendar cal = Calendar.getInstance();
+		
+		String year = Integer.toString(cal.get(Calendar.YEAR));
+		String month = Integer.toString(cal.get(Calendar.MONTH));
+		String date = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
+		String hour = Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
+		String min = Integer.toString(cal.get(Calendar.MINUTE));
+		String sec = Integer.toString(cal.get(Calendar.SECOND));
+		currentDate = year+month+date+hour+min+sec; 
+		System.out.println("createId: "+ currentDate);
+		
+		return currentDate;
+	}
+	
 }

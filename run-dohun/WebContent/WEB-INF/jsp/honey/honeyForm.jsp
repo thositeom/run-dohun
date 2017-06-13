@@ -39,12 +39,19 @@ $(function(){
          },
 		colNames:['No','이름','전화번호','주소','비고'],
 	   	colModel:[
-	   		{name:'userId',index:'col00',width:50,editable:true,align:"center",editoptions:{readonly:true}},	//no
+	   		{name:'userId',index:'col00',width:100,editable:true,align:"center",editoptions:{readonly:true}},	//no
 	   		{name:'userName',index:'col01',width:70,editable:true,align:"center",editrules:{required:true}
 	   			,formoptions:{elmsuffix:"	(필수)" },
 	   		},		//이름
 	   		{name:'userPhone',index:'col02',width:100,editable:true,align:"center",editrules:{required:true}
 	   			,formoptions:{elmsuffix:"	(필수)" }
+	   			,editoptions: {
+	   				dataInit: function (element) {
+	   					$(element).keyup(function(){
+	   						$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+	   					})
+	   				}
+	   			}
 	   		},      //전화번호
 	   		{name:'userAddress',index:'col03',width:300,editable:true,editrules:{required:true}
 	   			,formoptions:{elmsuffix:"	(필수)" }
@@ -65,12 +72,12 @@ $(function(){
 				if(rowid != null) {
 					//subGrid 호출
 					var rowData = jQuery("#list01").jqGrid("getRowData", rowid);  
-					jQuery("#list02").jqGrid("setGridParam",{url:"/honeyJqgridSub.do",datatype:"json"
+					jQuery("#list02").jqGrid("setGridParam",{url:"/honeyJqgridSubList.do",datatype:"json"
 						,postData :{
-							no:rowData.no
+							userId:rowData.userId
 						}
 					}); 
-					jQuery("#list02").jqGrid("setCaption", "꿀 장부 상세화면- No:"+rowData.no);
+					jQuery("#list02").jqGrid("setCaption", "꿀 장부 상세화면- No:"+rowData.userId);
 					jQuery("#list02").trigger("reloadGrid");
 				}					
 			} 
@@ -79,7 +86,7 @@ $(function(){
 		{mtype:"POST", reloadAfterSubmit:true, serializeDelData: function (postdata) {
 		      var rowdata = jQuery('#list01').getRowData(postdata.id);
 		      // append postdata with any information 
-		      return {index: postdata.id, oper: postdata.oper, no: rowdata.no};
+		      return {index: postdata.id, oper: postdata.oper, userId: rowdata.userId};
 		 }
 		} // del options
 	);
@@ -90,7 +97,7 @@ $(function(){
     
     
     $("#list02").jqGrid({
-		editurl: "/honeyJqgridMerge.do",	// 셀이 수정될 때 수정 요청을 받아서 처리할 URL
+		editurl: "/honeyJqgridSubMerge.do",	// 셀이 수정될 때 수정 요청을 받아서 처리할 URL
 		contentType: "application/json; charset=utf-8",
         datatype: "json",
         jsonReader : {
@@ -99,9 +106,10 @@ $(function(){
             root: "resultSub",	// 실제 jqgrid에서 뿌려져야 할 데이터 
             repeatitems: false
          },
-		colNames:['No','주문일자','결재여부','주문내역','수량','단가','금액','운송장번호','배송일자'],
+		colNames:['No',"사용자",'주문일자','결재여부','주문내역','수량','단가','금액','운송장번호','배송일자'],
 	   	colModel:[
-	   		{name:'honeyId',index:'col00',width:50,editable:true,align:"center",editoptions:{readonly:true}},		//no
+	   		{name:'honeyId',index:'col00',width:50,editable:true,align:"center",editoptions:{readonly:true}},		//id
+	   		{name:'honeyUserId',index:'col01',hidden:true},		//userId
 	   		{name:'honeyOrderDate',index:'col05',width:90,editable:true,editrules:{required:true},
 	   			editoptions: {
 	   				readonly:true,	   				
@@ -185,9 +193,10 @@ $(function(){
 	}).navGrid('#pager02',{edit:true,add:true,del:true,search:false}
 		,{},{},
 		{mtype:"POST", reloadAfterSubmit:true, serializeDelData: function (postdata) {
-		      var rowdata = jQuery('#list02').getRowData(postdata.id);
+			var rowdata01 = jQuery('#list01').getRowData(postdata.id);  
+			var rowdata = jQuery('#list02').getRowData(postdata.id);
 		      // append postdata with any information 
-		      return {index: postdata.id, oper: postdata.oper, no: rowdata.no};
+		      return {index:postdata.id, oper:postdata.oper, honeyId:rowdata.honeyId, userId:rowdata.honeyUserId};
 		 }
 		} // del options
 	);

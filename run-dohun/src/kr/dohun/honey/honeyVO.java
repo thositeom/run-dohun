@@ -2,6 +2,7 @@ package kr.dohun.honey;
 
 public class honeyVO {
 	String honeyId;
+	String honeyUserId;
 	String honeyOrderDate;
 	String honeyPayment;
 	String honeyOrderList;
@@ -17,6 +18,12 @@ public class honeyVO {
 	}
 	public void setHoneyId(String honeyId) {
 		this.honeyId = honeyId;
+	}
+	public String getHoneyUserId() {
+		return honeyUserId;
+	}
+	public void setHoneyUserId(String honeyUserId) {
+		this.honeyUserId = honeyUserId;
 	}
 	public String getHoneyOrderDate() {
 		return honeyOrderDate;

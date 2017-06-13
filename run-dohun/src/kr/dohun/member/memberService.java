@@ -4,16 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import kr.dohun.honey.honeyVO;
-
 @Service
 public interface memberService {
 	
-	public List honeyList() throws Exception;
-	public honeyVO honeyInfo(honeyVO vo) throws Exception;
-	public int honeyInsertInfo(honeyVO vo) throws Exception;
-	public int honeyUpdateInfo(honeyVO vo) throws Exception;
-	public int honeyDeleteInfo(honeyVO vo) throws Exception;
-
+	public List memberList() throws Exception;
+	public memberVO memberInfo(memberVO vo) throws Exception;
+	public int memberInsertInfo(memberVO vo) throws Exception;
+	public int memberUpdateInfo(memberVO vo) throws Exception;
+	public int memberDeleteInfo(memberVO vo) throws Exception;
 	
 }

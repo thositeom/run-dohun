@@ -55,8 +55,8 @@
 		DELETE FROM HONEY WHERE H_ID = #honeyId#
 	</delete>
 	
-	<select id="honeySubList" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM HONEY WHERE H_ID = #honeyId#
+	<select id="honeySubList" parameterClass="java.lang.String" resultMap="honeyMap">
+		SELECT * FROM HONEY WHERE H_ID = #userId#
 	</select>
 
 </sqlMap>

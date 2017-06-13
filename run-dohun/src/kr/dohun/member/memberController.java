@@ -1,14 +1,16 @@
 package kr.dohun.member;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import kr.dohun.session.sessionManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.dohun.session.sessionManager;
 
 @Controller
 public class memberController {
@@ -77,16 +79,20 @@ public class memberController {
 	}
 	
 	@RequestMapping(value = "/memberJoin.do")
-	public ModelAndView memberJoin(memberVO memberVo, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView memberJoin(memberVO vo, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
-		
-		String tmepId = "thositeom";
-		
-		memberVo.getUserName();
-		memberVo.getUserEmail();
-		memberVo.getUserPassword();
-		
 		mv.setViewName("jsonView");
+		
+		try {
+			
+			
+//			vo.setUserId("");
+//			memberService.memberInsertInfo(vo);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return mv;
 	} 
 	

@@ -36,7 +36,7 @@
 		,M_ETC01,M_ETC02,M_ETC03,M_ETC04,M_ETC05) 
 		VALUES 
 		(#userId#,#userName#,#userEmail#,#userPhone#,#userAddress#
-		,#userPassword#,SYSDATE
+		,#userPassword#,NOW()
 		,#userEtc01#,#userEtc02#,#userEtc03#,#userEtc04#,#userEtc05#)
 	</insert>
 	

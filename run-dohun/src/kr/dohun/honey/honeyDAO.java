@@ -66,8 +66,8 @@ public class honeyDAO {
 	 * @throws Exception
 	 * dohun 2017. 6. 11.
 	 */
-	public List honeySubList(honeyVO vo) throws Exception{
-		return sqlMapClientTemplate.queryForList("honeySqlMap.honeySubList", vo);
+	public List honeySubList(String userId) throws Exception{
+		return sqlMapClientTemplate.queryForList("honeySqlMap.honeySubList", userId);
 	
 	}
 }
