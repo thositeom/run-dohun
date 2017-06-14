@@ -38,7 +38,6 @@ public class honeyController {
 	@RequestMapping(value = "/honeyForm.do")
 	public ModelAndView honeyFrom(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("::start::honeyForm.do");
 		
 //		mv.setViewName("jsonView");
 		
@@ -75,8 +74,6 @@ public class honeyController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		try {
 			String oper = request.getParameter("oper");
-			
-			
 			switch (oper){
 			case "add":
 					vo.setUserId(getCurrentDate());
@@ -107,7 +104,8 @@ public class honeyController {
 		try {
 			List list = new ArrayList();
 			list = honeyService.honeySubList(request.getParameter("userId"));
-			mv.addObject("userId",request.getParameter("userId"));
+			mv.addObject("subUserId",request.getParameter("userId"));
+			mv.addObject("aaa",request.getParameter("userId"));
 			mv.addObject("resultSub",list);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -123,8 +121,8 @@ public class honeyController {
 			
 			switch (oper){
 			case "add":
-					request.getParameter("honeyUserId");
-					System.out.println(vo.toString());
+				
+					System.out.println(request.getParameter("aaa"));
 				
 //					vo.setUserId(getCurrentDate());
 //					vo.setUserPassword("createAuto"); //자동가입시 createAuto

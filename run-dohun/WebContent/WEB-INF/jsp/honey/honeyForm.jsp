@@ -85,7 +85,7 @@ $(function(){
 		,{},{},
 		{mtype:"POST", reloadAfterSubmit:true, serializeDelData: function (postdata) {
 		      var rowdata = jQuery('#list01').getRowData(postdata.id);
-		      // append postdata with any information 
+		      //수정, 삭제 
 		      return {index: postdata.id, oper: postdata.oper, userId: rowdata.userId};
 		 }
 		} // del options
@@ -97,7 +97,7 @@ $(function(){
     
     
     $("#list02").jqGrid({
-		editurl: "/honeyJqgridSubMerge.do",	// 셀이 수정될 때 수정 요청을 받아서 처리할 URL
+		editurl: "/honeyJqgridSubMerge.do?",	// 셀이 수정될 때 수정 요청을 받아서 처리할 URL
 		contentType: "application/json; charset=utf-8",
         datatype: "json",
         jsonReader : {
@@ -190,24 +190,26 @@ $(function(){
 		width:'auto',
      	autowidth:true,	// 그리드 전체 넓이 조정 (오토 조절 가능)
         shrinkToFit: false	//스크롤
+        ,loadComplete: function(data){
+        	$("#subUserId").val(data.subUserId);
+        	
+        	
+        }
 	}).navGrid('#pager02',{edit:true,add:true,del:true,search:false}
 		,{},{},
 		{mtype:"POST", reloadAfterSubmit:true, serializeDelData: function (postdata) {
-			var rowdata01 = jQuery('#list01').getRowData(postdata.id);  
 			var rowdata = jQuery('#list02').getRowData(postdata.id);
-		      // append postdata with any information 
-		      return {index:postdata.id, oper:postdata.oper, honeyId:rowdata.honeyId, userId:rowdata.honeyUserId};
+		      return {index:postdata.id, oper:postdata.oper, honeyId:rowdata.honeyId};
 		 }
 		} // del options
 	);
     jQuery("#list02").trigger('reloadGrid');       // colModel option에 frozen:true 적용해야함
-    
 });
     
 </script>
 
 <form id="honeyForm"  method="post" >
-<input type="hidden" id="h_no"/>
+<input type="hidden" id="subUserId"/>
     <div class="col-sm-8 text-left">
 		<h1>Honey</h1>
 		<p>나는 꿀을판다.</p>
