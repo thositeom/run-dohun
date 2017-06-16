@@ -5,23 +5,24 @@
 
 	<resultMap id="honeyMap" class="honey">
 		<result property="honeyId" column="H_ID" columnIndex="1" />
-		<result property="honeyOrderDate" column="H_ORDERDATE" columnIndex="2" />
-		<result property="honeyPayment" column="H_PAYMENT" columnIndex="3" />
-		<result property="honeyOrderList" column="H_ORDERLIST" columnIndex="4" />
-		<result property="honeyQty" column="H_QTY" columnIndex="5" />
-		<result property="honeyCost" column="H_COST" columnIndex="6" />
-		<result property="honeyAmount" column="H_AMOUNT" columnIndex="7" />
-		<result property="honeyWaybill" column="H_WAYBILL" columnIndex="8" />
-		<result property="honeyDeliveryDate" column="H_DELIVERYDATE" columnIndex="9" />
-		<result property="honeyEtc01" column="H_ETC01" columnIndex="10" />
+		<result property="honeyUserId" column="H_USERID" columnIndex="2" />
+		<result property="honeyOrderDate" column="H_ORDERDATE" columnIndex="3" />
+		<result property="honeyPayment" column="H_PAYMENT" columnIndex="4" />
+		<result property="honeyOrderList" column="H_ORDERLIST" columnIndex="5" />
+		<result property="honeyQty" column="H_QTY" columnIndex="6" />
+		<result property="honeyCost" column="H_COST" columnIndex="7" />
+		<result property="honeyAmount" column="H_AMOUNT" columnIndex="8" />
+		<result property="honeyWaybill" column="H_WAYBILL" columnIndex="9" />
+		<result property="honeyDeliveryDate" column="H_DELIVERYDATE" columnIndex="10" />
+		<result property="honeyEtc01" column="H_ETC01" columnIndex="11" />
 	</resultMap>
 
 	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
 		SELECT * FROM TEST WHERE ID = #id#
 	</select> -->
 	
-	<select id="honeyList" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM HONEY
+	<select id="honeyList" parameterClass="java.lang.String" resultMap="honeyMap">
+		SELECT * FROM HONEY WHERE H_USERID = #honeyUserId#
 	</select>
 	
 	<select id="honeyInfo" parameterClass="honey" resultMap="honeyMap">
@@ -30,10 +31,10 @@
 
 	<insert id="honeyInsertInfo" parameterClass="honey">
 		INSERT INTO HONEY 
-		(H_ID,H_ORDERDATE,H_PAYMENT,H_ORDERLIST,H_QTY
+		(H_ID,H_USERID,H_ORDERDATE,H_PAYMENT,H_ORDERLIST,H_QTY
 		,H_COST,H_AMOUNT,H_WAYBILL,H_DELIVERYDATE,H_ETC01) 
 		VALUES 
-		(#honeyId#,#honeyOrderDate#,#honeyPayment#,#honeyOrderList#,#honeyQty#
+		(#honeyId#,#honeyUserId#,#honeyOrderDate#,#honeyPayment#,#honeyOrderList#,#honeyQty#
 		,#honeyCost#,#honeyAmount#,#honeyWaybill#,#honeyDeliveryDate#,#honeyEtc01#)
 	</insert>
 
@@ -54,9 +55,5 @@
 	<delete id="honeyDeleteInfo" parameterClass="honey">
 		DELETE FROM HONEY WHERE H_ID = #honeyId#
 	</delete>
-	
-	<select id="honeySubList" parameterClass="java.lang.String" resultMap="honeyMap">
-		SELECT * FROM HONEY WHERE H_ID = #userId#
-	</select>
 
 </sqlMap>

@@ -21,8 +21,8 @@ public class honeyDAO {
 	 * dohun 2017. 6. 8.
 	 * 
 	 */
-	public List honeyList() throws Exception{
-		return (List) sqlMapClientTemplate.queryForList("honeySqlMap.honeyList");
+	public List honeyList(String userId) throws Exception{
+		return (List) sqlMapClientTemplate.queryForList("honeySqlMap.honeyList",userId);
 	
 	}
 	/**
@@ -61,13 +61,4 @@ public class honeyDAO {
 		return sqlMapClientTemplate.delete("honeySqlMap.honeyDeleteInfo", vo);
 	}
 	
-	/**
-	 * @return
-	 * @throws Exception
-	 * dohun 2017. 6. 11.
-	 */
-	public List honeySubList(String userId) throws Exception{
-		return sqlMapClientTemplate.queryForList("honeySqlMap.honeySubList", userId);
-	
-	}
 }

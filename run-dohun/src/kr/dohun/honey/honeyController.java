@@ -1,6 +1,8 @@
 package kr.dohun.honey;
 
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.HTMLEditorKit.Parser;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.tomcat.util.descriptor.web.InjectionTarget;
@@ -61,11 +64,9 @@ public class honeyController {
 		
 			response.setContentType("text/xml; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return mv;
 	}
 	
@@ -99,14 +100,15 @@ public class honeyController {
 	}
 	
 	@RequestMapping(value = "/honeyJqgridSubList.do")
-	public ModelAndView honeyJqgridSub(HttpServletRequest request) {
+	public ModelAndView honeyJqgridSub(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		try {
 			List list = new ArrayList();
-			list = honeyService.honeySubList(request.getParameter("userId"));
+			list = honeyService.honeyList(request.getParameter("userId"));
 			mv.addObject("subUserId",request.getParameter("userId"));
-			mv.addObject("aaa",request.getParameter("userId"));
 			mv.addObject("resultSub",list);
+			response.setContentType("text/xml; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,21 +123,28 @@ public class honeyController {
 			
 			switch (oper){
 			case "add":
-				
-					System.out.println(request.getParameter("aaa"));
-				
-//					vo.setUserId(getCurrentDate());
-//					vo.setUserPassword("createAuto"); //자동가입시 createAuto
-//					vo.setUserEtc02("A"); //A:자동가입
-//					cal.set(Calendar.MILLISECOND, 0);
-//					memberService.memberInsertInfo(vo);
+					System.out.println(request.getParameter("subUserId"));
+					if(request.getParameter("subUserId") != null){
+						
+						vo.setHoneyId(getCurrentDate());
+						String cost = getUnitCost(vo.getHoneyOrderList());
+						vo.setHoneyCost(cost);
+						vo.setHoneyAmount(getAmount(vo.getHoneyQty(),cost));
+						
+						vo.setHoneyUserId(request.getParameter("subUserId"));
+						
+						honeyService.honeyInsertInfo(vo);
+					}
 				break;
 			case "edit":
-//					honeyService.honeyUpdateInfo(vo);
+					String cost = getUnitCost(vo.getHoneyOrderList());
+					vo.setHoneyCost(cost);
+					vo.setHoneyAmount(getAmount(vo.getHoneyQty(),cost));
+					honeyService.honeyUpdateInfo(vo);
 				break;
-			default ://del
-//				vo.setHoneyId(request.getParameter("no"));
-//				honeyService.honeyDeleteInfo(vo);
+			default :
+				vo.setHoneyId(request.getParameter("honeyId"));
+				honeyService.honeyDeleteInfo(vo);
 				break;
 			}
 		} catch (DuplicateKeyException e) {
@@ -148,11 +157,17 @@ public class honeyController {
 	
 	
 	
+	/**
+	 * @return
+	 * dohun 2017. 6. 15.
+	 * 현재 날짜 1/1000 가져오기
+	 */
 	private String getCurrentDate() {
-		String currentDate;
+/*		String currentDate;
 		Calendar cal = Calendar.getInstance();
-		
-		String year = Integer.toString(cal.get(Calendar.YEAR));
+*/		
+		String currentDate = Long.toString(System.currentTimeMillis());
+		/*String year = Integer.toString(cal.get(Calendar.YEAR));
 		String month = Integer.toString(cal.get(Calendar.MONTH));
 		String date = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
 		String hour = Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
@@ -160,8 +175,39 @@ public class honeyController {
 		String sec = Integer.toString(cal.get(Calendar.SECOND));
 		currentDate = year+month+date+hour+min+sec; 
 		System.out.println("createId: "+ currentDate);
-		
+		*/
 		return currentDate;
+	}
+	
+	/**
+	 * @return
+	 * dohun 2017. 6. 15.
+	 * 주문내역으로 단가 구하기  TODO 코드 값 변환해서 디비에서 가져오게 변환
+	 */
+	private String  getUnitCost(String orderList) {
+		String cost="";
+		switch (orderList) {
+		case "잡화":
+			cost = "40000";
+			break;
+		case "아카시아":
+			cost = "40000";
+			break;
+		case "꽃화분":
+			cost = "60000";
+			break;
+		default:
+			cost = "80000";
+			break;
+		}
+		return cost;
+	}
+	
+	private String getAmount(String qty, String cost) {
+		int numQty =  Integer.parseInt(qty);
+		int numCost = Integer.parseInt(cost);
+
+		return String.valueOf(numQty * numCost);
 	}
 	
 }
