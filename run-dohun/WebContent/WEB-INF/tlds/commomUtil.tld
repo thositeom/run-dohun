@@ -13,14 +13,14 @@
  	<tag>
  		<description>로그인여부확인(로그인)</description>
  		<name>isLogin</name>
- 		<tag-class>kr.dohun.common.tags.isLogin</tag-class>
+ 		<tag-class>kr.dohun.common.tags.IsLogin</tag-class>
  		<body-content>JSP</body-content>
  	</tag>
  	
  	<tag>
  		<description>로그인여부확인(로그아웃)</description>
  		<name>isNotLogin</name>
- 		<tag-class>kr.dohun.common.tags.isNotLogin</tag-class>
+ 		<tag-class>kr.dohun.common.tags.IsNotLogin</tag-class>
  		<body-content>JSP</body-content>
  	</tag>
  

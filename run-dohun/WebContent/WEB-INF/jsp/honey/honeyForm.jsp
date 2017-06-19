@@ -126,10 +126,8 @@ $(function(){
                     value: "잡화:잡화;아카시아:아카시아;꽃화분:꽃화분;프로폴리스:프로폴리스"                                                                  
                 }	   			
 	   		},//주문내역
-	   		{name:"honeyQty",index:"col08",width:100,editable:true,align:"right",editrules:{required:true}
-		   		,formatter: "integer"
-	   			,formoptions:{elmsuffix:"	(필수)" }
-	   			,editoptions: {
+	   		{name:"honeyQty",index:"col08",width:100,editable:true,align:"right",editrules:{required:true},formatter: "integer",
+	   			editoptions: {
 	   				dataInit: function (element) {
 	   					$(element).keyup(function(){
 	   						$(this).val( $(this).val().replace(/[^0-9]/g,"") );
@@ -137,7 +135,7 @@ $(function(){
 	   				}
 	   			}
 	   		},//수량
-	   		{name:"honeyCost",index:"col09",width:100,align:"right",editrules:{required:true},formatter: "integer",
+	   		{name:"honeyCost",index:"col09",width:100,editable:true,align:"right",editrules:{required:true},formatter: "integer",
 	   			editoptions: {
 	   				dataInit: function (element) {
 	   					$(element).keyup(function(){
@@ -146,7 +144,7 @@ $(function(){
 	   				}
 	   			}
 	   		},//단가
-	   		{name:"honeyAmount",index:"col10",width:100,align:"right",formatter: "integer",
+	   		{name:"honeyAmount",index:"col10",width:100,editable:true,align:"right",formatter: "integer",
 	   			editoptions: {
 	   				dataInit: function (element) {
 	   					$(element).keyup(function(){
