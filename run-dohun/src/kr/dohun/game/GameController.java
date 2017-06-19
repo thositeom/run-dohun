@@ -24,14 +24,12 @@ public class GameController {
 	@RequestMapping(value = "/baseballGameFrom.do")
 	public ModelAndView basballGameFrom(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("game/baseballGameForm");
-		System.out.println("::start::baseballGameFrom.do");
 //		mv.setViewName("jsonView");
 		mv.setViewName("game/baseballGameForm");
 		return mv;
 	}
 	@RequestMapping(value = "/baseballGameStart.do")
 	public ModelAndView basballGameStart(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("::start::baseballGameStart.do");
 		ModelAndView mav = new ModelAndView();
 		Map resultMap = new HashedMap();
 		int strake = 0;

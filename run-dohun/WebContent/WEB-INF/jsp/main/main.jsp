@@ -64,9 +64,10 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
+      <p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
+      <p><a href="https://w3schools.com" target="_w3schools">W3Schools</a></p>
+      <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
+      <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>
     </div>
     <div id="content_div">
 	    <div class="col-sm-8 text-left"> 

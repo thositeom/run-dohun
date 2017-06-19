@@ -82,8 +82,6 @@ public class MemberController {
 		mv.setViewName("jsonView");
 		
 		try {
-			
-			
 //			vo.setUserId("");
 //			memberService.memberInsertInfo(vo);
 		

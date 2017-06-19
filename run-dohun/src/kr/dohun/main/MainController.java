@@ -30,11 +30,8 @@ public class MainController {
 	public ModelAndView springFormTest(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		testVO vo = new testVO();
-		mv.addObject("testVo",vo);
-		
+		mv.addObject("testVO",vo);
 		mv.setViewName("test/springFormTest");
-		
-		
 		return mv;
 	}
 		
