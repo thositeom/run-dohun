@@ -1,101 +1,49 @@
 package kr.dohun.common;
 
-import java.io.Reader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.script.Bindings;
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public class JavaScript implements ScriptEngine {
+public class JavaScript {
 	
-	@Override
-	public Bindings createBindings() {
-		ScriptEngineManager manager = new ScriptEngineManager();
-        // Obtain a ScriptEngine that supports the JavaScript short name.
-        ScriptEngine engine = manager.getEngineByName("JavaScript");
-		
-		return null;
-	}
-
-	@Override
-	public Object eval(String arg0) throws ScriptException {
-		// TODO Auto-generated method stub
-		return arg0;
-	}
-
-	@Override
-	public Object eval(Reader arg0) throws ScriptException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object eval(String arg0, ScriptContext arg1) throws ScriptException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object eval(Reader arg0, ScriptContext arg1) throws ScriptException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object eval(String arg0, Bindings arg1) throws ScriptException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object eval(Reader arg0, Bindings arg1) throws ScriptException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object get(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Bindings getBindings(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ScriptContext getContext() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ScriptEngineFactory getFactory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void put(String arg0, Object arg1) {
-		// TODO Auto-generated method stub
+	private List<String> scripts = new ArrayList<String>();
+	
+	public JavaScript() {
 		
 	}
-
-	@Override
-	public void setBindings(Bindings arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
+	
+	public JavaScript(String script) {
+		addScript(script);
 	}
-
-	@Override
-	public void setContext(ScriptContext arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public void addScript(String script){
+		scripts.add(script);
 	}
-
+	
+	public void execute(HttpServletResponse response, HttpServletRequest request){
+		try {
+			response.setContentType("text/html; charset=UTF-8");
+			response.setCharacterEncoding(request.getCharacterEncoding());
+	        PrintWriter out = response.getWriter();
+			out.println("<script typre=\"text/javascript\">");
+			for(String script : scripts){
+				out.println(script);
+			}
+	        out.println("</script>");
+		    out.flush();
+		} catch (IOException e) {
+		}
+	}
+	
+	public static JavaScript alert(String messages){
+		return new JavaScript("alert('" + messages + "'); history.back();");
+	}
+	
+	public static JavaScript alertToUrl(String messages, String url){
+		return new JavaScript("alert('" + messages + "'); location.href= '"+ url +"' ");
+	}
 }

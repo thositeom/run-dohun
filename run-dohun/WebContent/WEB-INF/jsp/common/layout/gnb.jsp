@@ -40,11 +40,6 @@
 			  $.ajax({
 				  url: menuUrl,
 				  type: "POST",
-				  data: {
-					  "startCheck": "aaa",
-					  "userNum": "bbb",
-					  "rNum" : "ccc"
-					  },
 					  success: function(result){
 						  console.log("success");
 						  $("#content_div").html(result);
