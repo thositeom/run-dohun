@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO memberInfo(MemberVO vo) throws Exception {
+	public MemberVO memberInfo(String vo) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.memberInfo(vo);
 	}
@@ -40,6 +40,12 @@ public class MemberServiceImpl implements MemberService {
 	public int memberDeleteInfo(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.memberDeleteInfo(vo);
+	}
+
+	@Override
+	public List memberHoneyList() throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.memberHoneyList();
 	}
 
 }

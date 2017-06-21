@@ -67,7 +67,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li id="home" class="active"><a href="#">Home</a></li>
-        <li id="honey"><a href="#">Honey</a></li>
+        <tlds:isLogin>
+	        <li id="honey"><a href="#">Honey</a></li>
+        </tlds:isLogin>
         <li id="game"><a href="#">Game</a></li>
         <li id="about"><a href="#">About</a></li>
         <li id="projects"><a href="#">Projects</a></li>

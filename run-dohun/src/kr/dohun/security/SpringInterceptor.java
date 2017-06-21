@@ -23,7 +23,10 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 			reqUrl.equals(context+"aboutForm.do")||
 			reqUrl.equals(context+"contactForm.do")||
 			reqUrl.equals(context+"projectsForm.do")||
-			reqUrl.equals(context+"memberLoginForm.do")))
+			reqUrl.equals(context+"memberLoginForm.do")||
+			reqUrl.equals(context+"memberJoin.do")||
+			reqUrl.equals(context+"memberLogin.do")
+				))
 		{	
 			//session 체크
 			HttpSession session = request.getSession();

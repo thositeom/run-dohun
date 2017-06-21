@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+ 
+    <description>CommonUtil functions library</description>
+    <display-name>CommonUtil functions</display-name>
+    <tlib-version>1.1</tlib-version>
+    <short-name>run-dohun</short-name>
+    <uri>http://run-dohun.kr/tlds</uri>
+ 
+ 	<tag>
+ 		<description>로그인여부확인(로그인)</description>
+ 		<name>isLogin</name>
+ 		<tag-class>kr.dohun.common.tags.IsLogin</tag-class>
+ 		<body-content>JSP</body-content>
+ 	</tag>
+ 	
+ 	<tag>
+ 		<description>로그인여부확인(로그아웃)</description>
+ 		<name>isNotLogin</name>
+ 		<tag-class>kr.dohun.common.tags.IsNotLogin</tag-class>
+ 		<body-content>JSP</body-content>
+ 	</tag>
+ 
+</taglib>

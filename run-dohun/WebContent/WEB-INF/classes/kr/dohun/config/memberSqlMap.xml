@@ -4,12 +4,13 @@
 	<typeAlias alias="member" type="kr.dohun.member.MemberVO" />
 
 	<resultMap id="memberMap" class="member">
-		<result property="userId" column="M_ID" columnIndex="1" />
-		<result property="userName" column="M_NAME" columnIndex="2" />
-		<result property="userEmail" column="M_EMAIL" columnIndex="3" />
-		<result property="userPhone" column="M_PHONE" columnIndex="4" />
-		<result property="userAddress" column="M_ADDRESS" columnIndex="5" />
-		<result property="userPassword" column="M_PASSWORD" columnIndex="6" />
+<!-- 		<result property="no" column="NO" columnIndex="1" /> -->
+		<result property="userId" column="M_ID" columnIndex="2" />
+		<result property="userName" column="M_NAME" columnIndex="3" />
+		<result property="userEmail" column="M_EMAIL" columnIndex="4" />
+		<result property="userPhone" column="M_PHONE" columnIndex="5" />
+		<result property="userAddress" column="M_ADDRESS" columnIndex="6" />
+		<result property="userPassword" column="M_PASSWORD" columnIndex="7" />
 		<result property="userEtc01" column="M_ETC01" columnIndex="8" />
 		<result property="userEtc02" column="M_ETC02" columnIndex="9" />
 		<result property="userEtc03" column="M_ETC03" columnIndex="10" />
@@ -25,7 +26,7 @@
 		SELECT * FROM MEMBER
 	</select>
 	
-	<select id="memberInfo" parameterClass="member" resultMap="memberMap">
+	<select id="memberInfo" parameterClass="java.lang.String" resultMap="memberMap">
 		SELECT * FROM MEMBER WHERE M_ID = #userId#
 	</select>
 
@@ -54,5 +55,19 @@
 	<delete id="memberDeleteInfo" parameterClass="member">
 		DELETE FROM MEMBER WHERE M_ID = #userId#
 	</delete>
+	
+	<select id="memberHoneyList" parameterClass="member" resultMap="memberMap">
+		<!-- M_ETC02 = 'A' 장부 가입자만 조회 -->
+		SELECT *
+		  FROM (SELECT *
+		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
+		                  FROM (  SELECT *
+		                            FROM thositeom.MEMBER
+		                           WHERE M_ETC02 = 'A'
+		                        ORDER BY M_ID DESC) A,
+		                       (SELECT @ROWNUM := 0) B) C
+		         WHERE C.NO <![CDATA[<=]]> 11) X
+		 WHERE X.NO <![CDATA[>=]]> 1
+	</select>
 
 </sqlMap>

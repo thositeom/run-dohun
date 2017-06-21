@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.dohun.common.JavaScript;
 import kr.dohun.session.SessionManager;
 
 @Controller
@@ -30,31 +31,33 @@ public class MemberController {
 	public ModelAndView memberLogin(MemberVO memberVo,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String userName = request.getParameter("loginId");
+		String userId = request.getParameter("loginId");
 		String userPwd = request.getParameter("loginPwd");
 		
-		memberVo.setUserName(userName);
+		memberVo.setUserName(userId);
 		memberVo.setUserPassword(userPwd);
 		
-		mv.setViewName("redirect:/index.do");
-	
 		//DB조회 1.사용자 유무확인
-		if((userName.equals("") ||userName == null)){
-			System.out.println(":::null");
+		if((userId.equals("") ||userId == null)){
+			JavaScript.alert("사용자 아이디를 입력해주세요.").execute(response, request);
 			return null;
 		}
+
+		MemberVO memberInfo = memberService.memberInfo(userId);
 		
-		if(!userName.equals("thositeom")){
-			//존재하지 않는 사용자 입니다. 메시지 출력
-			System.out.println("::::: 존재하지 않는 사용자 입니다. ");
-		}else{
-			System.out.println(":::thositeom");
-			//DB조회 2.사용자 비번확인
-			//3.비번맞으면 세션 생성(SSO)?
-			sessionManager.creatSessoin(memberVo, request, response);
-//			memberService.creatSessoin(memberVo, request, response);
-			
+		if(memberInfo == memberService.memberInfo(userId)){
+			//존재하지 않는 사용자 입니다.
+			JavaScript.alert("존재하지 않는 사용자 입니다.").execute(response, request);
+			return null;
 		}
+		if(!userPwd.equals(memberInfo.getUserPassword())){
+			//비밀번호가 틀렸습니다. 확인 후 다시 로그인 해주세요.
+			JavaScript.alert("비밀번호가 틀렸습니다. 확인 후 다시 로그인 해주세요.").execute(response, request);
+			return null;
+		}
+		//3.비번맞으면 세션 생성(SSO)?
+		sessionManager.creatSessoin(memberVo, request, response);
+		mv.setViewName("redirect:/index.do");
 		
 		return mv;
 	}
@@ -80,11 +83,8 @@ public class MemberController {
 	public ModelAndView memberJoin(MemberVO vo, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("jsonView");
-		
 		try {
-//			vo.setUserId("");
-//			memberService.memberInsertInfo(vo);
-		
+			memberService.memberInsertInfo(vo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

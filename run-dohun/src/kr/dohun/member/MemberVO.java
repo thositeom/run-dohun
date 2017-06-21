@@ -1,7 +1,9 @@
 package kr.dohun.member;
 
 public class MemberVO {
-
+	
+	String no;
+	
 	String userId;
 	String userName;
 	String userEmail;
@@ -15,6 +17,12 @@ public class MemberVO {
 	String userEtc05;
 	
 	
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
 	public String getUserId() {
 		return userId;
 	}

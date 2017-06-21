@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 	
 	public List memberList() throws Exception;
-	public MemberVO memberInfo(MemberVO vo) throws Exception;
+	public MemberVO memberInfo(String vo) throws Exception;
 	public int memberInsertInfo(MemberVO vo) throws Exception;
 	public int memberUpdateInfo(MemberVO vo) throws Exception;
 	public int memberDeleteInfo(MemberVO vo) throws Exception;
+	public List memberHoneyList() throws Exception;
 	
 }

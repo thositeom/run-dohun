@@ -44,7 +44,7 @@ public class HoneyController {
 		Map map = new HashedMap();
 		
 		try {
-			list = (List) memberService.memberList();
+			list = (List) memberService.memberHoneyList();
 			
 			mv.addObject("result", list); // 실제 jqgrid에서 뿌려져야 할 데이터
 		

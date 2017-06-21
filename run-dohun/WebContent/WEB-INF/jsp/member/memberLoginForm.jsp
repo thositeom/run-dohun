@@ -7,12 +7,10 @@
 <head>
 <title>Bootstrap Example</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-	href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
-<script type="text/javascript"
-	src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 <style>
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -22,7 +20,7 @@
 </style>
 <script type="text/javascript">
   $(document).ready(function(){
-	  $("#userName_span").hide();
+	  $("#userId_span").hide();
 	  
 	  $(".nav.navbar-nav > li").click(function(){
 		  $(".nav.navbar-nav > li").removeAttr("class");
@@ -78,20 +76,20 @@
 	//아이디 입력시 vaildation조회
 	var checkIdStatus = 0;
 	function searchName() {
-		var userName = $("#userName").val().trim();
-		if(userName.length < 1){
-			joinVaildation("userName", "default");
+		var userId = $("#userId").val().trim();
+		if(userId.length < 1){
+			joinVaildation("userId", "default");
 		}else{
 			$.ajax({
 				url: "/memberNameCheck.do",
 				type: "POST",
-				data: {"userName":userName},
+				data: {"userId":userId},
 					success: function(result){
 						if(result.status == "true"){//사용불가
-							joinVaildation("userName", "error");
+							joinVaildation("userId", "error");
 							checkIdStatus = 0;
 						}else{//사용가능
-							joinVaildation("userName", "ok");
+							joinVaildation("userId", "ok");
 							checkIdStatus = 1;
 						}
 					}, 
@@ -121,37 +119,40 @@
   	//Pwd vaildation조회
     function searchPwd(){
     	var regex = /^.*(?=.{7,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-		var userPwd =  $("#userPwd").val().trim();
+		var userPwd =  $("#userPassword").val().trim();
 		if(userPwd.length < 1){
 			//빈칸
-			joinVaildation("userPwd", "default");
+			joinVaildation("userPassword", "default");
 			return false;
 		}
 		if(userPwd.length < 7){
 			//7자리 이하
-			joinVaildation("userPwd", "error");
+			joinVaildation("userPassword", "error");
 			return false;
 		}
 		if(!userPwd.match(regex)){
 			//정규식  false
-			joinVaildation("userPwd", "error");
+			joinVaildation("userPassword", "error");
 		}else{
 			//정규식 true
-			joinVaildation("userPwd", "ok");
+			joinVaildation("userPassword", "ok");
 		}
 		
   	}
     
 	$(".form-group > input").keyup(function(){
 		switch($(this).attr("id")) {
-		case "userName":
+		case "userId":
 			searchName();
 			break;
 		case "userEmail":
 			searchEmail();
 			break;
-		default:
+		case "userPassword":
 			searchPwd();
+			break;
+		default:
+			
 		}
 	});
 	
@@ -190,11 +191,11 @@
 	$("#creatUser").click(function(){
 		var formData = $("#createUserForm").serialize();
 
-		var userName = $("#userName").val().trim();
+		var userId = $("#userId").val().trim();
 		var userEmail = $("#userEmail").val().trim();
-		var userPwd = $("#userPwd").val().trim();
+		var userPwd = $("#userPassword").val().trim();
 
-		if(userName==""){
+		if(userId==""){
 			alert("이름을 입력하세요");
 			return false;
 		}else if(userEmail==""){
@@ -297,20 +298,35 @@
 							</div>
 							<div class="modal-body text-left">
 								<form id="createUserForm">
+									<div id="userId_div" class="form-group">
+										  <label for="usr">UserId (*)</label> 
+										  <input type="text" class="form-control" id="userId" name="userId">
+										  <span id="userId_span" class="glyphicon form-control-feedback"></span>
+									</div>
 									<div id="userName_div" class="form-group">
-										  <label for="usr">Username</label> 
-										  <input type="text" class="form-control" id="userName">
+										  <label for="usr">Username (*)</label> 
+										  <input type="text" class="form-control" id="userName" name="userName">
 										  <span id="userName_span" class="glyphicon form-control-feedback"></span>
 									</div>
 									<div id="userEmail_div" class="form-group">
-										  <label for="usr">Email Address</label> 
-										  <input type="text" class="form-control" id="userEmail">
+										  <label for="usr">Email Address (*)</label> 
+										  <input type="text" class="form-control" id="userEmail" name="userEmail">
 										  <span id="userEmail_span" class="glyphicon form-control-feedback"></span>
 									</div>
-									<div id="userPwd_div" class="form-group">
-										  <label for="usr">Password</label>
-										  <input type="text" class="form-control" id="userPwd">
-										  <span id="userPwd_span" class="glyphicon form-control-feedback"></span>
+									<div id="userPassword_div" class="form-group">
+										  <label for="Password">Password (*)</label>
+										  <input type="password" class="form-control" id="userPassword" name="userPassword">
+										  <span id="userPassword_span" class="glyphicon form-control-feedback"></span>
+									</div>
+									<div id="userPhone_div" class="form-group">
+										  <label for="usr">Phone (*)</label>
+										  <input type="text" class="form-control" id="userPhone" name="userPhone">
+										  <span id="userPhone_span" class="glyphicon form-control-feedback"></span>
+									</div>
+									<div id="userAddress_div" class="form-group">
+										  <label for="usr">Local Address</label>
+										  <input type="text" class="form-control" id="userAddress" name="userAddress">
+										  <span id="userAddress_span" class="glyphicon form-control-feedback"></span>
 									</div>
 								</form>
 							</div>

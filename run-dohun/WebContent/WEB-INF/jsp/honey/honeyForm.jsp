@@ -25,9 +25,10 @@ $(function(){
             root: "result",	// 실제 jqgrid에서 뿌려져야 할 데이터 
             repeatitems: false
          },
-		colNames:["회원번호","이름","전화번호","주소","비고"],
+		colNames:["NO","회원번호","이름","전화번호","주소","비고"],
 	   	colModel:[
-	   		{name:"userId",index:"col00",width:100,editable:true,align:"center",editoptions:{readonly:true}},	//no
+	   		{name:"no",index:"col00",width:30,align:"left",editoptions:{readonly:true}},	//no
+	   		{name:"userId",index:"col00",width:100,editable:true,align:"center",editoptions:{readonly:true}},	//userId
 	   		{name:"userName",index:"col01",width:80,editable:true,align:"center",editrules:{required:true}
 	   			,formoptions:{elmsuffix:"	(필수)" },
 	   		},		//이름
