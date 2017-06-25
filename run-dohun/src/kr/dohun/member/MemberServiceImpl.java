@@ -43,9 +43,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List memberHoneyList() throws Exception {
+	public List memberHoneyList(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		return memberDao.memberHoneyList();
+		
+		System.out.println("@@@@@@@@@@@@@@@"+ vo.getStartRow());
+		System.out.println("@@@@@@@@@@@@@@@"+vo.getEndRow());
+		
+		return memberDao.memberHoneyList(vo);
+	}
+
+	@Override
+	public int memberHoneyListCnt(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.memberHoneyListCnt(vo);
 	}
 
 }

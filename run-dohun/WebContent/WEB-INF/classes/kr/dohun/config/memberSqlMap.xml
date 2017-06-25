@@ -66,8 +66,12 @@
 		                           WHERE M_ETC02 = 'A'
 		                        ORDER BY M_ID DESC) A,
 		                       (SELECT @ROWNUM := 0) B) C
-		         WHERE C.NO <![CDATA[<=]]> 11) X
-		 WHERE X.NO <![CDATA[>=]]> 1
+		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
+		 WHERE X.NO <![CDATA[>=]]> #startRow#
+	</select>
+	
+	<select id="memberHoneyListCnt" parameterClass="member" resultClass="java.lang.Integer">
+	  SELECT COUNT(*) FROM MEMBER WHERE M_ETC02 = 'A'
 	</select>
 
 </sqlMap>

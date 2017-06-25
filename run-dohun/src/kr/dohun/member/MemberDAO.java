@@ -67,7 +67,17 @@ public class MemberDAO {
 	 * @throws Exception
 	 * dohun 2017. 6. 21.
 	 */
-	public List memberHoneyList() throws Exception{
-		return (List) sqlMapClientTemplate.queryForList("memberSqlMap.memberHoneyList");
+	public List memberHoneyList(MemberVO vo) throws Exception{
+		return (List) sqlMapClientTemplate.queryForList("memberSqlMap.memberHoneyList", vo);
 	}
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 * dohun 2017. 6. 22.
+	 */
+	public int memberHoneyListCnt(MemberVO vo) throws Exception{
+		return (int) sqlMapClientTemplate.queryForObject("memberSqlMap.memberHoneyListCnt", vo);
+	}
+	
 }

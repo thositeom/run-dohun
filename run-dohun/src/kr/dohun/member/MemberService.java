@@ -12,6 +12,6 @@ public interface MemberService {
 	public int memberInsertInfo(MemberVO vo) throws Exception;
 	public int memberUpdateInfo(MemberVO vo) throws Exception;
 	public int memberDeleteInfo(MemberVO vo) throws Exception;
-	public List memberHoneyList() throws Exception;
-	
+	public List memberHoneyList(MemberVO vo) throws Exception;
+	public int memberHoneyListCnt(MemberVO vo) throws Exception;
 }

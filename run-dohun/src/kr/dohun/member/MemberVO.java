@@ -2,21 +2,36 @@ package kr.dohun.member;
 
 public class MemberVO {
 	
-	String no;
+	private String no;
 	
-	String userId;
-	String userName;
-	String userEmail;
-	String userPhone;
-	String userAddress;
-	String userPassword;
-	String userEtc01; 
-	String userEtc02;
-	String userEtc03;
-	String userEtc04;
-	String userEtc05;
+	private String userId;
+	private String userName;
+	private String userEmail;
+	private String userPhone;
+	private String userAddress;
+	private String userPassword;
+	private String userEtc01; 
+	private String userEtc02;
+	private String userEtc03;
+	private String userEtc04;
+	private String userEtc05;
+	
+	private int startRow = 1;
+	private int endRow = 11;
 	
 	
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 	public String getNo() {
 		return no;
 	}

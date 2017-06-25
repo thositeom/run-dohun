@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.dohun.common.commonUtil;
 import kr.dohun.member.MemberService;
 import kr.dohun.member.MemberVO;
 
@@ -34,19 +35,27 @@ public class HoneyController {
 		return mv;
 	}
 	@RequestMapping(value = "/honeyJqgridList.do")
-	public ModelAndView honeyJqgridList(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public ModelAndView honeyJqgridList(HttpServletRequest request, HttpServletResponse response, ModelMap model, MemberVO vo) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		              
-		mv.addObject("page",1);		// 현재 페이지   
-		mv.addObject("total",10);	// 총 페이지 수 
-		
 		List list = new ArrayList();
 		Map map = new HashedMap();
 		
+		String currentPage = request.getParameter("page"); //현재페이지
+		String rows = request.getParameter("rows"); //보여줄 건수
+		
+		if(!currentPage.equals("1")){
+			int startRow = (Integer.parseInt(currentPage)*10)+1-Integer.parseInt(rows);
+			int endRow = startRow+Integer.parseInt(rows);
+			vo.setStartRow(startRow);
+			vo.setEndRow(endRow);
+		}
+		
 		try {
-			list = (List) memberService.memberHoneyList();
-			
+			list = (List) memberService.memberHoneyList(vo);
 			mv.addObject("result", list); // 실제 jqgrid에서 뿌려져야 할 데이터
+			mv.addObject("page",currentPage);		// 현재 페이지
+			mv.addObject("total",commonUtil.getTotalPage(memberService.memberHoneyListCnt(vo), Integer.parseInt(rows)));	// 총 페이지 수
 		
 			response.setContentType("text/xml; charset=UTF-8");
 			PrintWriter out = response.getWriter();
