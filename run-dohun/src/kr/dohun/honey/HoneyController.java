@@ -16,7 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.dohun.common.commonUtil;
+import kr.dohun.common.CommonUtil;
 import kr.dohun.member.MemberService;
 import kr.dohun.member.MemberVO;
 
@@ -55,7 +55,7 @@ public class HoneyController {
 			list = (List) memberService.memberHoneyList(vo);
 			mv.addObject("result", list); // 실제 jqgrid에서 뿌려져야 할 데이터
 			mv.addObject("page",currentPage);		// 현재 페이지
-			mv.addObject("total",commonUtil.getTotalPage(memberService.memberHoneyListCnt(vo), Integer.parseInt(rows)));	// 총 페이지 수
+			mv.addObject("total",CommonUtil.getTotalPage(memberService.memberHoneyListCnt(vo), Integer.parseInt(rows)));	// 총 페이지 수
 		
 			response.setContentType("text/xml; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -95,11 +95,25 @@ public class HoneyController {
 	}
 	
 	@RequestMapping(value = "/honeyJqgridSubList.do")
-	public ModelAndView honeyJqgridSub(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView honeyJqgridSub(HttpServletRequest request, HttpServletResponse response, HoneyVO vo) {
 		ModelAndView mv = new ModelAndView("jsonView");
-		try {
+		try{
+			vo.setHoneyUserId(request.getParameter("userId"));
+			String currentPage = request.getParameter("page"); //현재페이지
+			String rows = request.getParameter("rows"); //보여줄 건수
+			
+			if(!currentPage.equals("1")){
+				int startRow = (Integer.parseInt(currentPage)*10)+1-Integer.parseInt(rows);
+				int endRow = startRow+Integer.parseInt(rows);
+				vo.setStartRow(startRow);
+				vo.setEndRow(endRow);
+			}
+			
 			List list = new ArrayList();
-			list = honeyService.honeyList(request.getParameter("userId"));
+			list = honeyService.honeyList(vo);
+			
+			mv.addObject("page",currentPage);		// 현재 페이지
+			mv.addObject("total",CommonUtil.getTotalPage(honeyService.honeyListCnt(vo.getHoneyUserId()), Integer.parseInt(rows)));	// 총 페이지 수
 			mv.addObject("subUserId",request.getParameter("userId"));
 			mv.addObject("resultSub",list);
 			
@@ -116,17 +130,21 @@ public class HoneyController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		try {
 			String oper = request.getParameter("oper");
-			
+			String orderList = vo.getHoneyOrderList();
 			switch (oper){
 			case "add":
 					if(request.getParameter("subUserId") != null){
 						vo.setHoneyUserId(request.getParameter("subUserId"));
 						vo.setHoneyId(getCurrentDate());
+						vo.setHoneyCost(CommonUtil.getQtyToCost(orderList));
+						vo.setHoneyAmount(CommonUtil.getQtyToAmount(vo.getHoneyQty(),orderList));
 						honeyService.honeyInsertInfo(vo);
 					}
 				break;
 			case "edit":
 					vo.setHoneyId(request.getParameter("honeyId"));
+					vo.setHoneyCost(CommonUtil.getQtyToCost(orderList));
+					vo.setHoneyAmount(CommonUtil.getQtyToAmount(vo.getHoneyQty(),orderList));
 					honeyService.honeyUpdateInfo(vo);
 				break;
 			default ://del

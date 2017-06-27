@@ -21,8 +21,20 @@
 		SELECT * FROM TEST WHERE ID = #id#
 	</select> -->
 	
-	<select id="honeyList" parameterClass="java.lang.String" resultMap="honeyMap">
-		SELECT * FROM HONEY WHERE H_USERID = #honeyUserId#
+	<select id="honeyList" parameterClass="honey" resultMap="honeyMap">
+		SELECT *
+		  FROM (SELECT *
+		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
+		                  FROM (SELECT *
+		                          FROM HONEY
+		                         WHERE H_USERID = #honeyUserId#) A,
+		                       (SELECT @ROWNUM := 0) B) C
+		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
+		 WHERE X.NO <![CDATA[>=]]> #startRow#
+	</select>
+	
+	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM HONEY WHERE H_USERID = #honeyUserId#
 	</select>
 	
 	<select id="honeyInfo" parameterClass="honey" resultMap="honeyMap">

@@ -21,10 +21,21 @@ public class HoneyDAO {
 	 * dohun 2017. 6. 8.
 	 * 
 	 */
-	public List honeyList(String userId) throws Exception{
-		return (List) sqlMapClientTemplate.queryForList("honeySqlMap.honeyList",userId);
-	
+	public List honeyList(HoneyVO vo) throws Exception{
+		return (List) sqlMapClientTemplate.queryForList("honeySqlMap.honeyList",vo);
 	}
+	
+	/**
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 * dohun 2017. 6. 27.
+	 * 
+	 */
+	public int honeyListCnt(String userId) throws Exception{
+		return (int) sqlMapClientTemplate.queryForObject("honeySqlMap.honeyListCnt",userId);
+	}
+	
 	/**
 	 * @return
 	 * @throws Exception

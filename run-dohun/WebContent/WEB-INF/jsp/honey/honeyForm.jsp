@@ -25,9 +25,8 @@ $(function(){
             root: "result",	// 실제 jqgrid에서 뿌려져야 할 데이터 
             repeatitems: false
          },
-		colNames:["NO","회원번호","이름","전화번호","주소","비고"],
+		colNames:["회원번호","이름","전화번호","주소","비고"],
 	   	colModel:[
-	   		{name:"no",index:"col00",width:30,align:"left",editoptions:{readonly:true}},	//no
 	   		{name:"userId",index:"col00",width:100,editable:true,align:"center",editoptions:{readonly:true}},	//userId
 	   		{name:"userName",index:"col01",width:80,editable:true,align:"center",editrules:{required:true}
 	   			,formoptions:{elmsuffix:"	(필수)" },
@@ -223,10 +222,10 @@ $(function(){
 <input type="hidden" id="subUserId"/>
     <div class="col-sm-8 text-left">
 		<h1>Honey</h1>
-		<p>나는 꿀을판다.</p>
+		<p>꿀꿀 기록한다.</p>
 		<hr>
-		<h3>후니허니</h3>
-		<p>나는야 꿀을파는청년...</p>
+		<h3>형제벌꿀</h3>
+		<p>맛있는 벌꿀</p>
 		<div>
 			<table id="list01"></table>
 			<div id="pager01"></div>

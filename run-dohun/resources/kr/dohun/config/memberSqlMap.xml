@@ -4,7 +4,6 @@
 	<typeAlias alias="member" type="kr.dohun.member.MemberVO" />
 
 	<resultMap id="memberMap" class="member">
-<!-- 		<result property="no" column="NO" columnIndex="1" /> -->
 		<result property="userId" column="M_ID" columnIndex="2" />
 		<result property="userName" column="M_NAME" columnIndex="3" />
 		<result property="userEmail" column="M_EMAIL" columnIndex="4" />

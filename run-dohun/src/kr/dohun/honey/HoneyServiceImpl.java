@@ -13,8 +13,13 @@ public class HoneyServiceImpl implements HoneyService {
 	HoneyDAO honeyDao;
 	
 	@Override
-	public List honeyList(String userId) throws Exception {
-		return (List) honeyDao.honeyList(userId);
+	public List honeyList(HoneyVO vo) throws Exception {
+		return (List) honeyDao.honeyList(vo);
+	}
+	
+	@Override
+	public int honeyListCnt(String userId) throws Exception {
+		return honeyDao.honeyListCnt(userId);
 	}
 	
 	@Override
@@ -36,5 +41,5 @@ public class HoneyServiceImpl implements HoneyService {
 	public int honeyDeleteInfo(HoneyVO vo) throws Exception {
 		return honeyDao.honeyDeleteInfo(vo);
 	}
-	
+
 }

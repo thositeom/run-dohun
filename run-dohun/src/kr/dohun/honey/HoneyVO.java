@@ -1,18 +1,42 @@
 package kr.dohun.honey;
 
 public class HoneyVO {
-	String honeyId;
-	String honeyUserId;
-	String honeyOrderDate;
-	String honeyPayment;
-	String honeyOrderList;
-	String honeyQty;
-	String honeyCost;
-	String honeyAmount;
-	String honeyWaybill;
-	String honeyDeliveryDate;
-	String honeyEtc01;
+
+	private String no;
 	
+	private String honeyId;
+	private String honeyUserId;
+	private String honeyOrderDate;
+	private String honeyPayment;
+	private String honeyOrderList;
+	private String honeyQty;
+	private String honeyCost;
+	private String honeyAmount;
+	private String honeyWaybill;
+	private String honeyDeliveryDate;
+	private String honeyEtc01;
+	
+	private int startRow = 1;
+	private int endRow = 11;
+	
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 	public String getHoneyId() {
 		return honeyId;
 	}

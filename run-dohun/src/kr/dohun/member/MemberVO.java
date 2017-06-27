@@ -2,7 +2,7 @@ package kr.dohun.member;
 
 public class MemberVO {
 	
-	private String no;
+	private String userNo;
 	
 	private String userId;
 	private String userName;
@@ -20,23 +20,11 @@ public class MemberVO {
 	private int endRow = 11;
 	
 	
-	public int getStartRow() {
-		return startRow;
+	public String getUserNo() {
+		return userNo;
 	}
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
-	public int getEndRow() {
-		return endRow;
-	}
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
-	public String getNo() {
-		return no;
-	}
-	public void setNo(String no) {
-		this.no = no;
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
 	}
 	public String getUserId() {
 		return userId;
@@ -103,6 +91,18 @@ public class MemberVO {
 	}
 	public void setUserEtc05(String userEtc05) {
 		this.userEtc05 = userEtc05;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 	
 }
