@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="boardSqlMap">
+	<typeAlias alias="board" type="kr.dohun.board.BoardVO" />
+
+
+	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM TEST WHERE ID = #id#
+	</select> -->
+	
+	<!-- <select id="honeyList" parameterClass="honey" resultMap="honeyMap">
+		SELECT *
+		  FROM (SELECT *
+		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
+		                  FROM (SELECT *
+		                          FROM HONEY
+		                         WHERE H_USERID = #honeyUserId#) A,
+		                       (SELECT @ROWNUM := 0) B) C
+		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
+		 WHERE X.NO <![CDATA[>=]]> #startRow#
+	</select>
+	
+	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM HONEY WHERE H_USERID = #honeyUserId#
+	</select>
+	
+	<select id="honeyInfo" parameterClass="honey" resultMap="honeyMap">
+		SELECT * FROM HONEY WHERE H_ID = #honeyId#
+	</select>
+
+	<insert id="honeyInsertInfo" parameterClass="honey">
+		INSERT INTO HONEY 
+		(H_ID,H_USERID,H_ORDERDATE,H_PAYMENT,H_ORDERLIST,H_QTY
+		,H_COST,H_AMOUNT,H_WAYBILL,H_DELIVERYDATE,H_ETC01) 
+		VALUES 
+		(#honeyId#,#honeyUserId#,#honeyOrderDate#,#honeyPayment#,#honeyOrderList#,#honeyQty#
+		,#honeyCost#,#honeyAmount#,#honeyWaybill#,#honeyDeliveryDate#,#honeyEtc01#)
+	</insert>
+
+	<update id="honeyUpdateInfo" parameterClass="honey">
+		UPDATE HONEY SET 
+			H_PAYMENT=#honeyPayment#,
+			H_ORDERDATE=#honeyOrderDate#,
+			H_ORDERLIST=#honeyOrderList#,
+			H_QTY=#honeyQty#,
+			H_COST=#honeyCost#,
+			H_AMOUNT=#honeyAmount#,
+			H_WAYBILL=#honeyWaybill#,
+			H_DELIVERYDATE=#honeyDeliveryDate#,
+			H_ETC01=#honeyEtc01#
+		WHERE H_ID=#honeyId# 
+	</update>	
+ 
+	<delete id="honeyDeleteInfo" parameterClass="honey">
+		DELETE FROM HONEY WHERE H_ID = #honeyId#
+	</delete>
+ -->
+</sqlMap>

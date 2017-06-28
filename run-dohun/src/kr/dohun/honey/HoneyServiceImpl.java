@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class HoneyServiceImpl implements HoneyService {
 
 	@Autowired
-	HoneyDAO honeyDao;
+	HoneyDao honeyDao;
 	
 	@Override
 	public List honeyList(HoneyVO vo) throws Exception {

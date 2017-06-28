@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("HoneyDAO")
-public class HoneyDAO {
+@Repository("HoneyDao")
+public class HoneyDao {
 
 	@Autowired
 	SqlMapClientTemplate sqlMapClientTemplate;

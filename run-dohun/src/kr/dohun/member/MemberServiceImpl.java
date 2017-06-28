@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	MemberDAO memberDao;
+	MemberDao memberDao;
 	
 	@Override
 	public List memberList() throws Exception {
@@ -45,10 +45,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List memberHoneyList(MemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("@@@@@@@@@@@@@@@"+ vo.getStartRow());
-		System.out.println("@@@@@@@@@@@@@@@"+vo.getEndRow());
-		
 		return memberDao.memberHoneyList(vo);
 	}
 

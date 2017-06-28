@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("MemberDAO")
-public class MemberDAO {
+@Repository("MemberDao")
+public class MemberDao {
 
 	@Autowired
 	SqlMapClientTemplate sqlMapClientTemplate;
