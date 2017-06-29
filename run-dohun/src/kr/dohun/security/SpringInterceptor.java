@@ -25,7 +25,16 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 			reqUrl.equals(context+"projectsForm.do")||
 			reqUrl.equals(context+"memberLoginForm.do")||
 			reqUrl.equals(context+"memberJoin.do")||
+			reqUrl.equals(context+"toss.do")||
+			reqUrl.equals(context+"boardForm.do")||
+			reqUrl.equals(context+"boardWriteForm.do")||
+			reqUrl.equals(context+"boardWrite.do")||
+			reqUrl.equals(context+"boardUpdateForm.do")||
+			reqUrl.equals(context+"boardUpdate.do")||
+			reqUrl.equals(context+"boardDelete.do")||
+			reqUrl.equals(context+"boardList.do")||
 			reqUrl.equals(context+"memberLogin.do")
+			
 				))
 		{	
 			//session 체크

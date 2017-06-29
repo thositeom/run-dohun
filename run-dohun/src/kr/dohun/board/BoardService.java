@@ -1,5 +1,7 @@
 package kr.dohun.board;
 
-public interface BoardService {
+import java.util.List;
 
+public interface BoardService {
+	public List boardList(BoardVO vo) throws Exception;
 }

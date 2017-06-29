@@ -2,7 +2,41 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="boardSqlMap">
 	<typeAlias alias="board" type="kr.dohun.board.BoardVO" />
+	
+	<resultMap id="boardMap" class="board">
+		<result property="boardIdx" column="BOARD_IDX" />
+		<result property="boardId" column="BOARD_ID" />
+		<result property="boardParentIdx" column="PARENT_IDX" />
+		<result property="boardType" column="BOARD_TYPE" />
+		<result property="boardTitle" column="TITLE" />
+		<result property="boardContent" column="CONTENT" />
+		<result property="boardNotice" column="NOTICE" />
+		<result property="boardSecret" column="SECRET" />
+		<result property="boardCreateDate" column="CREATEDATE" />
+		<result property="boardCreateUser" column="CRATEUSER" />
+		<result property="boardUpdateDate" column="UPDATEDATE" />
+		<result property="boardUpdateUser" column="UPDATEUSER" />
+		<result property="boardBest" column="BEST" />
+		<result property="boardWost" column="WOST" />
+		<result property="boardCategory01" column="CATEGORY01" />
+		<result property="boardCategory02" column="CATEGORY02" />
+		<result property="boardCategory03" column="CATEGORY03" />
+	</resultMap>
 
+	<select id="boardList" parameterClass="board" resultMap="boardMap">
+		SELECT *
+		  FROM (SELECT *
+		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
+		                  FROM (SELECT *
+		                          FROM BOARD ) A,
+		                       (SELECT @ROWNUM := 0) B) C
+		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
+		 WHERE X.NO <![CDATA[>=]]> #startRow#
+	</select>
+	
+	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM BOARD
+	</select>
 
 	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
 		SELECT * FROM TEST WHERE ID = #id#

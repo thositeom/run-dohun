@@ -25,6 +25,9 @@
 		  case "about":
 			  menuUrl ="/aboutForm.do";
 			  break;
+		  case "board":
+			  menuUrl ="/boardForm.do";
+			  break;
 		  case "contact":
 			  menuUrl ="/contactForm.do";
 			  break;
@@ -72,6 +75,7 @@
         </tlds:isLogin>
         <li id="game"><a href="#">Game</a></li>
         <li id="about"><a href="#">About</a></li>
+        <li id="board"><a href="#">Board</a></li>
         <li id="projects"><a href="#">Projects</a></li>
         <li id="contact"><a href="#">Contact</a></li>
       </ul>
