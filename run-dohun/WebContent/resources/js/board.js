@@ -19,6 +19,7 @@ $("button").click(function(){
 			url="/boardWriteForm.do";
 			break;
 		case "boardWrite" :
+			$("#boardContent").val(CKEDITOR.instances.editor1.getData());
 			url="/boardWrite.do";
 			break;
 		case "boardUpdateForm" :

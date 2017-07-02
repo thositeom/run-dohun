@@ -57,8 +57,8 @@
 	  });
 	});
   </script>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -81,12 +81,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        	<tlds:isLogin>
-	        	<li id="logOut"><a href="/memberLogOut.do"><span class="glyphicon"></span>LogOut</a></li>
-        	</tlds:isLogin>
-        	<tlds:isNotLogin>
-	        	<li id="login"><a href="/memberLoginForm.do"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-       		</tlds:isNotLogin>
+       	<tlds:isLogin>
+        	<li id="logOut"><a href="/memberLogOut.do"><span class="glyphicon"></span>LogOut</a></li>
+       	</tlds:isLogin>
+       	<tlds:isNotLogin>
+        	<li id="login"><a href="/memberLoginForm.do"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+   		</tlds:isNotLogin>
       </ul>
     </div>
   </div>

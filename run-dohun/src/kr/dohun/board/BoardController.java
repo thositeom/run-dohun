@@ -43,6 +43,13 @@ public class BoardController {
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
+			System.out.println("::::::::::::::::::::"+vo.getBoardTitle());
+			System.out.println("::::::::::::::::::::"+vo.getBoardContent());
+			
+			vo.setBoardId(boardId);
+			vo.setBoardCreateUser(boardCreateUser);
+			vo.setBoardUpdateUser(boardUpdateUser);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -37,24 +37,22 @@
 	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM BOARD
 	</select>
-
-	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM TEST WHERE ID = #id#
-	</select> -->
 	
-	<!-- <select id="honeyList" parameterClass="honey" resultMap="honeyMap">
-		SELECT *
-		  FROM (SELECT *
-		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
-		                  FROM (SELECT *
-		                          FROM HONEY
-		                         WHERE H_USERID = #honeyUserId#) A,
-		                       (SELECT @ROWNUM := 0) B) C
-		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
-		 WHERE X.NO <![CDATA[>=]]> #startRow#
-	</select>
+	<insert id="boardInsertInfo" parameterClass="board">
+		INSERT INTO BOARD
+		(BOARD_IDX,BOARD_ID,PARENT_IDX,BOARD_TYPE,TITLE
+		,CONTENT,NOTICE,SECRET,CREATEDATE,CRATEUSER
+		,UPDATEDATE,UPDATEUSER,BEST,WOST,CATEGORY01
+		,CATEGORY02,CATEGORY03
+		) 
+		VALUES 
+		(#boardIdx#,#boardId#,#boardParentIdx#,#boardType#,#boardTitle#
+		,#boardContent#,#boardNotice#,#boardSecret#,#boardCreateDate#,#boardCreateUser#
+		,#boardUpdateDate#,#boardUpdateUser#,#boardBest#,#boardWost#,#boardCategory01#
+		,#boardCategory02#,#boardCategory03#)
+	</insert>	
 	
-	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+<!-- 	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM HONEY WHERE H_USERID = #honeyUserId#
 	</select>
 	
@@ -88,5 +86,5 @@
 	<delete id="honeyDeleteInfo" parameterClass="honey">
 		DELETE FROM HONEY WHERE H_ID = #honeyId#
 	</delete>
- -->
+  -->
 </sqlMap>

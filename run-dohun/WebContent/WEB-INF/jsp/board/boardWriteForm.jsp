@@ -7,12 +7,14 @@
 <title>게시판</title>
 </head>
 <script type="text/javascript" src="/resources/js/board.js"></script>
+
 <style type="text/css">
 	ul {list-style-type: :none; }
 	li {display: inline; }
 </style>
     
 <form id="boardForm">
+	<input type="hidden" id="boardContent" name="boardContent">
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판-글쓰기</h1>
 	    <p>나는 게시판. 나는 글을쓴다. 너도 글을쓴다.</p>
@@ -20,25 +22,22 @@
 		
 		<div class="form-group">
 		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle">
-		</div>
-		<div class="form-group">
-		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle">
-		</div>
-		<div class="form-group">
-		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle">
-		</div>
-		<div class="form-group">
-		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle">
-		</div>
-		<div class="form-group">
-		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle">
+		    <input type="text" class="form-control" id="boardTitle" name="boardTitle">
 		</div>
 		
+		<!-- CKEditor -->
+		<div class="form-group">
+			<textarea name="editor1" id="editor1" >
+	        </textarea>
+	        <script>
+	            CKEDITOR.replace( 'editor1' );
+	        </script>
+        </div>
+        
+        <div class="form-group">
+		    <label for="업로드">업로드:</label>
+		    <input type="text" class="form-control" id="fileUpload">
+		</div>
 		
 		<div class="modal-footer">
 			<button type="button" id="boardWrite" name="boardWrite" class="btn btn-default">글쓰기</button>

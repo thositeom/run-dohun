@@ -18,7 +18,9 @@
 	<script src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script src="/resources/jquery.jqGrid-4.4.3/js/jquery.jqGrid.src.js"></script>
 	<script src="/resources/jquery.jqGrid-4.4.3/src/i18n/grid.locale-kr.js"></script>
-
+	<!-- 게시판 에디터 -->
+	<script src="/resources/ckeditor/ckeditor.js"></script>
+  	
   	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -45,6 +47,20 @@
       }
       .row.content {height:auto;} 
     }
+    
+    /* nav navbar-fixed-top 사용으로인해 margin추가 */
+    .mainContent {margin-top: 50px}
+    
+    /* naver-fix-left 왼쪽 바고정*/
+    .navbar-fixed-left{
+    	  position: fixed;
+		  right: 0;
+		  left: 0;
+		  z-index: 1020;
+		  padding-right: 15px;
+		  padding-left: 15px;
+		  
+    	}
   	</style>
   	
   	<!-- 구글애드샌스 광고 무료수익 -->
@@ -60,13 +76,15 @@
 <body>
 <jsp:include page="/WEB-INF/jsp/common/layout/gnb.jsp"></jsp:include>
 
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
+<div class="container-fluid text-center mainContent">    
+  <div class="row content"> 
+    <div class="col-sm-2 sidenav navbar-fixed-left">
       <p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
       <p><a href="https://w3schools.com" target="_w3schools">W3Schools</a></p>
       <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
       <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>
+    </div>
+    <div class="col-sm-2 sidenav">
     </div>
     <div id="content_div">
 	    <div class="col-sm-8 text-left"> 
