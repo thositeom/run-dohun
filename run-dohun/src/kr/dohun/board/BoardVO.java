@@ -5,20 +5,20 @@ public class BoardVO {
 	private int startRow = 1;
 	private int endRow = 11;
 
-	private int boardIdx;
-	private String boardId;
-	private int boardParentIdx;
-	private String boardType;
-	private String boardTitle;
-	private String boardContent;
-	private String boardNotice;
-	private String boardSecret;
+	private int boardIdx;//boardIdx
+	private String boardId;//게시판Id
+	private int boardParentIdx;//부모Idx
+	private String boardType;//게시판 타입
+	private String boardTitle;//제목
+	private String boardContent;//내용
+	private String boardNotice;//공지
+	private String boardSecret;//비밀글
 	private String boardCreateDate;
 	private String boardCreateUser;
 	private String boardUpdateDate;
 	private String boardUpdateUser;
-	private String boardBest;
-	private String boardWost;
+	private String boardBest;//추천
+	private String boardWost;//신고
 	private String boardCategory01;
 	private String boardCategory02;
 	private String boardCategory03;

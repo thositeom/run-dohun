@@ -40,7 +40,10 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 			//session 체크
 			HttpSession session = request.getSession();
 			if(session.getAttribute("_USER_INFO_") != null){
-				//TODO 권한체크
+				
+				//xss체크
+				
+				
 				
 			}else{//로그인필요
 				System.out.println("::::::::::::::Session null LoginPage go!!");

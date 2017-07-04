@@ -8,9 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.dohun.common.CommonService;
+
 @Controller
 public class BoardController {
 
+	@Autowired(required=false)
+	private CommonService commonService;
+	
 	@Autowired
 	private BoardService boardService;
 	
@@ -44,12 +49,17 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			System.out.println("::::::::::::::::::::"+vo.getBoardTitle());
+			
+			int aaa=  commonService.commonSeqCnt("boardIdx");
+			System.out.println(":::::::@@@@" + aaa);
+			vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
 			System.out.println("::::::::::::::::::::"+vo.getBoardContent());
+			commonService.commonUpdateSeq("boardIdx");
+			vo.setBoardId("A");
+			vo.setBoardCreateUser("userId");
+			vo.setBoardUpdateUser("userId");
 			
-			vo.setBoardId(boardId);
-			vo.setBoardCreateUser(boardCreateUser);
-			vo.setBoardUpdateUser(boardUpdateUser);
-			
+			boardService.boardInsertInfo(vo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

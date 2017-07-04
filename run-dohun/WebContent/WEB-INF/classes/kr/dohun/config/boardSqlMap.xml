@@ -47,8 +47,8 @@
 		) 
 		VALUES 
 		(#boardIdx#,#boardId#,#boardParentIdx#,#boardType#,#boardTitle#
-		,#boardContent#,#boardNotice#,#boardSecret#,#boardCreateDate#,#boardCreateUser#
-		,#boardUpdateDate#,#boardUpdateUser#,#boardBest#,#boardWost#,#boardCategory01#
+		,#boardContent#,#boardNotice#,#boardSecret#,NOW(),#boardCreateUser#
+		,NOW(),#boardUpdateUser#,#boardBest#,#boardWost#,#boardCategory01#
 		,#boardCategory02#,#boardCategory03#)
 	</insert>	
 	

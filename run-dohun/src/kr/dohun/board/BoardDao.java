@@ -7,7 +7,6 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository("BoardDao")
-
 public class BoardDao {
 
 	@Autowired
@@ -24,6 +23,10 @@ public class BoardDao {
 	 */
 	public List boardList(BoardVO vo) throws Exception{
 		return (List) sqlMapClientTemplate.queryForList("boardSqlMap.boardList",vo);
+	}
+	
+	public int boardInsertInfo(BoardVO vo) throws Exception{
+		return (int) sqlMapClientTemplate.queryForObject("boardSqlMap.boardInsertInfo",vo);
 	}
 	
 	

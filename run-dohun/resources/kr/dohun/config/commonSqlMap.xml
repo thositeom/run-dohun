@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="commonSqlMap">
+	
+	<select id="commonSeqCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #str#
+	</select>
+
+	<update id="commonUpdateSeq" parameterClass="java.lang.String" >
+		UPDATE 
+			SEQ_MANAGER a, (SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#) B
+		SET 
+			A.SEQ = B.SEQ+1
+		WHERE SEQ_ID = #seqId#
+	</update>	
+ 
+
+</sqlMap>

@@ -8,6 +8,7 @@
 	<sqlMap resource="kr/dohun/config/honeySqlMap.xml" />
 	<sqlMap resource="kr/dohun/config/memberSqlMap.xml" />
 	<sqlMap resource="kr/dohun/config/boardSqlMap.xml" />
+	<sqlMap resource="kr/dohun/config/commonSqlMap.xml" />
 </sqlMapConfig>
 
  

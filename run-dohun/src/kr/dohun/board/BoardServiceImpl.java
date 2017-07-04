@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("BoardServiceImp")
+@Service("BoardServiceImpl")
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
@@ -14,6 +14,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List boardList(BoardVO vo) throws Exception {
 		return boardDao.boardList(vo);
+	}
+
+	@Override
+	public int boardInsertInfo(BoardVO vo) throws Exception {
+		return boardDao.boardInsertInfo(vo);
 	}
 
 }
