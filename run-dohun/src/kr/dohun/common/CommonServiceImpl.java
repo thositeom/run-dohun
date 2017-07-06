@@ -1,4 +1,4 @@
-package CommonService;
+package kr.dohun.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,8 @@ public class CommonServiceImpl implements CommonService {
 	CommonDao commonDao;
 
 	@Override
-	public int commonSeqCnt(String str) throws Exception {
-		System.out.println("@@@@@@@@@@@");
-		return commonDao.commonSeqCnt(str);
+	public int commonSeqCnt(String seqId) throws Exception {
+		return commonDao.commonSeqCnt(seqId);
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ import kr.dohun.common.CommonService;
 @Controller
 public class BoardController {
 
-	@Autowired(required=false)
+	@Autowired
 	private CommonService commonService;
 	
 	@Autowired
@@ -48,18 +48,16 @@ public class BoardController {
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
-			System.out.println("::::::::::::::::::::"+vo.getBoardTitle());
 			
-			int aaa=  commonService.commonSeqCnt("boardIdx");
-			System.out.println(":::::::@@@@" + aaa);
-			vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
-			System.out.println("::::::::::::::::::::"+vo.getBoardContent());
-			commonService.commonUpdateSeq("boardIdx");
-			vo.setBoardId("A");
+//			vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
+			
+			vo.setBoardIdx(commonService.commonUpdateSeq("boardIdx"));
+			vo.setBoardId("A"); //A:일반게시판
 			vo.setBoardCreateUser("userId");
 			vo.setBoardUpdateUser("userId");
-			
 			boardService.boardInsertInfo(vo);
+			
+//			int bbb = commonService.commonUpdateSeq("boardIdx");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,9 +19,8 @@ public class CommonDao {
 	 * @throws Exception
 	 * dohun 2017. 7. 5.
 	 */
-	public int commonSeqCnt(String str) throws Exception{
-		System.out.println("#######");
-		return (int) sqlMapClientTemplate.queryForObject("commonSqlMap.commonSeqCnt",str);
+	public int commonSeqCnt(String seqId) throws Exception{
+		return (int) sqlMapClientTemplate.queryForObject("commonSqlMap.commonSeqCnt",seqId);
 	}
 	
 	/**

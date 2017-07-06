@@ -52,6 +52,19 @@
 		,#boardCategory02#,#boardCategory03#)
 	</insert>	
 	
+<!-- 	<select id="boardSeqCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer"> -->
+<!-- 		SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId# -->
+<!-- 	</select> -->
+
+<!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
+<!-- 		UPDATE  -->
+<!-- 			SEQ_MANAGER a, (SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#) B -->
+<!-- 		SET  -->
+<!-- 			A.SEQ = B.SEQ+1 -->
+<!-- 		WHERE SEQ_ID = #seqId# -->
+<!-- 	</update>	 -->
+	
+	
 <!-- 	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM HONEY WHERE H_USERID = #honeyUserId#
 	</select>
