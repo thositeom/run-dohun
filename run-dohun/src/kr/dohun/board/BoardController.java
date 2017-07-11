@@ -14,9 +14,6 @@ import kr.dohun.common.CommonService;
 public class BoardController {
 
 	@Autowired
-	private CommonService commonService;
-	
-	@Autowired
 	private BoardService boardService;
 	
 	@RequestMapping(value = "/boardForm.do")
@@ -49,15 +46,10 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			
-//			vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
-			
-			vo.setBoardIdx(commonService.commonUpdateSeq("boardIdx"));
 			vo.setBoardId("A"); //A:일반게시판
 			vo.setBoardCreateUser("userId");
 			vo.setBoardUpdateUser("userId");
 			boardService.boardInsertInfo(vo);
-			
-//			int bbb = commonService.commonUpdateSeq("boardIdx");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -17,12 +17,26 @@ public class BoardVO {
 	private String boardCreateUser;
 	private String boardUpdateDate;
 	private String boardUpdateUser;
-	private String boardBest;//추천
-	private String boardWost;//신고
+	private String boardBest;//추천수
+	private String boardWost;//신고수
 	private String boardCategory01;
 	private String boardCategory02;
 	private String boardCategory03;
+	private String boardCount;//조회수
+	private String boardAnswerCnt;//답변수
 	
+	public String getBoardCount() {
+		return boardCount;
+	}
+	public void setBoardCount(String boardCount) {
+		this.boardCount = boardCount;
+	}
+	public String getBoardAnswerCnt() {
+		return boardAnswerCnt;
+	}
+	public void setBoardAnswerCnt(String boardAnswerCnt) {
+		this.boardAnswerCnt = boardAnswerCnt;
+	}
 	public int getStartRow() {
 		return startRow;
 	}

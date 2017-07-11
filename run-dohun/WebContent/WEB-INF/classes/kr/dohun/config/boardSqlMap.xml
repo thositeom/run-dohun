@@ -21,6 +21,8 @@
 		<result property="boardCategory01" column="CATEGORY01" />
 		<result property="boardCategory02" column="CATEGORY02" />
 		<result property="boardCategory03" column="CATEGORY03" />
+		<result property="boardCount" column="BOARD_CNT" />
+		<result property="boardAnswerCnt" column="ANSWER_CNT" />
 	</resultMap>
 
 	<select id="boardList" parameterClass="board" resultMap="boardMap">
@@ -32,6 +34,7 @@
 		                       (SELECT @ROWNUM := 0) B) C
 		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
+		 ORDER BY BOARD_IDX DESC
 	</select>
 	
 	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">

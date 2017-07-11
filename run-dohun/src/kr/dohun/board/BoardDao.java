@@ -26,7 +26,7 @@ public class BoardDao {
 	}
 	
 	public int boardInsertInfo(BoardVO vo) throws Exception{
-		return (int) sqlMapClientTemplate.queryForObject("boardSqlMap.boardInsertInfo",vo);
+		return (int) sqlMapClientTemplate.update("boardSqlMap.boardInsertInfo",vo);
 	}
 	
 	

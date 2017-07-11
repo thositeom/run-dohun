@@ -30,7 +30,7 @@ public class CommonDao {
 	 * dohun 2017. 7. 5.
 	 */
 	public int commonUpdateSeq(String seqId) throws Exception{
-		return (int) sqlMapClientTemplate.queryForObject("commonSqlMap.commonUpdateSeq",seqId);
+		return (int) sqlMapClientTemplate.update("commonSqlMap.commonUpdateSeq",seqId);
 	}
 	
 	

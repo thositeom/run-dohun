@@ -3,12 +3,12 @@
 <sqlMap namespace="commonSqlMap">
 	
 	<select id="commonSeqCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-		SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#
+		SELECT SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#
 	</select>
 
 	<update id="commonUpdateSeq" parameterClass="java.lang.String">
 		UPDATE 
-			SEQ_MANAGER a, (SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#) B
+			SEQ_MANAGER A, (SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#) B
 		SET 
 			A.SEQ = B.SEQ+1
 		WHERE SEQ_ID = #seqId#

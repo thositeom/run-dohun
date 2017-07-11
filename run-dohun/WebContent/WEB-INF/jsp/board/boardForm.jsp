@@ -22,21 +22,25 @@
 		    <table class="table">
 		    	<thead>
 		    		<tr>
-		    			<th>No</th>
-		    			<th>카테고리</th>
+		    			<th>boardIdx</th>
 		    			<th>제목</th>
-		    			<th>아이디</th>
-		    			<th>등록일</th>
+		    			<th>답변수</th>
+		    			<th>추천수</th>
+		    			<th>조회수</th>
+		    			<th>ID</th>
 		    		</tr>
 			    </thead>
 				<tbody>
 					<c:if test="${!empty boardList}">
-						<c:forEach items="${boardList}" var="boardList" >
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+						<c:forEach items="${boardList}" var="board" >
+						<tr>
+							<td>${board.boardIdx}</td>
+							<td>${board.boardTitle}</td>
+							<td>${board.boardCategory02}</td>
+							<td>${board.boardBest}</td>
+							<td>${board.boardCreateDate}</td>
+							<td>${board.boardCreateUser}</td>
+						</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty boardList}">		 			
