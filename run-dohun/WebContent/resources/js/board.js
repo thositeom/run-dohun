@@ -30,6 +30,11 @@ $("button").click(function(){
 			break;
 		case "boardDelete" :
 			url="/boardDelete.do";
+			// 체크 되어 있는 값 추출
+			/*$("input[name=boardCheck]:checked").each(function() {
+				var test = $(this).val();
+				console.log(test);
+			});*/
 			break;
 		case "boardList" :
 			url="/boardList.do";

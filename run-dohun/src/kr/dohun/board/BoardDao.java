@@ -1,10 +1,13 @@
 package kr.dohun.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
+
+import kr.dohun.honey.HoneyVO;
 
 @Repository("BoardDao")
 public class BoardDao {
@@ -25,9 +28,17 @@ public class BoardDao {
 		return (List) sqlMapClientTemplate.queryForList("boardSqlMap.boardList",vo);
 	}
 	
+	public int boardListCnt(String vo) throws Exception{
+		return (int) sqlMapClientTemplate.queryForObject("boardSqlMap.boardListCnt",vo);
+	}
+	
 	public int boardInsertInfo(BoardVO vo) throws Exception{
 		return (int) sqlMapClientTemplate.update("boardSqlMap.boardInsertInfo",vo);
 	}
 	
+	public int boardDeleteInfo(Map boardCheck) {
+        return sqlMapClientTemplate.delete("boardSqlMap.boardDeleteInfo", boardCheck);
+    }
+
 	
 }

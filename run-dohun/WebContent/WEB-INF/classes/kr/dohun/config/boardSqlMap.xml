@@ -30,11 +30,11 @@
 		  FROM (SELECT *
 		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
 		                  FROM (SELECT *
-		                          FROM BOARD ) A,
+		                          FROM BOARD ORDER BY BOARD_IDX DESC) A,
 		                       (SELECT @ROWNUM := 0) B) C
 		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
-		 ORDER BY BOARD_IDX DESC
+<!-- 		 ORDER BY BOARD_IDX DESC -->
 	</select>
 	
 	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
@@ -54,6 +54,13 @@
 		,NOW(),#boardUpdateUser#,#boardBest#,#boardWost#,#boardCategory01#
 		,#boardCategory02#,#boardCategory03#)
 	</insert>	
+	
+	<delete id="boardDeleteInfo" parameterClass="map">
+		DELETE FROM BOARD WHERE BOARD_IDX IN 
+	   <iterate property="boardCheck" open="(" conjunction="," close=")">
+	   		#boardCheck[]#
+       </iterate>
+	</delete>
 	
 <!-- 	<select id="boardSeqCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer"> -->
 <!-- 		SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId# -->

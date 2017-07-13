@@ -13,6 +13,33 @@
 	li {display: inline; }
 </style>
     
+<script type="text/javascript">
+
+var rows=10;
+var currentPage = ${currentPage};
+var totalPage = ${boardListCnt};
+// var startRow = ${startRow};
+// var endRow = ${endRow};
+
+var totalPage = Math.ceil(totalPage/rows); 
+
+var pager = '<div class="container">';
+pager += '<ul class="pagination pagination-sm">';
+pager += '<li><a href="#">이전</a></li>';
+for(var i=1; i<totalPage; i++){
+	if(currentPage == i){
+		pager += '<li class="active"><a href="#">'+i+'</a></li>';
+	}else{
+		pager += '<li><a href="#">'+i+'</a></li>';
+	}
+}
+pager += '<li><a href="#">다음</a></li>';
+pager += '</ul>';
+pager += '</div>';
+$("#pager").html(pager);
+
+</script>    
+    
 <form id="boardForm">
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판</h1>
@@ -22,6 +49,7 @@
 		    <table class="table">
 		    	<thead>
 		    		<tr>
+		    			<th>선택</th>
 		    			<th>boardIdx</th>
 		    			<th>제목</th>
 		    			<th>답변수</th>
@@ -34,11 +62,12 @@
 					<c:if test="${!empty boardList}">
 						<c:forEach items="${boardList}" var="board" >
 						<tr>
-							<td>${board.boardIdx}</td>
+							<td><input type="checkbox" name="boardCheck" value="${board.boardIdx}"/></td>
+							<td>#${board.boardIdx}</td>
 							<td>${board.boardTitle}</td>
-							<td>${board.boardCategory02}</td>
+							<td>${board.boardAnswerCnt}</td>
 							<td>${board.boardBest}</td>
-							<td>${board.boardCreateDate}</td>
+							<td>${board.boardCount}</td>
 							<td>${board.boardCreateUser}</td>
 						</tr>
 						</c:forEach>
@@ -50,6 +79,8 @@
 					</c:if>
 				</tbody>
 		    </table>
+		</div>
+		<div id="pager" class="container">
 		</div>
 		<div class="modal-footer">
 			<button type="button" id="boardWriteForm" name="boardWriteForm" class="btn btn-default">글쓰기</button>
