@@ -33,6 +33,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 			reqUrl.equals(context+"boardUpdate.do")||
 			reqUrl.equals(context+"boardDelete.do")||
 			reqUrl.equals(context+"boardList.do")||
+			reqUrl.equals(context+"boardDetailForm.do")||
+			reqUrl.equals(context+"boardDetail.do")||
 			reqUrl.equals(context+"memberLogin.do")
 			
 				))
@@ -42,8 +44,6 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 			if(session.getAttribute("_USER_INFO_") != null){
 				
 				//xss체크
-				
-				
 				
 			}else{//로그인필요
 				System.out.println("::::::::::::::Session null LoginPage go!!");

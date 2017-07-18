@@ -8,4 +8,5 @@ public interface BoardService {
 	public int boardListCnt(String vo) throws Exception;
 	public int boardInsertInfo(BoardVO vo) throws Exception;
 	public int boardDeleteInfo(Map boardCheck);
+	public BoardVO boardDetailInfo(BoardVO vo);
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.dohun.common.CommonService;
 
@@ -34,7 +33,6 @@ public class BoardServiceImpl implements BoardService {
 		if(vo.getBoardCreateUser() == null){
 			vo.setBoardCreateUser("guest");
 		}
-
 		commonService.commonUpdateSeq("boardIdx"); //boardIdx 시퀀스증가
 		vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
 		
@@ -44,5 +42,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardDeleteInfo(Map boardCheck) {
 		return boardDao.boardDeleteInfo(boardCheck);
+	}
+
+	@Override
+	public BoardVO boardDetailInfo(BoardVO vo) {
+		return boardDao.boardDetailInfo(vo);
 	}
 }

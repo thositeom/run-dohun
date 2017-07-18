@@ -64,7 +64,7 @@ $("#pager").html(pager);
 						<tr>
 							<td><input type="checkbox" name="boardCheck" value="${board.boardIdx}"/></td>
 							<td>#${board.boardIdx}</td>
-							<td>${board.boardTitle}</td>
+							<td><span onclick="boardDetailForm(${board.boardIdx});" style="cursor:pointer">${board.boardTitle}</span></td>
 							<td>${board.boardAnswerCnt}</td>
 							<td>${board.boardBest}</td>
 							<td>${board.boardCount}</td>
@@ -84,7 +84,7 @@ $("#pager").html(pager);
 		</div>
 		<div class="modal-footer">
 			<button type="button" id="boardWriteForm" name="boardWriteForm" class="btn btn-default">글쓰기</button>
-			<button type="button" id="boardUpdateForm" name="boardUpdateForm" class="btn btn-default" >수정</button>
+<!-- 			<button type="button" id="boardUpdateForm" name="boardUpdateForm" class="btn btn-default" >수정</button> -->
 			<button type="button" id="boardDelete" name="boardDelete" class="btn btn-default" >삭제</button>
 		</div>
 	</div>

@@ -27,10 +27,11 @@ function customAjaxFrom(url, formId, successCallback, errorCallback){
 	});
 };
 
-//Ajax 폼 데이터 없을때 
-function customAjax(url, successCallback, errorCallback){
+//Ajax 데이터 없을때 
+function customAjax(url, data, successCallback, errorCallback){
 	$.ajax({
 		url: url,
+		data: data,
 		type: "POST",
 		success: successCallback,
 		error:errorCallback

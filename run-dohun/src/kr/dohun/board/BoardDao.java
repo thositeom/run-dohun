@@ -39,6 +39,10 @@ public class BoardDao {
 	public int boardDeleteInfo(Map boardCheck) {
         return sqlMapClientTemplate.delete("boardSqlMap.boardDeleteInfo", boardCheck);
     }
+	
+	public BoardVO boardDetailInfo(BoardVO vo) {
+		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardDetailInfo", vo);
+	}
 
 	
 }

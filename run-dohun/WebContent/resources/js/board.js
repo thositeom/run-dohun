@@ -10,7 +10,6 @@ function errorBoard(result,status,error){
 }
 
 $("button").click(function(){
-	
 	var url;
 	var formId="boardForm";
 	
@@ -42,8 +41,10 @@ $("button").click(function(){
 		default:
 			break;
 	}
-	
 	customAjaxFrom(url,formId,successBoard,errorBoard);	
 });
 
-
+function boardDetailForm(boardIdx){
+	var data = {"boardIdx":boardIdx};
+	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
+}

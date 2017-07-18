@@ -76,6 +76,7 @@ public class BoardController {
 		try {
 			
 			vo.setBoardId("A"); //A:일반게시판
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@"+ vo.getBoardContent());
 			boardService.boardInsertInfo(vo);
 			
 		} catch (Exception e) {
@@ -88,8 +89,9 @@ public class BoardController {
 	@RequestMapping(value = "/boardUpdateForm.do")
 	public ModelAndView boardUpdateList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
-		
 		try {
+			
+			System.out.println(":::::::::::::::::::"+ vo.getBoardIdx());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,9 +148,19 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/boardTest.do")
-	public ModelAndView index(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("jsonView");
+	@RequestMapping(value = "/boardDetailForm.do")
+	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+		ModelAndView mv = new ModelAndView();
+		try {
+			
+			BoardVO boardVo = boardService.boardDetailInfo(vo);
+			mv.addObject("boardVo", boardVo);
+			System.out.println(":::::::::::::::"+boardVo.getBoardContent());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("board/boardDetailForm");
 		return mv;
 	}
 }

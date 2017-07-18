@@ -12,23 +12,23 @@
 	ul {list-style-type: :none; }
 	li {display: inline; }
 </style>
-    
 <form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent">
 	<div class="col-sm-8 text-left"> 
-		<h1>게시판-글쓰기</h1>
+		<h1>게시판-읽기</h1>
 	    <p>나는 게시판. 나는 글을쓴다. 너도 글을쓴다.</p>
 	    <hr>
 		<div class="form-group">
 		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle" name="boardTitle">
+		    <input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${boardVo.boardTitle}">
 		</div>
 		<!-- CKEditor -->
 		<div class="form-group">
 			<textarea name="editor1" id="editor1" >
 	        </textarea>
 	        <script>
-	            CKEDITOR.replace('editor1');
+	            CKEDITOR.replace("editor1");
+	            CKEDITOR.instances.editor1.setData(${boardVo.boardContent});
 	        </script>
         </div>
         <div class="form-group">
