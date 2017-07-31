@@ -25,6 +25,7 @@ $("button").click(function(){
 			url="/boardUpdateForm.do";
 			break;
 		case "boardUpdate" :
+			$("#boardContent").val(CKEDITOR.instances.editor1.getData());
 			url="/boardUpdate.do";
 			break;
 		case "boardDelete" :
@@ -48,3 +49,4 @@ function boardDetailForm(boardIdx){
 	var data = {"boardIdx":boardIdx};
 	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
 }
+

@@ -17,6 +17,13 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 리스트폼
+	 * @return
+	 */
 	@RequestMapping(value = "/boardForm.do")
 	public ModelAndView boardForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
@@ -58,6 +65,32 @@ public class BoardController {
 		return mv;
 	} 
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 리스트
+	 * @return
+	 */
+	@RequestMapping(value = "/boardList.do")
+	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+		ModelAndView mv = new ModelAndView();
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("redirect:/boardForm.do");
+		return mv;
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 쓰기폼
+	 * @return
+	 */
 	@RequestMapping(value = "/boardWriteForm.do")
 	public ModelAndView boardWriteFrom(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
@@ -70,13 +103,19 @@ public class BoardController {
 		return mv;
 	}
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 쓰기
+	 * @return
+	 */
 	@RequestMapping(value = "/boardWrite.do")
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
 			
 			vo.setBoardId("A"); //A:일반게시판
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@"+ vo.getBoardContent());
 			boardService.boardInsertInfo(vo);
 			
 		} catch (Exception e) {
@@ -86,33 +125,13 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/boardUpdateForm.do")
-	public ModelAndView boardUpdateList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
-		ModelAndView mv = new ModelAndView();
-		try {
-			
-			System.out.println(":::::::::::::::::::"+ vo.getBoardIdx());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.setViewName("board/boardUpdateForm");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/boardUpdate.do")
-	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
-		ModelAndView mv = new ModelAndView();
-		
-		try {
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.setViewName("redirect:/boardForm.do");
-		return mv;
-	}
-	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 삭제
+	 * @return
+	 */
 	@RequestMapping(value = "/boardDelete.do")
 	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
@@ -136,31 +155,68 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/boardList.do")
-	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 상세보기 폼
+	 * @return
+	 */
+	@RequestMapping(value = "/boardDetailForm.do")
+	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
+			BoardVO boardVo = boardService.boardDetailInfo(vo);
+//			boardVo.setBoardContent(boardVo.getBoardContent().replaceAll("& lt;", "<").replaceAll("& gt;", ">"));
+			mv.addObject("boardVo", boardVo);
+			System.out.println(":::::::::::::::"+boardVo.getBoardContent());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("board/boardDetailForm");
+		return mv;
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 수정폼
+	 * @return
+	 */
+	@RequestMapping(value = "/boardUpdateForm.do")
+	public ModelAndView boardUpdateList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+		ModelAndView mv = new ModelAndView();
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("board/boardUpdateForm");
+		return mv;
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 수정
+	 * @return
+	 */
+	@RequestMapping(value = "/boardUpdate.do")
+	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+		ModelAndView mv = new ModelAndView();
+		try {
+			System.out.println("@@@@@@@@@@@@@@@1");
+			System.out.println("@@@@@@@@@@@@@@@"+ vo.getBoardIdx());
+			
+			
+			boardService.boardUpdateInfo(vo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		mv.setViewName("redirect:/boardForm.do");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/boardDetailForm.do")
-	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
-		ModelAndView mv = new ModelAndView();
-		try {
-			
-			BoardVO boardVo = boardService.boardDetailInfo(vo);
-			mv.addObject("boardVo", boardVo);
-			System.out.println(":::::::::::::::"+boardVo.getBoardContent());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.setViewName("board/boardDetailForm");
 		return mv;
 	}
 }

@@ -43,6 +43,11 @@ public class BoardDao {
 	public BoardVO boardDetailInfo(BoardVO vo) {
 		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardDetailInfo", vo);
 	}
+	
+	public int boardUpdateInfo(BoardVO vo) {
+		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardUpdateInfo", vo);
+	}
+	
 
 	
 }

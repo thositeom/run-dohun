@@ -48,4 +48,10 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO boardDetailInfo(BoardVO vo) {
 		return boardDao.boardDetailInfo(vo);
 	}
+
+	@Override
+	public int boardUpdateInfo(BoardVO vo) {
+		System.out.println("@@@@@@@@@@@@@@@2");
+		return boardDao.boardUpdateInfo(vo);
+	}
 }

@@ -9,4 +9,5 @@ public interface BoardService {
 	public int boardInsertInfo(BoardVO vo) throws Exception;
 	public int boardDeleteInfo(Map boardCheck);
 	public BoardVO boardDetailInfo(BoardVO vo);
+	public int boardUpdateInfo(BoardVO vo);
 }
