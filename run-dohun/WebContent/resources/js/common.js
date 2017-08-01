@@ -15,19 +15,21 @@ function checkLength(length, id){
 function vaildation(form){
 }
 
-//Ajax 폼 데이터 있을때 
+//Ajax form submit; 
 function customAjaxFrom(url, formId, successCallback, errorCallback){
-	var formData = $("#"+formId).serialize();
+	/*var formData = $("#"+formId).serialize();*/
+	var formData = $("#"+formId).serializeObject();
+	console.log(formData);
 	$.ajax({
 		url: url,
 		type: "POST",
-		data: formData,
+		data: JSON.stringify(formData),
 		success: successCallback,
 		error:errorCallback
 	});
 };
 
-//Ajax 데이터 없을때 
+//Ajax data submit;
 function customAjax(url, data, successCallback, errorCallback){
 	$.ajax({
 		url: url,
@@ -37,4 +39,38 @@ function customAjax(url, data, successCallback, errorCallback){
 		error:errorCallback
 	});
 };
+
+//serialize to json;
+jQuery.fn.serializeObject = function () {
+	  //json 형태로 변환
+	  var formData = {};
+	  var formArray = this.serializeArray();
+
+	  for(var i = 0, n = formArray.length; i < n; ++i)
+	    formData[formArray[i].name] = formArray[i].value;
+
+	  return formData;
+		
+	  //아래쳐럼 가져와 사용
+	  /*var formdata = $('form').serializeObject();
+		console.log(formdata);
+		console.log(JSON.stringify(formdata));*/
+};
+
+//Ajax json submit;
+function serializeObjectAjax(url, formId, successCallback, errorCallback){
+	var formdata = $("#"+formId).serializeObject();
+	console.log(formdata);
+	console.log(JSON.stringify(formdata));
+	$.ajax({
+		url: url,
+		data: formdata,
+		type: "POST",
+		success: successCallback,
+		error:errorCallback
+	});
+	
+};
+
+
 

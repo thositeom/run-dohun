@@ -15,9 +15,9 @@ pager += '<li><a href="#">이전</a></li>';
 
 for(var i=1; i<=totalPage; i++){
 	if(currentPage == i){
-		pager += '<li class="active"><a href=#>'+i+'</a></li>';
+		pager += '<li class="active"><a href="#">'+i+'</a></li>';
 	}else{
-		pager += '<li><a href=#>'+i+'</a></li>';
+		pager += '<li><a href="javascript:pageClick('+i+');">'+i+'</a></li>';
 	}
 }
 pager += '<li><a href="#">다음</a></li>';
@@ -25,6 +25,14 @@ pager += '</ul>';
 pager += '</div>';
 $("#pager").html(pager);
 
+function pageClick(page){
+	var data = {"currentPage":page};
+	customAjaxFromData("/boardForm.do", "boardForm", data, successBoard, errorBoard);
+// 	customAjax("/boardForm.do", data, successCallback, errorCallback);
+	
+}
+
+//체크박스
 $("#boardCheckAll").click(function(){
 	if($("#boardCheckAll").prop("checked")) {
 		$("input[name=boardCheck]").each(function() {

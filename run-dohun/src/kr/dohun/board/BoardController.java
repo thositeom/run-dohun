@@ -29,35 +29,21 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 
-			/*if(!currentPage.equals("1")){
-				int startRow = (Integer.parseInt(currentPage)*10)+1-Integer.parseInt(rows);
-				int endRow = startRow+Integer.parseInt(rows);
-				vo.setStartRow(startRow);
-				vo.setEndRow(endRow);
-			}
-			*/
-			
-			if(vo.getStartRow() != 1){
-				String currentPage = request.getParameter("currentPage");
+			if(vo.getCurrentPage() != 1){
 				int rows = 10;
-				int startRow = (Integer.parseInt(currentPage)*10)+1-rows;
+				int startRow = (vo.getCurrentPage()*10)+1-rows;
 				int endRow = startRow+rows;
 				
 				vo.setStartRow(startRow);
 				vo.setEndRow(endRow);
-//				mv.addObject("startRow",startRow);
-//				mv.addObject("endRow",endRow);
-				mv.addObject("currentPage",currentPage);
+				mv.addObject("currentPage",vo.getCurrentPage());
 			}else{
 				int currentPage = 1;				
 				mv.addObject("currentPage",currentPage);
-//				mv.addObject("startRow",1);
-//				mv.addObject("endRow",10);
 			}
 			
 			mv.addObject("boardList", boardService.boardList(vo));
 			mv.addObject("boardListCnt", boardService.boardListCnt(""));
-			//mv.addObject("totalPage",totalPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,7 +100,6 @@ public class BoardController {
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
-			
 			vo.setBoardId("A"); //A:일반게시판
 			boardService.boardInsertInfo(vo);
 			
@@ -142,8 +127,6 @@ public class BoardController {
 			Map hm = new HashMap();
 			hm.put("boardCheck", boardCheck);
 			
-//			HashMap mapIdx = new HashMap();
-//			mapIdx.put("boardCheck", boardCheck);
 			if(0 < boardService.boardDeleteInfo(hm)){
 				System.out.println("삭제완료");
 			};
@@ -167,9 +150,7 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			BoardVO boardVo = boardService.boardDetailInfo(vo);
-//			boardVo.setBoardContent(boardVo.getBoardContent().replaceAll("& lt;", "<").replaceAll("& gt;", ">"));
 			mv.addObject("boardVo", boardVo);
-			System.out.println(":::::::::::::::"+boardVo.getBoardContent());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -207,12 +188,7 @@ public class BoardController {
 	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
-			System.out.println("@@@@@@@@@@@@@@@1");
-			System.out.println("@@@@@@@@@@@@@@@"+ vo.getBoardIdx());
-			
-			
 			boardService.boardUpdateInfo(vo);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ public class BoardVO {
 
 	private int startRow = 1;
 	private int endRow = 11;
+	private int currentPage=1;
 
 	private int boardIdx;//boardIdx
 	private String boardId;//게시판Id
@@ -25,6 +26,13 @@ public class BoardVO {
 	private String boardCount;//조회수
 	private String boardAnswerCnt;//답변수
 	
+	
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 	public String getBoardCount() {
 		return boardCount;
 	}

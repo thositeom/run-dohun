@@ -29,7 +29,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int boardInsertInfo(BoardVO vo) throws Exception {
-		
 		if(vo.getBoardCreateUser() == null){
 			vo.setBoardCreateUser("guest");
 		}
@@ -51,7 +50,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int boardUpdateInfo(BoardVO vo) {
-		System.out.println("@@@@@@@@@@@@@@@2");
 		return boardDao.boardUpdateInfo(vo);
 	}
 }
