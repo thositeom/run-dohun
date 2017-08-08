@@ -118,7 +118,8 @@
     
   	//Pwd vaildation조회
     function searchPwd(){
-    	var regex = /^.*(?=.{7,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+    	/* var regex = /^.*(?=.{7,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; */
+    	var regex = /^(?=.*\d)(?=.*[~`!@#$%\^&*()-])(?=.*[a-zA-Z]).{7,20}$/;
 		var userPwd =  $("#userPassword").val().trim();
 		if(userPwd.length < 1){
 			//빈칸

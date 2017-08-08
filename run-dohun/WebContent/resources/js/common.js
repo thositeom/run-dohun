@@ -17,13 +17,14 @@ function vaildation(form){
 
 //Ajax form submit; 
 function customAjaxFrom(url, formId, successCallback, errorCallback){
-	/*var formData = $("#"+formId).serialize();*/
-	var formData = $("#"+formId).serializeObject();
-	console.log(formData);
+	var formData = $("#"+formId).serialize();
 	$.ajax({
 		url: url,
 		type: "POST",
-		data: JSON.stringify(formData),
+		data: formData,
+		beforeSend : function(xmlHttpRequest){
+            xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
+        },
 		success: successCallback,
 		error:errorCallback
 	});
@@ -34,6 +35,9 @@ function customAjax(url, data, successCallback, errorCallback){
 	$.ajax({
 		url: url,
 		data: data,
+		beforeSend : function(xmlHttpRequest){
+            xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
+        },
 		type: "POST",
 		success: successCallback,
 		error:errorCallback

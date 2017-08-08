@@ -31,6 +31,9 @@
 		  case "contact":
 			  menuUrl ="/contactForm.do";
 			  break;
+		  case "sample":
+			  menuUrl ="/sampleForm.do";
+			  break;
 		 /*  case "projects":
 			  menuUrl ="/projectsForm.do";
 			  break; */
@@ -40,22 +43,21 @@
 		  }
 		  
 		  if($(this).attr("id") != "login"){
-			  $.ajax({
-				  url: menuUrl,
-				  type: "POST",
-					  success: function(result){
-						  console.log("success");
-						  $("#content_div").html(result);
-					  }, 
-					  error: function(request,status,error){
-					    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						alert("권한이없습니다.");
-						$(location).attr('href',"/memberLoginForm.do");
-					  }
-				});
+			  var data = {};
+			  customAjax(menuUrl, data, gnbSuccessCallback, gnbErrorCallback);
 		  }
 	  });
 	});
+  
+  function gnbSuccessCallback(result){
+	  console.log("success");
+	  $("#content_div").html(result);
+  }
+  function gnbErrorCallback(request,status,error){
+	  console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	  alert("권한이없습니다.");
+	  $(location).attr('href',"/memberLoginForm.do");
+  }
   </script>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
@@ -78,6 +80,7 @@
         <li id="board"><a href="#">Board</a></li>
         <li id="projects"><a href="#">Projects</a></li>
         <li id="contact"><a href="#">Contact</a></li>
+        <li id="sample"><a href="#">Sample</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
