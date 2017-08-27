@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.dohun.common.JavaScript;
+import kr.dohun.session.SessionManager;
+
 @Controller
 public class BoardController {
 
@@ -28,9 +31,17 @@ public class BoardController {
 	public ModelAndView boardForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
 		ModelAndView mv = new ModelAndView();
 		try {
-
+			System.out.println(":::::::::::::::::::::::: "+SessionManager.userSessionCheck(request));
+			System.out.println(":::::::::::::::::::::::: "+vo.getBoardType());
+			
+			if(!boardService.boardTypeCheck(request, vo)){
+				JavaScript.alert("로그인 후 이용이 가능합니다.", "/memberLoginForm.do").execute(response, request);
+				return null;
+			}
+			
+			
 			if(vo.getCurrentPage() != 1){
-				int rows = 10;
+				int rows = 9;
 				int startRow = (vo.getCurrentPage()*10)+1-rows;
 				int endRow = startRow+rows;
 				

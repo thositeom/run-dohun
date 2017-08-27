@@ -3,7 +3,7 @@ package kr.dohun.board;
 public class BoardVO {
 
 	private int startRow = 1;
-	private int endRow = 11;
+	private int endRow = 10;
 	private int currentPage=1;
 
 	private int boardIdx;//boardIdx

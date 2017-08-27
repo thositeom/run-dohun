@@ -7,13 +7,6 @@
 <title>index.page</title>
 </head>
 
-<style type="text/css">
-/* 	ul {list-style-type: :none; } */
-/* 	li {display: inline; } */
-</style>
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!-- <script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script> -->
-<!-- <script type="text/javascript" src="/resources/js/common.js"></script> -->
 <script>
 	function buttonClick(){
 		document.getElementById("myForm").action = "/baseballGameStart.do";
@@ -22,7 +15,7 @@
 
 	var startCheck = "true";
 	var rNum = "";
-	var userNum = document.getElementById("userNum");
+	 var userNum = document.getElementById("userNum"); 
 	
 	$("#baseball01").click(function(e){
  	    if(e.target && e.target.nodeName == "INPUT"){
@@ -39,30 +32,30 @@
 		
 		
 	
-// 	document.getElementById("parent-list01").addEventListener("click", function(e) {
-// 	    console.log(e.target, e.target.nodeName);
-// 	    if(e.target && e.target.nodeName == "INPUT"){
-// 	    	console.log(e.target.value+" click" );
-// 	    	checkNum(e.target.value);
-// 	    }
-// 	});
-	
-// 	document.getElementById("parent-list02").addEventListener("click", function(e) {
-// 	    console.log(e.target, e.target.nodeName);
-// 	    if(e.target && e.target.nodeName == "INPUT"){
-// 	    	console.log(e.target.value+" click" );
-// 	    	checkNum(e.target.value);
-// 	    }
-// 	});
+/* 	document.getElementById("parent-list01").addEventListener("click", function(e) {
+	    console.log(e.target, e.target.nodeName);
+	    if(e.target && e.target.nodeName == "INPUT"){
+	    	console.log(e.target.value+" click" );
+	    	checkNum(e.target.value);
+	    }
+	});
+
+	document.getElementById("parent-list02").addEventListener("click", function(e) {
+	    console.log(e.target, e.target.nodeName);
+	    if(e.target && e.target.nodeName == "INPUT"){
+	    	console.log(e.target.value+" click" );
+	    	checkNum(e.target.value);
+	    }
+	}); */
 	
 	//중복값 및 최대길이 체크
 	function checkNum(targetValue){
+		var userNum = document.getElementById("userNum");
 		var str = userNum.value;
 		if(str.indexOf(targetValue) != -1){
     		console.log("중복");
-    		alert("중복입니다.");
     	}else{
-    		if(str.length == userNum.maxLength){
+    		if(!uValidation.chckMaxLength(userNum.maxLength-1,null,str)){
     			console.log("최대길이");
     		}else{
 				userNum.value = userNum.value+targetValue;    	
@@ -80,7 +73,7 @@
 	
 	$(document).ready(function(){
 		$("#submitBtn").click(function(){
-			if(checkLength("4","userNum") == "true"){
+			if(uValidation.checkLength(4,"userNum")){
 				$.ajax({
 					url: "/baseballGameStart.do",
 					type: "POST",
@@ -89,8 +82,12 @@
 						"userNum": $("#userNum").val(),
 						"rNum" : rNum
 					},
+					beforeSend : function(xmlHttpRequest){
+			            xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
+			        },
 		        	success: function(result){
 		        		console.log("성공");
+		        		
 		        		userNum.value = "";
 		        		
 		        		var newContent =  '';
@@ -160,44 +157,4 @@
       
 </form>
 
-
-<!-- <body>
-	<input type="button" onclick="buttonClick();" value="이 동" />
-
-	<form id="myForm"  method="post" >
-	<div>
-		<ul id="parent-list01">
-		    <li id="post-1"><input type="button" value="1"></li>
-		    <li id="post-2"><input type="button" value="2"></li>
-		    <li id="post-3"><input type="button" value="3"></li>
-		    <li id="post-4"><input type="button" value="4"></li>
-		    <li id="post-5"><input type="button" value="5"></li>
-	  	</ul>
-	  	<ul id="parent-list02">
-		    <li id="post-6"><input type="button" value="6"></li>
-		    <li id="post-7"><input type="button" value="7"></li>
-		    <li id="post-8"><input type="button" value="8"></li>
-		    <li id="post-9"><input type="button" value="9"></li>
-		    <li id="post-0"><input type="button" value="0"></li>
-	  	</ul>
-	</div>
-	
-	<div>
-		<table>
-			<tr>
-				<td>숫자4자리 입력</td>	
-			</tr>
-			<tr>
-				<td><input type="text" id="userNum" name="userNum" maxlength="4" size="6"> </td>			
-			</tr>
-			<tr>
-				<td><input type="button" id="submitBtn" value="버튼"></td>			
-			</tr>
-		</table>
-	</div>	
-	<div id="resultContent">
-	</div>
-	
-	</form>
-</body> -->
 </html>

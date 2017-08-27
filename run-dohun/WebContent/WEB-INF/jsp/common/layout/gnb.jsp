@@ -20,7 +20,7 @@
 			  menuUrl ="/honeyForm.do";
 			  break;
 		  case "game":
-			  menuUrl ="/baseballGameFrom.do";
+			  menuUrl ="/baseballGameForm.do";
 			  break;
 		  case "about":
 			  menuUrl ="/aboutForm.do";

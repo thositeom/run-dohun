@@ -43,7 +43,7 @@ public class JavaScript {
 		return new JavaScript("alert('" + messages + "'); history.back();");
 	}
 	
-	public static JavaScript alertToUrl(String messages, String url){
+	public static JavaScript alert(String messages, String url){
 		return new JavaScript("alert('" + messages + "'); location.href= '"+ url +"' ");
 	}
 }

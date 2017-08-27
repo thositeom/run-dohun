@@ -22,7 +22,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
     			
     			}else{//로그인필요
     				System.out.println("::::::::::::::Session null LoginPage go!!");
-    				JavaScript.alertToUrl("로그인후 사용 가능합니다.", "/memberLoginForm.do").execute(response, request);
+    				JavaScript.alert("로그인후 사용 가능합니다.", "/memberLoginForm.do").execute(response, request);
     				return false;
     			}
     		}	
@@ -31,7 +31,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
         	//Ajax 콜이 아닐경우 
         	//메인페이지, 로그인페이지만 허용
         	if(!isAjaxUrlCheck(request)){
-        		JavaScript.alertToUrl("비정상적인 접근입니다.", "/index.do").execute(response, request);
+        		JavaScript.alert("비정상적인 접근입니다.", "/index.do").execute(response, request);
         		return false;
         	}
         	return true;
@@ -47,7 +47,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 		
 		if(reqUrl.equals(context+"index.do")||
 				reqUrl.equals(context+"mainForm.do")||
-				reqUrl.equals(context+"baseballGameFrom.do")||
+				reqUrl.equals(context+"baseballGameForm.do")||
+				reqUrl.equals(context+"baseballGameStart.do")||
 				reqUrl.equals(context+"aboutForm.do")||
 				reqUrl.equals(context+"contactForm.do")||
 				reqUrl.equals(context+"projectsForm.do")||

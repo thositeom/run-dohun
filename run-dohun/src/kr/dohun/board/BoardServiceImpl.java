@@ -3,10 +3,14 @@ package kr.dohun.board;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.dohun.common.CommonService;
+import kr.dohun.common.JavaScript;
+import kr.dohun.session.SessionManager;
 
 @Service("BoardServiceImpl")
 public class BoardServiceImpl implements BoardService {
@@ -51,5 +55,19 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardUpdateInfo(BoardVO vo) {
 		return boardDao.boardUpdateInfo(vo);
+	}
+
+	@Override
+	public boolean boardTypeCheck(HttpServletRequest request, BoardVO vo) throws Exception {
+		if(vo.getBoardType() == null){
+			return false;
+		}
+		if(!vo.getBoardType().equals("PN")){ // P공개용 N일반게시판
+			if(!SessionManager.userSessionCheck(request)){
+				return false; 
+			}
+		}
+		
+		return true;
 	}
 }

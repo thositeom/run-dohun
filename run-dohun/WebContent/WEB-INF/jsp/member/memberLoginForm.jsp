@@ -37,7 +37,7 @@
 			  menuUrl ="/honeyForm.do";
 			  break;
 		  case "game":
-			  menuUrl ="/baseballGameFrom.do";
+			  menuUrl ="/baseballGameForm.do";
 			  break;
 		  case "about":
 			  menuUrl ="/aboutForm.do";
@@ -103,23 +103,20 @@
     //Email vaildation조회
     function searchEmail(){
     	var userEmail = $("#userEmail").val().trim();
-    	var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 
     	if(userEmail.length < 1){
     		joinVaildation("userEmail", "default");
     	}else{
-    		if (!userEmail.match(regExp)){
+    		if (!uValidation.checkRegExpEmail(userEmail)){
     			joinVaildation("userEmail", "error");
 	    	}else{
 	    		joinVaildation("userEmail", "ok");
 	    	}
     	}
-    }
+    };
     
   	//Pwd vaildation조회
     function searchPwd(){
-    	/* var regex = /^.*(?=.{7,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; */
-    	var regex = /^(?=.*\d)(?=.*[~`!@#$%\^&*()-])(?=.*[a-zA-Z]).{7,20}$/;
 		var userPwd =  $("#userPassword").val().trim();
 		if(userPwd.length < 1){
 			//빈칸
@@ -131,7 +128,7 @@
 			joinVaildation("userPassword", "error");
 			return false;
 		}
-		if(!userPwd.match(regex)){
+		if(!uValidation.checkRegExpPassword(userPwd)){
 			//정규식  false
 			joinVaildation("userPassword", "error");
 		}else{
@@ -139,7 +136,7 @@
 			joinVaildation("userPassword", "ok");
 		}
 		
-  	}
+  	};
     
 	$(".form-group > input").keyup(function(){
 		switch($(this).attr("id")) {
@@ -186,46 +183,46 @@
     		$(id_span).removeClass("glyphicon-warning-sign");
     		$(id_span).hide();
 		}
-	}
+	};
 	
-		  
+	//사용자 가입취소
+	$("#closeModal, #closeModal02").click(function(){
+		$("form").each(function() {
+			if(this.id == "createUserForm"){
+				this.reset();
+			}
+			$("#userId_div, #userPassword_div, #userEmail_div").removeClass("has-success has-feedback");
+    		$("#userId_div, #userPassword_div, #userEmail_div").removeClass("has-error has-feedback");
+    		$("#userId_span, #userPassword_span, #userEmail_span").removeClass("glyphicon-ok");
+    		$("#userId_span, #userPassword_span, #userEmail_span").removeClass("glyphicon-warning-sign");
+    		$("#userId_span, #userPassword_span, #userEmail_span").hide();
+		});
+	});
+	
+	function successMemberJoin(result){
+		console.log("success");
+		$("#closeModal").click();
+	};
+	function errorMemberJoin(request,status,error){
+		 console.log("code:"+request.status+" error:"+error);
+	};
+	//사용자 가입
 	$("#creatUser").click(function(){
-		var formData = $("#createUserForm").serialize();
-
-		var userId = $("#userId").val().trim();
-		var userEmail = $("#userEmail").val().trim();
-		var userPwd = $("#userPassword").val().trim();
-
-		if(userId==""){
+		if($("#userId").val().trim() == ""){
 			alert("이름을 입력하세요");
 			return false;
-		}else if(userEmail==""){
+		}else if($("#userEmail").val().trim() == ""){
 			alert("이메일을 입력하세요");
 			return false;
 		}
-		else if(userPwd==""){
+		else if($("#userPassword").val().trim() == ""){
 			alert("비밀번호 입력하세요");
 			return false;
 		};
-
-		$.ajax({
-			  url: "/memberJoin.do", 
-			  type: "POST",
-			  data: formData,
-			  success: function(result){
-				  console.log("success");
-				  //form 초기화
-				  $("form").each(function() {
-					  if(this.id == "createUserForm") this.reset();
-				  });
-				  $("#closeModal").click();
-			  }, 
-			  error: function(request,status,error){
-				  console.log("code:"+request.status+" error:"+error);
-			  }
-		});
+		
+		customAjaxFrom("/memberJoin.do", "createUserForm", successMemberJoin, errorMemberJoin);
+		
 	});
-  
   
   });
   </script>
@@ -294,33 +291,33 @@
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" id="closeModal02" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Sign up</h4>
 							</div>
 							<div class="modal-body text-left">
 								<form id="createUserForm">
 									<div id="userId_div" class="form-group">
-										  <label for="usr">UserId (*)</label> 
+										  <label for="usr">UserId <b style="color: red;">*</b></label> 
 										  <input type="text" class="form-control" id="userId" name="userId">
 										  <span id="userId_span" class="glyphicon form-control-feedback"></span>
 									</div>
 									<div id="userName_div" class="form-group">
-										  <label for="usr">Username (*)</label> 
+										  <label for="usr">Username <b style="color: red;">*</b></label> 
 										  <input type="text" class="form-control" id="userName" name="userName">
 										  <span id="userName_span" class="glyphicon form-control-feedback"></span>
 									</div>
 									<div id="userEmail_div" class="form-group">
-										  <label for="usr">Email Address (*)</label> 
+										  <label for="usr">Email Address <b style="color: red;">*</b></label> 
 										  <input type="text" class="form-control" id="userEmail" name="userEmail">
 										  <span id="userEmail_span" class="glyphicon form-control-feedback"></span>
 									</div>
 									<div id="userPassword_div" class="form-group">
-										  <label for="Password">Password (*)</label>
+										  <label for="Password">Password <b style="color: red;">*</b></label>
 										  <input type="password" class="form-control" id="userPassword" name="userPassword">
 										  <span id="userPassword_span" class="glyphicon form-control-feedback"></span>
 									</div>
 									<div id="userPhone_div" class="form-group">
-										  <label for="usr">Phone (*)</label>
+										  <label for="usr">Phone</label>
 										  <input type="text" class="form-control" id="userPhone" name="userPhone">
 										  <span id="userPhone_span" class="glyphicon form-control-feedback"></span>
 									</div>

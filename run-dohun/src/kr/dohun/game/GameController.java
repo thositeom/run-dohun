@@ -21,20 +21,19 @@ public class GameController {
 	@Autowired
 	private commonService commonService;
 
-	@RequestMapping(value = "/baseballGameFrom.do")
-	public ModelAndView basballGameFrom(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/baseballGameForm.do")
+	public ModelAndView baseballGameForm(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("game/baseballGameForm");
 //		mv.setViewName("jsonView");
 		mv.setViewName("game/baseballGameForm");
 		return mv;
 	}
 	@RequestMapping(value = "/baseballGameStart.do")
-	public ModelAndView basballGameStart(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView baseballGameStart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		Map resultMap = new HashedMap();
 		int strake = 0;
 		int ball = 0;
-
 		String startCheck = request.getParameter("startCheck");
 		String userNum = request.getParameter("userNum");
 		String rNum = request.getParameter("rNum");
@@ -101,6 +100,7 @@ public class GameController {
 			resultMap.put("ball", ball);
 			resultMap.put("startCheck", "false");
 			mav.addAllObjects(resultMap);
+			
 			mav.setViewName("jsonView");
 			
 		}catch(Exception e){

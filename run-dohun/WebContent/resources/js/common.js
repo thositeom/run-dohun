@@ -1,19 +1,21 @@
 /**
  * 
  */
-//id값으로 길이 체크
-function checkLength(length, id){
-	var val = document.getElementById(id);
-	if(length == val.value.length){
-		return "true";
-	}else{
-		return "false";
-	}
-} 
 
-//vaildation
-function vaildation(form){
-}
+function customAjaxFromData(url, formId, data,successCallback, errorCallback){
+	var formData = $("#"+formId).serialize();
+	$.ajax({
+		url: url,
+		type: "POST",
+		data: formData+"&"+data,
+		beforeSend : function(xmlHttpRequest){
+            xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
+        },
+		success: successCallback,
+		error:errorCallback
+	});
+};
+
 
 //Ajax form submit; 
 function customAjaxFrom(url, formId, successCallback, errorCallback){
@@ -75,6 +77,52 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
 	});
 	
 };
+
+/**
+* javascript library Validation(연관배열 방식 사용)
+*/
+(function(window){
+	
+	var uValidation = {
+			ualert : function(){
+				alert("@@하이룽");	
+			},
+			checkLength : function(length, fieldId, fieldValue){
+				if(fieldId == null || fieldId ==""){
+					return fieldValue.length == length;
+				}else{
+					return document.getElementById(fieldId).value.length == length; 
+				}
+			},
+			chckMaxLength : function(maxLength, fieldId, fieldValue){
+				if(fieldId == null || fieldId ==""){
+					return fieldValue.length <= maxLength;
+				}else{
+					return document.getElementById(fieldId).value.length <= maxLength; 
+				}
+			},
+			checkMinLength : function(minLength, fieldId, fieldValue){
+				if(fieldId == null || fieldId ==""){
+					return fieldValue.length >= minLength;
+				}else{
+					return document.getElementById(fieldId).value.length >= minLength; 
+				}
+			},
+			checkRegExp : function(regExp, fieldValue){
+				return fieldValue.match(regExp); 
+			},
+			checkRegExpEmail : function(fieldValue){
+				var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+				return fieldValue.match(regExp); 
+			},
+			checkRegExpPassword : function(fieldValue){
+				var regExp = /^(?=.*\d)(?=.*[~`!@#$%\^&*()-])(?=.*[a-zA-Z]).{7,20}$/;
+				return fieldValue.match(regExp); 
+			}
+	
+	};
+	window.uValidation= uValidation;
+})(window);
 
 
 
