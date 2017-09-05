@@ -111,5 +111,29 @@
 		    </script>
 	    </div>
 	    
+	    
+	    <div class="col-sm-6">
+	    <h4>lucy-xss체크</h4>
+	    <label for="lucyXss">입력:</label>
+	    <input type="text" id="lucyXss" onchange="lucyXssCheck();">
+	    <p id="lucyXssResult"></p>
+	    <script type="text/javascript">
+	    function lucyXssCheck(){
+	    	var lucyXss = $("#lucyXss").val().trim();
+// 	    	$("#lucyXssResult").text("true");
+	    	
+	    	var data = "lucyXss="+lucyXss;
+	    	customAjax("/lucyXssTest.do", data, successLucyXssCallback, errorLucyXssCallback);
+	    	
+	    }
+	    function successLucyXssCallback(result){
+	    	$("#lucyXssResult").text(result.lucyXss);
+	    }
+	    function errorLucyXssCallback(){
+	    }
+	    </script>
+	    </div>
+	    
+	    
     </div>
 </form>

@@ -1,6 +1,10 @@
 package kr.dohun.board;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.dohun.common.JavaScript;
-import kr.dohun.session.SessionManager;
 
 @Controller
 public class BoardController {
@@ -28,37 +33,17 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardForm.do")
-	public ModelAndView boardForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		try {
-			System.out.println(":::::::::::::::::::::::: "+SessionManager.userSessionCheck(request));
-			System.out.println(":::::::::::::::::::::::: "+vo.getBoardType());
-			
-			if(!boardService.boardTypeCheck(request, vo)){
-				JavaScript.alert("로그인 후 이용이 가능합니다.", "/memberLoginForm.do").execute(response, request);
-				return null;
-			}
-			
-			
-			if(vo.getCurrentPage() != 1){
-				int rows = 9;
-				int startRow = (vo.getCurrentPage()*10)+1-rows;
-				int endRow = startRow+rows;
-				
-				vo.setStartRow(startRow);
-				vo.setEndRow(endRow);
-				mv.addObject("currentPage",vo.getCurrentPage());
-			}else{
-				int currentPage = 1;				
-				mv.addObject("currentPage",currentPage);
-			}
-			
-			mv.addObject("boardList", boardService.boardList(vo));
+		
+//			if(!boardService.boardTypeCheck(request, vo)){
+//				JavaScript.alert("로그인 후 이용이 가능합니다.", "/memberLoginForm.do").execute(response, request);
+//				return null;
+//			}
+			mv.addObject("boardList", boardService.boardList(vo, request));
 			mv.addObject("boardListCnt", boardService.boardListCnt(""));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.setViewName("board/boardForm");
+			mv.addObject("currentPage",vo.getCurrentPage());
+			mv.setViewName("board/boardForm");
 		return mv;
 	} 
 	
@@ -70,7 +55,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardList.do")
-	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			
@@ -89,7 +74,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardWriteForm.do")
-	public ModelAndView boardWriteFrom(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardWriteFrom(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			
@@ -108,10 +93,52 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardWrite.do")
-	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
+			
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+			Iterator iter = multipartRequest.getFileNames();
+			MultipartFile mfile = null;
+			String fieldName = "";
+			List resultList = new ArrayList();
+
+			while (iter.hasNext()) {
+				fieldName = (String) iter.next(); // 내용을 가져와서
+				
+				System.out.println(":::::::::::::::::::" + fieldName);
+				
+				mfile = multipartRequest.getFile(fieldName);
+				String origName;
+				
+				origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8"); //한글꺠짐 방지
+				// 파일명이 없다면
+				if ("".equals(origName)) {
+					continue;
+				}
+
+				// 파일 명 변경(uuid로 암호화)
+				/*String ext = origName.substring(origName.lastIndexOf('.')); // 확장자
+				String saveFileName = getUuid() + ext;
+
+				// 설정한 path에 파일저장
+				File serverFile = new File(path + File.separator + saveFileName);
+				mfile.transferTo(serverFile);
+				
+				Map file = new HashMap();
+				file.put("origName", origName);
+				file.put("sfile", serverFile);
+				resultList.add(file);*/
+			}
+
+			
+			
+
 			vo.setBoardId("A"); //A:일반게시판
+			
+			System.out.println("::::::::::::::"+vo.getBoardContent());
+			System.out.println("::::::::::::::"+vo.getBoardTitle());
+			System.out.println("::::::::::::::"+vo.getFileUpload());
 			boardService.boardInsertInfo(vo);
 			
 		} catch (Exception e) {
@@ -129,7 +156,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardDelete.do")
-	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			
@@ -157,7 +184,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardDetailForm.do")
-	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			BoardVO boardVo = boardService.boardDetailInfo(vo);
@@ -177,7 +204,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardUpdateForm.do")
-	public ModelAndView boardUpdateList(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardUpdateList(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			
@@ -196,7 +223,7 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardUpdate.do")
-	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, BoardVO vo){
+	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
 			boardService.boardUpdateInfo(vo);

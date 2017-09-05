@@ -65,6 +65,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"boardDetailForm.do")||
 				reqUrl.equals(context+"boardDetail.do")||
 				reqUrl.equals(context+"sampleForm.do")||
+				reqUrl.equals(context+"lucyXssTest.do")||
+				reqUrl.equals(context+"formTest.do")||
 				reqUrl.equals(context+"memberLogin.do")
 		){
 			return true;

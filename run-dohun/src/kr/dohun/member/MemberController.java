@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.dohun.common.JavaScript;
+import kr.dohun.error.CustomGenericException;
 import kr.dohun.session.SessionManager;
 
 @Controller
@@ -48,7 +49,7 @@ public class MemberController {
 		if(memberInfo == memberService.memberInfo(userId)){
 			//존재하지 않는 사용자 입니다.
 			JavaScript.alert("존재하지 않는 사용자 입니다.").execute(response, request);
-			return null;
+			throw new CustomGenericException("에러코드", memberVo.getUserId());
 		}
 		if(!userPwd.equals(memberInfo.getUserPassword())){
 			//비밀번호가 틀렸습니다. 확인 후 다시 로그인 해주세요.

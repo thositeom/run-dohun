@@ -15,6 +15,7 @@
 	<!-- ANNOTATION HANDLER MAPPING -->
  	<context:component-scan base-package="com.spring" />
 	<context:component-scan base-package="kr.dohun" /> 
+	
 	<!-- InterCeptor-->	
 	<bean id="springInterceptor" class="kr.dohun.security.SpringInterceptor" />
 	<bean id="annotationHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"> 
@@ -26,6 +27,20 @@
 	</bean>
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	 
+	<!-- errorPage설정 -->
+	<!-- 20170905 error발생시 로그안남아서 임시주석 -->
+	<!-- <bean
+	  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	  <property name="exceptionMappings">
+		<props>
+			<prop key="kr.dohun.error.CustomGenericException">
+				/error/customException
+			</prop>
+			<prop key="java.lang.Exception">/error/exception</prop>
+		</props>
+	  </property>
+	</bean>  -->
+    
     <!-- Tiles -->
     <!-- <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
         <property name="definitions">
@@ -43,9 +58,9 @@
 	<!-- dispatcher-servlet.xml -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- jstl사용 -->
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
-		<property name="suffix" value=".jsp"></property>
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
 		<property name="order" value="4"/> 
 	</bean>
 		
@@ -54,6 +69,10 @@
 		<property name="order" value="0"/>
 	</bean>
 	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"></bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000"/>
+	</bean>
 
 </beans>
 	

@@ -6,7 +6,7 @@ function successBoard(result){
 	$("#content_div").html(result);
 }
 function errorBoard(result,status,error){
-	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
 }
 
 $("button").click(function(){
@@ -42,7 +42,10 @@ $("button").click(function(){
 		default:
 			break;
 	}
-	customAjaxFrom(url,formId,successBoard,errorBoard);	
+	
+	/*customAjaxFrom(url,formId,successBoard,errorBoard);*/
+	customAjaxForm(url,formId,successBoard,errorBoard);
+	
 });
 
 function boardDetailForm(boardIdx){

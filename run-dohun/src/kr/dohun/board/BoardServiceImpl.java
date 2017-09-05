@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.dohun.common.CommonService;
-import kr.dohun.common.JavaScript;
 import kr.dohun.session.SessionManager;
 
 @Service("BoardServiceImpl")
@@ -22,8 +21,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao;
 	
 	@Override
-	public List boardList(BoardVO vo) throws Exception {
-		return boardDao.boardList(vo);
+	public List boardList(BoardVO vo, HttpServletRequest request) throws Exception {
+		return boardDao.boardList(boardPage(vo, request));
 	}
 	
 	@Override
@@ -69,5 +68,18 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		return true;
+	}
+
+	@Override
+	public BoardVO boardPage(BoardVO vo, HttpServletRequest request) throws Exception {
+		if(vo.getCurrentPage() != 1){
+			int rows = vo.getRows();
+			int endRow = vo.getCurrentPage()*rows;
+			int startRow = endRow+1-rows;
+			
+			vo.setStartRow(startRow);
+			vo.setEndRow(endRow);
+		}
+		return vo;
 	}
 }

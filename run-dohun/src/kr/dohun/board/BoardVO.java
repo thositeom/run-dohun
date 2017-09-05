@@ -1,10 +1,13 @@
 package kr.dohun.board;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
 
 	private int startRow = 1;
 	private int endRow = 10;
 	private int currentPage=1;
+	private int rows;
 
 	private int boardIdx;//boardIdx
 	private String boardId;//게시판Id
@@ -26,7 +29,21 @@ public class BoardVO {
 	private String boardCount;//조회수
 	private String boardAnswerCnt;//답변수
 	
+	private MultipartFile fileUpload;
 	
+	
+	public MultipartFile getFileUpload() {
+		return fileUpload;
+	}
+	public void setFileUpload(MultipartFile fileUpload) {
+		this.fileUpload = fileUpload;
+	}
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}

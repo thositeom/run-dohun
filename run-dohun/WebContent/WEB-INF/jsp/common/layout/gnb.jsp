@@ -11,6 +11,7 @@
 		  
 		  var menuName = $(this).attr("id");
 		  var menuUrl="";
+		  var data;
 		  
 		  switch(menuName) {
 		  case "home":
@@ -27,6 +28,7 @@
 			  break;
 		  case "board":
 			  menuUrl ="/boardForm.do";
+			  data = "boardType\=PN";
 			  break;
 		  case "contact":
 			  menuUrl ="/contactForm.do";
@@ -43,7 +45,6 @@
 		  }
 		  
 		  if($(this).attr("id") != "login"){
-			  var data = {};
 			  customAjax(menuUrl, data, gnbSuccessCallback, gnbErrorCallback);
 		  }
 	  });

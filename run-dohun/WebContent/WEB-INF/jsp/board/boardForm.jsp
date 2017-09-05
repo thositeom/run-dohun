@@ -2,51 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript" src="/resources/js/board.js"></script>
-<style>
-
-
-</style>
-
 <script type="text/javascript">
-
-var rows=10;
-var currentPage = ${currentPage};
-var totalCnt = ${boardListCnt};
-var totalPage = Math.ceil(totalCnt/rows); 
-var prePage = ${currentPage} -1;
-var nextPage = ${currentPage} +1;
-	
-var pager = '<div class="container">';
-pager += '<ul class="pagination pagination-sm">';
-if(currentPage <= 1){
-	pager += '<li><a href="javascript:pageClick(1);">이전</a></li>';
-}else{
-	pager += '<li><a href="javascript:pageClick('+prePage+');">이전</a></li>';	
-}
-
-for(var i=1; i<=totalPage; i++){
-	if(currentPage == i){
-		pager += '<li class="active"><a href="#">'+i+'</a></li>';
-	}else{
-		pager += '<li><a href="javascript:pageClick('+i+');">'+i+'</a></li>';
-	}
-}
-
-if(totalPage <= nextPage){
-	pager += '<li><a href="javascript:pageClick('+totalPage+');">다음</a></li>';
-}else{
-	pager += '<li><a href="javascript:pageClick('+nextPage+');">다음</a></li>';
-}
-pager += '</ul>';
-pager += '</div>';
-$("#pager").html(pager);
-
-function pageClick(page){
-	var data = "currentPage="+page;
-	customAjaxFromData("/boardForm.do", "boardForm", data, successBoard, errorBoard);
-// 	customAjax("/boardForm.do", data, successCallback, errorCallback);
-	
-}
 
 //체크박스
 $("#boardCheckAll").click(function(){
@@ -104,8 +60,12 @@ $("#boardCheckAll").click(function(){
 				</tbody>
 		    </table>
 		</div>
-		<div id="pager" class="container">
-		</div>
+		<!-- Pager -->
+		<script type="text/javascript">
+			pager("pager" ,${currentPage}, ${boardListCnt}, 10);
+		</script>
+		<div id="pager" class="container"></div>
+		
 		<div class="modal-footer">
 			<button type="button" id="boardWriteForm" name="boardWriteForm" class="btn btn-default">글쓰기</button>
 <!-- 			<button type="button" id="boardUpdateForm" name="boardUpdateForm" class="btn btn-default" >수정</button> -->

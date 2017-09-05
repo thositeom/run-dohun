@@ -11,9 +11,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class SampleController {
 	
 	@RequestMapping(value = "/sampleForm.do")
-	public ModelAndView honeyFrom(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView sampleForm(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("sample/sampleForm");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/lucyXssTest.do")
+	public ModelAndView lucyXssTest(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView();
+		
+		String lucyXss = request.getParameter("lucyXss");
+		mv.addObject("lucyXss",lucyXss);
+		mv.setViewName("jsonView");
 		return mv;
 	}
 }

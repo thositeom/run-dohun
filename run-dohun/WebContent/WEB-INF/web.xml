@@ -84,7 +84,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- lucy-xss -->
-	<filter>
+	<!-- <filter>
 		<filter-name>xssEscapeServletFilter</filter-name>
 		<filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
 	</filter>
@@ -92,5 +92,5 @@
 	    <filter-name>xssEscapeServletFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+ -->
 </web-app>

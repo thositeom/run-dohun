@@ -20,6 +20,8 @@
 	<script src="/resources/jquery.jqGrid-4.4.3/src/i18n/grid.locale-kr.js"></script>
 	<!-- 게시판 에디터 -->
 	<script src="/resources/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/resources/js/pager.js"></script>
   	
   	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */
