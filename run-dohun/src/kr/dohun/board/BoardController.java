@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -97,49 +98,8 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
-			Iterator iter = multipartRequest.getFileNames();
-			MultipartFile mfile = null;
-			String fieldName = "";
-			List resultList = new ArrayList();
-
-			while (iter.hasNext()) {
-				fieldName = (String) iter.next(); // 내용을 가져와서
-				
-				System.out.println(":::::::::::::::::::" + fieldName);
-				
-				mfile = multipartRequest.getFile(fieldName);
-				String origName;
-				
-				origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8"); //한글꺠짐 방지
-				// 파일명이 없다면
-				if ("".equals(origName)) {
-					continue;
-				}
-
-				// 파일 명 변경(uuid로 암호화)
-				/*String ext = origName.substring(origName.lastIndexOf('.')); // 확장자
-				String saveFileName = getUuid() + ext;
-
-				// 설정한 path에 파일저장
-				File serverFile = new File(path + File.separator + saveFileName);
-				mfile.transferTo(serverFile);
-				
-				Map file = new HashMap();
-				file.put("origName", origName);
-				file.put("sfile", serverFile);
-				resultList.add(file);*/
-			}
-
-			
-			
-
 			vo.setBoardId("A"); //A:일반게시판
-			
-			System.out.println("::::::::::::::"+vo.getBoardContent());
-			System.out.println("::::::::::::::"+vo.getBoardTitle());
-			System.out.println("::::::::::::::"+vo.getFileUpload());
-			boardService.boardInsertInfo(vo);
+			boardService.boardInsertInfo(vo, request);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

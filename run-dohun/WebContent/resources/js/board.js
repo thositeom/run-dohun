@@ -12,6 +12,7 @@ function errorBoard(result,status,error){
 $("button").click(function(){
 	var url;
 	var formId="boardForm";
+	var data;
 	
 	switch ($(this).attr("id")) {
 		case "boardWriteForm" :
@@ -44,7 +45,7 @@ $("button").click(function(){
 	}
 	
 	/*customAjaxFrom(url,formId,successBoard,errorBoard);*/
-	customAjaxForm(url,formId,successBoard,errorBoard);
+	customAjaxForm(url,formId,data,successBoard,errorBoard);
 	
 });
 

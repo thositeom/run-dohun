@@ -36,18 +36,20 @@ public class BoardDao {
 		return (int) sqlMapClientTemplate.update("boardSqlMap.boardInsertInfo",vo);
 	}
 	
-	public int boardDeleteInfo(Map boardCheck) {
+	public int boardDeleteInfo(Map boardCheck) throws Exception{
         return sqlMapClientTemplate.delete("boardSqlMap.boardDeleteInfo", boardCheck);
     }
 	
-	public BoardVO boardDetailInfo(BoardVO vo) {
+	public BoardVO boardDetailInfo(BoardVO vo) throws Exception{
 		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardDetailInfo", vo);
 	}
 	
-	public int boardUpdateInfo(BoardVO vo) {
+	public int boardUpdateInfo(BoardVO vo) throws Exception{
 		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardUpdateInfo", vo);
 	}
 	
-
+	public int boardInsertFile(BoardVO vo) throws Exception{
+		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardInsertFile", vo);
+	}
 	
 }

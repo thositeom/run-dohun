@@ -30,38 +30,15 @@ public class BoardVO {
 	private String boardAnswerCnt;//답변수
 	
 	private MultipartFile fileUpload;
+	private String fileIdx;
+	private String fileName;
+	private String filePath;
+	private String fileSize;
+	private String fileExtention;
+	private String createDate;
+	private String updateDate;
 	
 	
-	public MultipartFile getFileUpload() {
-		return fileUpload;
-	}
-	public void setFileUpload(MultipartFile fileUpload) {
-		this.fileUpload = fileUpload;
-	}
-	public int getRows() {
-		return rows;
-	}
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-	public int getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-	public String getBoardCount() {
-		return boardCount;
-	}
-	public void setBoardCount(String boardCount) {
-		this.boardCount = boardCount;
-	}
-	public String getBoardAnswerCnt() {
-		return boardAnswerCnt;
-	}
-	public void setBoardAnswerCnt(String boardAnswerCnt) {
-		this.boardAnswerCnt = boardAnswerCnt;
-	}
 	public int getStartRow() {
 		return startRow;
 	}
@@ -73,6 +50,18 @@ public class BoardVO {
 	}
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
 	}
 	public int getBoardIdx() {
 		return boardIdx;
@@ -175,6 +164,66 @@ public class BoardVO {
 	}
 	public void setBoardCategory03(String boardCategory03) {
 		this.boardCategory03 = boardCategory03;
+	}
+	public String getBoardCount() {
+		return boardCount;
+	}
+	public void setBoardCount(String boardCount) {
+		this.boardCount = boardCount;
+	}
+	public String getBoardAnswerCnt() {
+		return boardAnswerCnt;
+	}
+	public void setBoardAnswerCnt(String boardAnswerCnt) {
+		this.boardAnswerCnt = boardAnswerCnt;
+	}
+	public MultipartFile getFileUpload() {
+		return fileUpload;
+	}
+	public void setFileUpload(MultipartFile fileUpload) {
+		this.fileUpload = fileUpload;
+	}
+	public String getFileIdx() {
+		return fileIdx;
+	}
+	public void setFileIdx(String fileIdx) {
+		this.fileIdx = fileIdx;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+	public String getFileExtention() {
+		return fileExtention;
+	}
+	public void setFileExtention(String fileExtention) {
+		this.fileExtention = fileExtention;
+	}
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 	
 }

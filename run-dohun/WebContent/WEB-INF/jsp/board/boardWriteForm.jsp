@@ -13,7 +13,7 @@
 	li {display: inline; }
 </style>
     
-<form id="boardForm" enctype="multipart/form-data">
+<form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent">
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판-글쓰기</h1>
@@ -32,8 +32,9 @@
 	        </script>
         </div>
         <div class="form-group">
-		    <label for="업로드">업로드:</label>
-		    <input type="file" class="form-control" id="fileUpload" name="fileUpload" />
+		    <label for="파일업로드">파일업로드:</label>
+		    <input type="file" class="form-control" id="fileUpload1" name="fileUpload1" />
+			<input type="file" class="form-control" id="fileUpload2" name="fileUpload2" />
 		</div>
 		<div class="modal-footer">
 			<button type="button" id="boardWrite" name="boardWrite" class="btn btn-default">글쓰기</button>

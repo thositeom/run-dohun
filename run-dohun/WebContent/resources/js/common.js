@@ -3,16 +3,19 @@
  */
 
 /**
- * AjaxForm submit; fileupload
+ * AjaxForm fileupload
+ * url, 폼아이디, data(data = { key1: 'value1', key2: 'value2' }), 성공시콜백함수, 에러시콜백함수
 */
-function customAjaxForm(url, formId, successCallback, errorCallback){
-	var formData = $("#"+formId).serialize();
+function customAjaxForm(url, formId, data, successCallback, errorCallback){
+	if(data === undefined || data == null){
+		data={};
+	}
 	$("#"+formId).ajaxSubmit({ 
 	    url: url, 
 	    type: "POST",
 	    processData: false,
+	    data: data,
 	    enctype: "multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
-//	    data: formData,
 	    beforeSend : function(xmlHttpRequest){
 			xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
 		},
@@ -20,25 +23,8 @@ function customAjaxForm(url, formId, successCallback, errorCallback){
 		error:errorCallback
 	});
 }
-/*function customAjaxForm(url, formId, successCallback, errorCallback){
-	$("#"+formId).ajaxForm({
-		url: url,
-		type: "POST",
-		enctype: "multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
-		beforeSubmit: function (data,form,option) {
-			//validation체크
-			//막기위해서는 return false를 잡아주면됨
-			return true;
-		},
-		beforeSend : function(xmlHttpRequest){
-			xmlHttpRequest.setRequestHeader("AJAX", "true"); // ajax 호출을  header에 기록
-		},
-		success: successCallback,
-		error:errorCallback
-	}).ajaxSubmit();
-}
-*/
-function customAjaxFromData(url, formId, data,successCallback, errorCallback){
+
+function customAjaxFromData(url, formId, data, successCallback, errorCallback){
 	var formData = $("#"+formId).serialize();
 	$.ajax({
 		url: url,
@@ -102,8 +88,6 @@ jQuery.fn.serializeObject = function () {
 //Ajax json submit;
 function serializeObjectAjax(url, formId, successCallback, errorCallback){
 	var formdata = $("#"+formId).serializeObject();
-	console.log(formdata);
-	console.log(JSON.stringify(formdata));
 	$.ajax({
 		url: url,
 		data: formdata,

@@ -80,6 +80,15 @@
 		WHERE BOARD_IDX = #boardIdx# 
 	</update>	
 	
+	<insert id="boardInsertFile" parameterClass="board">
+		INSERT INTO BOARD_FILE
+		(BOARD_IDX,FILE_IDX,FILE_NAME,FILE_PATH,FILE_SIZE
+		,FILE_EXTENTION,CREATEDATE,UPDATEDATE
+		) 
+		VALUES 
+		(#boardIdx#,#fileIdx#,#fileName#,#filePath#,#fileSize#
+		,#fileExtention#,NOW(),NOW())
+	</insert>	
 
 <!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
 <!-- 		UPDATE  -->
