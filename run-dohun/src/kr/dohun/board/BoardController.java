@@ -193,4 +193,24 @@ public class BoardController {
 		mv.setViewName("redirect:/boardForm.do");
 		return mv;
 	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 수정
+	 * @return
+	 */
+	@RequestMapping(value = "/fileUpload.do")
+	public ModelAndView fileUpload(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		try {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@");
+			boardService.fileUpload(vo, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
 }

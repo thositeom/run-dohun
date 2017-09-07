@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
 		commonService.commonUpdateSeq("boardIdx"); //boardIdx 시퀀스증가
 		vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
 		
-		fileUpload(vo, request);
+		fileUpload(vo, request);	//파일업로드
 		
 		return boardDao.boardInsertInfo(vo);
 	}
@@ -96,17 +96,18 @@ public class BoardServiceImpl implements BoardService {
 		MultipartFile mfile = null;
 		String fieldName = "";
 		String path = "D:\\dohun\\filedown";
-		System.out.println("@1");
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
-		System.out.println("@2");
-		Iterator iter = multipartRequest.getFileNames();
-		System.out.println("@3");
 		
+		
+		
+		/*vo.setFileUpload(multipartRequest.getFile("fileUpload"));
+		vo.getFileUpload().getOriginalFilename();
+		System.out.println("@!#!@#!@#!@#"+vo.getFileUpload().getOriginalFilename());*/
+		
+		Iterator iter = multipartRequest.getFileNames();
 		while (iter.hasNext()) {
-
 			fieldName = (String) iter.next(); // 내용을 가져와서
 			mfile = multipartRequest.getFile(fieldName);
-			
 			
 			if(mfile.isEmpty()){
 				

@@ -31,11 +31,15 @@
 	            CKEDITOR.replace('editor1');
 	        </script>
         </div>
-        <div class="form-group">
+        
+        <jsp:include page="/WEB-INF/jsp/board/fileUpload.jsp"></jsp:include>
+        
+        <!-- <div class="form-group">
 		    <label for="파일업로드">파일업로드:</label>
 		    <input type="file" class="form-control" id="fileUpload1" name="fileUpload1" />
 			<input type="file" class="form-control" id="fileUpload2" name="fileUpload2" />
-		</div>
+			
+		</div> -->
 		<div class="modal-footer">
 			<button type="button" id="boardWrite" name="boardWrite" class="btn btn-default">글쓰기</button>
 			<button type="button" id="boardList" name="boardList" class="btn btn-default">목록</button>
