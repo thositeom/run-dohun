@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 /**
  * AjaxForm fileupload
@@ -100,10 +97,11 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
 
 
 /**
-* javascript library Validation(연관배열 방식 사용)
+* javascript library(연관배열 방식 사용)
 */
 (function(window){
 	
+	/*Validation*/
 	var uValidation = {
 			ualert : function(){
 				alert("@@하이룽");	
@@ -143,6 +141,43 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
 	
 	};
 	window.uValidation= uValidation;
+	
+	
+	/*Cookie*/
+	var uCookie = {
+			/**
+			 * 쿠키명, 쿠키명으로 getCookie호출시 value값 가져옴
+			 * expire ex)1일때 하루
+			*/
+			setCookie : function(name, value, expire){
+				var today = new Date();
+				today.setTime(today.getTime());
+				if(expire){
+					expire = expire * 1000 * 60 * 60 * 24;
+				}
+				var expire_date = new Date(today.getTime() + (expire));
+				document.cookie = name + "=" + escape(value) + 
+				"; path=/; expire="+expire_date.toGMTString();
+			},
+			getCookie : function(name){
+				var search = name + "=";
+				if(document.cookie.length > 0){
+					offset = document.cookie.indexOf(search);
+					if(offset != -1){ 
+						offset += search.length;
+						end = document.cookie.indexOf(";", offset);
+						if(end == -1){
+							end = document.cookie.length;
+						}
+						return unescape(document.cookie.substring(offset, end));
+					}
+				}
+				return "";
+			}
+	};
+	window.uCookie= uCookie;
+	
+	
 })(window);
 
 

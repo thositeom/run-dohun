@@ -81,16 +81,16 @@
 		height:127px;
 		list-style-type: none;
 		color: gray;
-		font-size: 12px;
+		font-size: 10px;
 		overflow: auto;
 	}
 	#fileList .file {
 	  width: 100%;
-	  margin-bottom: 15px;
+	  margin-bottom: 5px;
 	}
 	#fileList .info {
 	  width: 100%;
-	  height: 26px;
+	  height: 45px;
 	  display: block;
 	  overflow: hidden;
 	  line-height: 13px;
@@ -132,10 +132,11 @@
           '<div class="file" id="uploadFile' + id + '">' +
             '<div class="info">' +
               '파일명 - <span class="filename" title="Size: ' + file.size + 'bytes - Mimetype: ' + file.type + '">' + file.name + '</span><br /><small>Status: <span class="status">Waiting</span></small>' +
-            '</div>' +
-            '<div class="progress">' +
+              '<span style="margin-left: 10px;"><button type="button" onclick="btnFileDelete();" class="btn btn-success btn-xs">삭제</button></span>'+
+              '</div>' +
+            /* '<div class="progress">' +
             	'<div class="progress-bar progress-bar-striped active" style="width:100%"></div>' +
-          	'</div>' + 
+          	'</div>' + */
             /* '<div class="bar">' +
               '<div class="progress" style="width:0%"></div>' +
             '</div>' + */
@@ -189,7 +190,7 @@
           
           update_file_status(id, 'success', 'Upload Complete');
           
-          update_file_progress(id, '100%');
+          update_file_progress(id, '80%');
         },
         onUploadError: function(id, message){
           add_log('Failed to Upload file #' + id + ': ' + message);
@@ -210,6 +211,10 @@
           alert('Browser not supported(do something else here!): ' + message);
         }
       });
+      
+      function btnFileDelete(){
+    	  alert("@@");
+      }
     </script>
     
 	</head>

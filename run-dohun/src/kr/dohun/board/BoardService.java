@@ -15,5 +15,5 @@ public interface BoardService {
 	
 	public boolean boardTypeCheck(HttpServletRequest request, BoardVO vo) throws Exception;
 	public BoardVO boardPage(BoardVO vo, HttpServletRequest request) throws Exception;
-	public void fileUpload(BoardVO vo, HttpServletRequest request) throws Exception;
+	public BoardVO fileUpload(BoardVO vo, HttpServletRequest request) throws Exception;
 }

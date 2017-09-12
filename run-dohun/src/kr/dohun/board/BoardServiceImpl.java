@@ -44,8 +44,6 @@ public class BoardServiceImpl implements BoardService {
 		commonService.commonUpdateSeq("boardIdx"); //boardIdx 시퀀스증가
 		vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
 		
-		fileUpload(vo, request);	//파일업로드
-		
 		return boardDao.boardInsertInfo(vo);
 	}
 
@@ -92,13 +90,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
+	public BoardVO fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
 		MultipartFile mfile = null;
 		String fieldName = "";
-		String path = "D:\\dohun\\filedown";
+		String path = "D:\\dohun\\filedown"; //임시폴더 경로
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
-		
-		
 		
 		/*vo.setFileUpload(multipartRequest.getFile("fileUpload"));
 		vo.getFileUpload().getOriginalFilename();
@@ -111,10 +107,7 @@ public class BoardServiceImpl implements BoardService {
 			
 			if(mfile.isEmpty()){
 				
-				System.out.println("@@@@@@@@@@@@@@@@");
-				
 			}
-			
 			String origName = new String(mfile.getOriginalFilename().getBytes("utf-8"), "utf-8"); 
 			// 파일명이 없다면
 			if ("".equals(origName)) {
@@ -132,11 +125,14 @@ public class BoardServiceImpl implements BoardService {
 			vo.setFilePath(path);
 			vo.setFileSize(Long.toString(fileSize));
 			vo.setFileExtention(extention);
-			boardDao.boardInsertFile(vo);
+			/*boardDao.boardInsertFile(vo);*/
 
-			//파일 저장
+			//임시 폴더에 파일 저장
 			File serverFile = new File(path + File.separator + saveFileName );
 			mfile.transferTo(serverFile);
+			if(serverFile.delete()){
+				System.out.println("::파일삭제");
+			}
 			
 			System.out.println("::::::::::::: "+origName);
 			System.out.println("::::::::::::: "+fileSize);
@@ -144,5 +140,6 @@ public class BoardServiceImpl implements BoardService {
 			System.out.println("::::::::::::: "+saveFileName);
 			
 		}
+		return vo;
 	}
 }

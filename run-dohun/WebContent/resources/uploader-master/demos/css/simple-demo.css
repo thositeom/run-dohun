@@ -108,16 +108,14 @@ h1 a {
  * File list
  */
 #fileList {
-  float:right;
+  float: right;
   width: 330px;
-  height:196px;
-	margin: 0px;
-	padding: 0px;
-	list-style-type: none;
-	color: gray;
-  
+  height: 196px;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  color: gray;
   font-size: 12px;
-  
   overflow: auto;
 }
 
@@ -131,7 +129,6 @@ h1 a {
   height: 26px;
   display: block;
   overflow: hidden;
-  
   line-height: 13px;
 }
 
@@ -144,7 +141,7 @@ h1 a {
   height: 12px;
   margin-top: 5px;
   padding: 1px;
-  width: 290px;
+  width: 200px;
 }
 
 #fileList .progress {
