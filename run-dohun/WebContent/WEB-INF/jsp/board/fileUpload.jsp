@@ -132,7 +132,7 @@
           '<div class="file" id="uploadFile' + id + '">' +
             '<div class="info">' +
               '파일명 - <span class="filename" title="Size: ' + file.size + 'bytes - Mimetype: ' + file.type + '">' + file.name + '</span><br /><small>Status: <span class="status">Waiting</span></small>' +
-              '<span style="margin-left: 10px;"><button type="button" onclick="btnFileDelete();" class="btn btn-success btn-xs">삭제</button></span>'+
+              '<span style="margin-left: 10px;"><button type="button" onclick="btnFileDelete('+ id +');" class="btn btn-success btn-xs">삭제</button></span>'+
               '</div>' +
             /* '<div class="progress">' +
             	'<div class="progress-bar progress-bar-striped active" style="width:100%"></div>' +
@@ -212,8 +212,10 @@
         }
       });
       
-      function btnFileDelete(){
-    	  alert("@@");
+      //임시업로드삭제
+      function btnFileDelete(fileDivId){
+    	  var removeDiv = "#uploadFile"+fileDivId; 
+    	  $(removeDiv).remove();
       }
     </script>
     

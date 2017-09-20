@@ -1,19 +1,16 @@
 package kr.dohun.board;
 
-import java.io.File;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.dohun.common.CommonService;
+import kr.dohun.file.FileUpload;
 import kr.dohun.session.SessionManager;
 
 @Service("BoardServiceImpl")
@@ -43,6 +40,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		commonService.commonUpdateSeq("boardIdx"); //boardIdx 시퀀스증가
 		vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
+		
+		
+		System.out.println("::::::::::::::::::::: "+vo.getFileName());
+		
 		
 		return boardDao.boardInsertInfo(vo);
 	}
@@ -88,58 +89,35 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return vo;
 	}
-
+	
 	@Override
-	public BoardVO fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
-		MultipartFile mfile = null;
-		String fieldName = "";
-		String path = "D:\\dohun\\filedown"; //임시폴더 경로
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+	public List fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
+		String path = "D:\\dohun\\filedown\\real\\"; //실제폴더 생성경로 
+//		String path = "D:\\dohun\\filedown\\temp\\"; //임시폴더 생성경로
+		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더경로
 		
-		/*vo.setFileUpload(multipartRequest.getFile("fileUpload"));
-		vo.getFileUpload().getOriginalFilename();
-		System.out.println("@!#!@#!@#!@#"+vo.getFileUpload().getOriginalFilename());*/
+		//임시폴더에 파일저장 후 파일명들 가져오기
+		List fileList = FileUpload.getFileUpload(request, path, folderName);
 		
-		Iterator iter = multipartRequest.getFileNames();
-		while (iter.hasNext()) {
-			fieldName = (String) iter.next(); // 내용을 가져와서
-			mfile = multipartRequest.getFile(fieldName);
+		for(int i = 0; i < fileList.size(); i++) {
+			Map<String, String> fileMap = new HashMap<String, String>();
+			fileMap = (Map<String, String>) fileList.get(i);
 			
-			if(mfile.isEmpty()){
-				
-			}
-			String origName = new String(mfile.getOriginalFilename().getBytes("utf-8"), "utf-8"); 
-			// 파일명이 없다면
-			if ("".equals(origName)) {
-				continue;
-			}
-			long fileSize = mfile.getSize(); // 파일 사이즈
-			// 확장자
-			String extention = origName.substring(origName.lastIndexOf('.')+1);
-			//UUID(Universally unique identifier)범용 고유 식별자 사용하여 파일명 변경.
-			String saveFileName = UUID.randomUUID().toString().replaceAll("-", "") + extention;
-			
-			//DB저장
-			vo.setFileIdx(saveFileName);
-			vo.setFileName(origName);
+/*			vo.setFileIdx(fileMap.get("saveFileName"));
+			vo.setFileName(fileMap.get("origName"));
 			vo.setFilePath(path);
-			vo.setFileSize(Long.toString(fileSize));
-			vo.setFileExtention(extention);
-			/*boardDao.boardInsertFile(vo);*/
-
-			//임시 폴더에 파일 저장
-			File serverFile = new File(path + File.separator + saveFileName );
-			mfile.transferTo(serverFile);
-			if(serverFile.delete()){
-				System.out.println("::파일삭제");
-			}
-			
-			System.out.println("::::::::::::: "+origName);
-			System.out.println("::::::::::::: "+fileSize);
-			System.out.println("::::::::::::: "+extention);
-			System.out.println("::::::::::::: "+saveFileName);
+			vo.setFileSize(fileMap.get("fileSize"));
+			vo.setFileExtention(fileMap.get("extention"));
+			boardDao.boardInsertFile(vo);//DB저장
+*/
 			
 		}
-		return vo;
+		return fileList;
+	}
+
+	@Override
+	public BoardVO fileTempUpload(BoardVO vo, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
