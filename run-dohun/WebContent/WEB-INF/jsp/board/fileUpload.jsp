@@ -129,19 +129,12 @@
       function add_file(id, file)
       {
         var template = '' +
-          '<div class="file" id="uploadFile' + id + '">' +
+        '<div class="file" id="uploadFile' + id + '">' +
             '<div class="info">' +
               '파일명 - <span class="filename" title="Size: ' + file.size + 'bytes - Mimetype: ' + file.type + '">' + file.name + '</span><br /><small>Status: <span class="status">Waiting</span></small>' +
               '<span style="margin-left: 10px;"><button type="button" onclick="btnFileDelete('+ id +');" class="btn btn-success btn-xs">삭제</button></span>'+
               '</div>' +
-            /* '<div class="progress">' +
-            	'<div class="progress-bar progress-bar-striped active" style="width:100%"></div>' +
-          	'</div>' + */
-            /* '<div class="bar">' +
-              '<div class="progress" style="width:0%"></div>' +
-            '</div>' + */
           '</div>';
-          
           $('#fileList').prepend(template);
       }
       
@@ -183,14 +176,21 @@
 
           update_file_progress(id, percentStr);
         },
+        //업로드 성공시
         onUploadSuccess: function(id, data){
           add_log('Upload of file #' + id + ' completed');
-          
           add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
-          
           update_file_status(id, 'success', 'Upload Complete');
-          
           update_file_progress(id, '80%');
+          
+          //saveFileName, origName, fileSize, extention 한줄로 만들기
+          for(var i=0; i<data.fileList.length; i++){
+		 	var fileString = data.fileList[i].saveFileName +"//"+ data.fileList[i].origName +"//"+
+		 					 data.fileList[i].fileSize +"//"+ data.fileList[i].extention;
+		 	
+          	$('#hiddenForm').append('<input type="hidden" name="fileUploadList" value="'+fileString+'"/>');
+          };
+          
         },
         onUploadError: function(id, message){
           add_log('Failed to Upload file #' + id + ': ' + message);
@@ -238,7 +238,11 @@
 	    <!-- Files will be places here -->
 	    <div class="panel panel-default col-sm-6">
 		    <div class="panel-body">
-		      <div id="fileList"></div>
+			    <!-- 저장시 file저장을 위한 hidden영역 -->
+			    <div id="hiddenForm"></div>
+		      	<!-- 임시파일 list -->
+		      	<div id="fileList">
+		      	</div>
 		    </div>
 	    </div>
 	</div>

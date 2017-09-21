@@ -14,7 +14,8 @@
 </style>
     
 <form id="boardForm">
-	<input type="hidden" id="boardContent" name="boardContent">
+	<input type="hidden" id="boardContent" name="boardContent"/>
+	
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판-글쓰기</h1>
 	    <p>나는 게시판. 나는 글을쓴다. 너도 글을쓴다.</p>
@@ -31,7 +32,6 @@
 	            CKEDITOR.replace('editor1');
 	        </script>
         </div>
-        
         <jsp:include page="/WEB-INF/jsp/board/fileUpload.jsp"></jsp:include>
         
         <!-- <div class="form-group">

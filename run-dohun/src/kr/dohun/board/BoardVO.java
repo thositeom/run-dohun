@@ -30,14 +30,15 @@ public class BoardVO {
 	private String boardAnswerCnt;//답변수
 	
 	private MultipartFile fileUpload;
-	private String fileIdx;
-	private String fileName;
+	private String fileUploadList[];
+	private int fileIdx;	//파일idx
+	private String fileName;	//파일명(변경된파일명)
+	private String fileOrigName;	//파일명(변경된파일명)
 	private String filePath;
 	private String fileSize;
 	private String fileExtention;
 	private String createDate;
 	private String updateDate;
-	
 	
 	public int getStartRow() {
 		return startRow;
@@ -183,10 +184,16 @@ public class BoardVO {
 	public void setFileUpload(MultipartFile fileUpload) {
 		this.fileUpload = fileUpload;
 	}
-	public String getFileIdx() {
+	public String[] getFileUploadList() {
+		return fileUploadList;
+	}
+	public void setFileUploadList(String[] fileUploadList) {
+		this.fileUploadList = fileUploadList;
+	}
+	public int getFileIdx() {
 		return fileIdx;
 	}
-	public void setFileIdx(String fileIdx) {
+	public void setFileIdx(int fileIdx) {
 		this.fileIdx = fileIdx;
 	}
 	public String getFileName() {
@@ -194,6 +201,12 @@ public class BoardVO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public String getFileOrigName() {
+		return fileOrigName;
+	}
+	public void setFileOrigName(String fileOrigName) {
+		this.fileOrigName = fileOrigName;
 	}
 	public String getFilePath() {
 		return filePath;
@@ -225,5 +238,7 @@ public class BoardVO {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	
 	
 }

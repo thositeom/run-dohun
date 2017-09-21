@@ -33,19 +33,30 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardInsertInfo(BoardVO vo, HttpServletRequest request) throws Exception {
+	public void boardInsertInfo(BoardVO vo, HttpServletRequest request) throws Exception {
 		if(vo.getBoardCreateUser() == null){
 			vo.setBoardCreateUser("guest");
 		}
 		
-		commonService.commonUpdateSeq("boardIdx"); //boardIdx 시퀀스증가
-		vo.setBoardIdx(commonService.commonSeqCnt("boardIdx"));
+		commonService.commonUpdateSeq("BOARD_SEQ"); //boardIdx 시퀀스증가
+		vo.setBoardIdx(commonService.commonSeqCnt("BOARD_SEQ"));
+		
+		if(vo.getFileUploadList() != null){
+			for (int i = 0; i < vo.getFileUploadList().length; i++) {
+				
+				vo.setFileName(vo.getFileUploadList()[i].split("//")[0]);
+				vo.setFileOrigName(vo.getFileUploadList()[i].split("//")[1]);
+				vo.setFileSize(vo.getFileUploadList()[i].split("//")[2]);
+				vo.setFileExtention(vo.getFileUploadList()[i].split("//")[3]);
+				commonService.commonUpdateSeq("BOARD_FILE_SEQ"); //boardFileIdx 시퀀스증가
+				vo.setFileIdx(commonService.commonSeqCnt("BOARD_FILE_SEQ"));
+				boardDao.boardInsertFile(vo);	//파일저장
+			}	
+		}
 		
 		
-		System.out.println("::::::::::::::::::::: "+vo.getFileName());
-		
-		
-		return boardDao.boardInsertInfo(vo);
+		 boardDao.boardInsertInfo(vo);	//게시물 저장
+		 
 	}
 
 	@Override
@@ -92,8 +103,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
-		String path = "D:\\dohun\\filedown\\real\\"; //실제폴더 생성경로 
-//		String path = "D:\\dohun\\filedown\\temp\\"; //임시폴더 생성경로
+//		String path = "D:\\dohun\\filedown\\real\\"; //실제폴더 생성경로 
+		String path = "D:\\dohun\\filedown\\temp\\"; //임시폴더 생성경로
 		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더경로
 		
 		//임시폴더에 파일저장 후 파일명들 가져오기
@@ -110,14 +121,8 @@ public class BoardServiceImpl implements BoardService {
 			vo.setFileExtention(fileMap.get("extention"));
 			boardDao.boardInsertFile(vo);//DB저장
 */
-			
 		}
 		return fileList;
 	}
 
-	@Override
-	public BoardVO fileTempUpload(BoardVO vo, HttpServletRequest request) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

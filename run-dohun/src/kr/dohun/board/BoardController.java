@@ -32,6 +32,7 @@ public class BoardController {
 //				JavaScript.alert("로그인 후 이용이 가능합니다.", "/memberLoginForm.do").execute(response, request);
 //				return null;
 //			}
+		
 			mv.addObject("boardList", boardService.boardList(vo, request));
 			mv.addObject("boardListCnt", boardService.boardListCnt(""));
 			mv.addObject("currentPage",vo.getCurrentPage());
@@ -88,7 +89,6 @@ public class BoardController {
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
-			
 			vo.setBoardId("A"); //A:일반게시판
 			boardService.boardInsertInfo(vo, request);
 			
@@ -195,11 +195,16 @@ public class BoardController {
 	@RequestMapping(value = "/fileUpload.do")
 	public ModelAndView fileUpload(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		response.setHeader("Content-Type", "application/xml"); 
+		response.setContentType("text/xml;charset=UTF-8"); 
+		response.setCharacterEncoding("utf-8"); 
+		
 		try {
-			boardService.fileUpload(vo, request);
+			mv.addObject("fileList", boardService.fileUpload(vo, request));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		mv.setViewName("jsonView");
 		return mv;
 	}
