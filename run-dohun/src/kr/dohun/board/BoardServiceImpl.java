@@ -16,6 +16,9 @@ import kr.dohun.session.SessionManager;
 @Service("BoardServiceImpl")
 public class BoardServiceImpl implements BoardService {
 
+	final static String TEMP_PATH = "D://dohun/filedown/temp/"; //임시폴더 생성경로
+	final static String REAL_PATH = "D://dohun/filedown/real/"; //실제폴더 생성경로
+	
 	@Autowired
 	private CommonService commonService;
 	
@@ -39,8 +42,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		commonService.commonUpdateSeq("BOARD_SEQ"); //boardIdx 시퀀스증가
-		vo.setBoardIdx(commonService.commonSeqCnt("BOARD_SEQ"));
+		vo.setBoardIdx(commonService.commonSeqCnt("BOARD_SEQ")); 
 		
+		String folderName = Long.toString(System.currentTimeMillis());
+		vo.setFilePath(REAL_PATH + folderName + "/");//실제폴더 생성경로
+
 		if(vo.getFileUploadList() != null){
 			for (int i = 0; i < vo.getFileUploadList().length; i++) {
 				
@@ -48,15 +54,18 @@ public class BoardServiceImpl implements BoardService {
 				vo.setFileOrigName(vo.getFileUploadList()[i].split("//")[1]);
 				vo.setFileSize(vo.getFileUploadList()[i].split("//")[2]);
 				vo.setFileExtention(vo.getFileUploadList()[i].split("//")[3]);
-				commonService.commonUpdateSeq("BOARD_FILE_SEQ"); //boardFileIdx 시퀀스증가
-				vo.setFileIdx(commonService.commonSeqCnt("BOARD_FILE_SEQ"));
+				
+				commonService.commonUpdateSeq("BOARD_FILE_SEQ"); //boardFileSeq 시퀀스증가
+				vo.setFileIdx(commonService.commonSeqCnt("BOARD_FILE_SEQ"));//boardFileSeq를 fileIdex로 사용
 				boardDao.boardInsertFile(vo);	//파일저장
+				
+				FileUpload.setMakeFolder(REAL_PATH, folderName);	//실제파일 저장될 폴더생성
+				FileUpload.setMoveFolder(TEMP_PATH+request.getRequestedSessionId()+"/", vo.getFilePath(), vo.getFileName());	//임시폴더 -> 실제폴더 파일이동
+				FileUpload.setRemoveFolder(TEMP_PATH, request.getRequestedSessionId());	//임시폴더삭제
 			}	
 		}
 		
-		
 		 boardDao.boardInsertInfo(vo);	//게시물 저장
-		 
 	}
 
 	@Override
@@ -103,26 +112,22 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List fileUpload(BoardVO vo, HttpServletRequest request) throws Exception {
-//		String path = "D:\\dohun\\filedown\\real\\"; //실제폴더 생성경로 
-		String path = "D:\\dohun\\filedown\\temp\\"; //임시폴더 생성경로
-		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더경로
+		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더
 		
 		//임시폴더에 파일저장 후 파일명들 가져오기
-		List fileList = FileUpload.getFileUpload(request, path, folderName);
+		List fileList = FileUpload.getFileUpload(request, TEMP_PATH, folderName);
 		
 		for(int i = 0; i < fileList.size(); i++) {
 			Map<String, String> fileMap = new HashMap<String, String>();
 			fileMap = (Map<String, String>) fileList.get(i);
 			
-/*			vo.setFileIdx(fileMap.get("saveFileName"));
-			vo.setFileName(fileMap.get("origName"));
-			vo.setFilePath(path);
-			vo.setFileSize(fileMap.get("fileSize"));
-			vo.setFileExtention(fileMap.get("extention"));
-			boardDao.boardInsertFile(vo);//DB저장
-*/
 		}
 		return fileList;
+	}
+
+	@Override
+	public List boardFileList(BoardVO vo) throws Exception {
+		return boardDao.boardFileList(vo);
 	}
 
 }

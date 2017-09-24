@@ -89,7 +89,7 @@ public class BoardController {
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
-			vo.setBoardId("A"); //A:일반게시판
+			vo.setBoardId("PN"); //PN:공개용 일반게시판
 			boardService.boardInsertInfo(vo, request);
 			
 		} catch (Exception e) {
@@ -138,8 +138,9 @@ public class BoardController {
 	public ModelAndView boardDetailForm(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
-			BoardVO boardVo = boardService.boardDetailInfo(vo);
-			mv.addObject("boardVo", boardVo);
+			mv.addObject("boardVo", boardService.boardDetailInfo(vo));
+			mv.addObject("boardFileList", boardService.boardFileList(vo));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.dohun.honey.HoneyVO;
-
 @Repository("BoardDao")
 public class BoardDao {
 
@@ -51,5 +49,10 @@ public class BoardDao {
 	public int boardInsertFile(BoardVO vo) throws Exception{
 		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardInsertFile", vo);
 	}
+	
+	public List boardFileList(BoardVO vo) throws Exception{
+		return (List) sqlMapClientTemplate.queryForList("boardSqlMap.boardFileList",vo);
+	}
+	
 	
 }

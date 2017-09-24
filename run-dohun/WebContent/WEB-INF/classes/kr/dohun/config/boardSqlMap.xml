@@ -24,7 +24,18 @@
 		<result property="boardCount" column="BOARD_CNT" />
 		<result property="boardAnswerCnt" column="ANSWER_CNT" />
 	</resultMap>
+	
+	<resultMap id="boardFileMap" class="board">
+		<result property="boardIdx" column="BOARD_IDX" />
+		<result property="fileIdx" column="FILE_IDX" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileOrigName" column="FILE_ORIG_NAME" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="fileExtention" column="FILE_EXTENTION" />
+	</resultMap>
 
+	<!-- 게시판 목록 -->
 	<select id="boardList" parameterClass="board" resultMap="boardMap">
 		SELECT *
 		  FROM (SELECT *
@@ -34,13 +45,14 @@
 		                       (SELECT @ROWNUM := 0) B) C
 		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
-<!-- 		 ORDER BY BOARD_IDX DESC -->
 	</select>
 	
+	<!-- 게시판 목록Count -->
 	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM BOARD
 	</select>
 	
+	<!-- 게시판 등록 -->
 	<insert id="boardInsertInfo" parameterClass="board">
 		INSERT INTO BOARD
 		(BOARD_IDX,BOARD_ID,PARENT_IDX,BOARD_TYPE,TITLE
@@ -55,6 +67,7 @@
 		,#boardCategory02#,#boardCategory03#)
 	</insert>	
 	
+	<!-- 게시판 삭제 -->
 	<delete id="boardDeleteInfo" parameterClass="map">
 		DELETE FROM BOARD WHERE BOARD_IDX IN 
 	   <iterate property="boardCheck" open="(" conjunction="," close=")">
@@ -62,6 +75,7 @@
        </iterate>
 	</delete>
 	
+	<!-- 게시판 상세보기 -->
 	<select id="boardDetailInfo" parameterClass="board" resultMap="boardMap">
 		SELECT BOARD_IDX,BOARD_ID,PARENT_IDX,BOARD_TYPE,TITLE
 			,CONVERT(CONTENT USING utf8) AS CONTENT
@@ -71,6 +85,7 @@
 		FROM BOARD WHERE BOARD_IDX = #boardIdx#
 	</select>
 	
+	<!-- 게시판 수정 -->
 	<update id="boardUpdateInfo" parameterClass="board">
 		UPDATE BOARD SET 
 		TITLE=#boardTitle#, CONTENT=#boardContent#, NOTICE=#boardNotice#
@@ -80,15 +95,24 @@
 		WHERE BOARD_IDX = #boardIdx# 
 	</update>	
 	
+	<!-- 게시판 파일등록 -->
 	<insert id="boardInsertFile" parameterClass="board">
 		INSERT INTO BOARD_FILE
-		(BOARD_IDX,FILE_IDX,FILE_NAME,FILE_PATH,FILE_SIZE
+		(BOARD_IDX,FILE_IDX,FILE_NAME,FILE_ORIG_NAME,FILE_PATH,FILE_SIZE
 		,FILE_EXTENTION,CREATEDATE,UPDATEDATE
 		) 
 		VALUES 
-		(#boardIdx#,#fileIdx#,#fileName#,#filePath#,#fileSize#
+		(#boardIdx#,#fileIdx#,#fileName#,#fileOrigName#,#filePath#,#fileSize#
 		,#fileExtention#,NOW(),NOW())
 	</insert>	
+
+	<!-- 게시판 파일목록 가져오기 -->
+	<select id="boardFileList" parameterClass="board" resultMap="boardFileMap">
+		SELECT BOARD_IDX,FILE_IDX,FILE_NAME,FILE_ORIG_NAME,FILE_PATH
+			,FILE_SIZE,FILE_EXTENTION,CREATEDATE,UPDATEDATE
+		FROM BOARD_FILE WHERE BOARD_IDX = #boardIdx#
+	</select>
+	
 
 <!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
 <!-- 		UPDATE  -->

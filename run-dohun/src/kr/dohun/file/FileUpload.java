@@ -26,10 +26,9 @@ public class FileUpload {
 	 * 폴더생성
 	 * @param path
 	 * @param folderName
-	 * @param saveFileName
 	 * @return
 	 */
-	public static void getMakeFolder(String path, String folderName, String saveFileName) throws Exception{
+	public static void setMakeFolder(String path, String folderName) throws Exception{
 		File serverFile = new File(path + folderName + File.separator);
 		if(!serverFile.exists()){//폴더가 존재하지 않을때
 			serverFile.mkdirs();	
@@ -44,14 +43,33 @@ public class FileUpload {
 	 * @param saveFileName
 	 * @return
 	 */
-	public static void getRemoveFolder(String path, String folderName, String saveFileName) throws Exception{
-		File serverFile = new File(path + folderName + File.separator + saveFileName);
-		serverFile.delete();
+	public static void setRemoveFolder(String path, String folderName) throws Exception{
+		File serverFile = new File(path + folderName);
 	}
 	
 	/**
-	 * @param vo
+	 * 폴더이동
+	 * @param fromPath
+	 * @param toPath
+	 * @param saveFileName
+	 * @throws Exception
+	 */
+	public static void setMoveFolder(String fromPath, String toPath, String saveFileName) throws Exception{
+		File file = new File(fromPath+saveFileName);
+		File fileToMove = new File(toPath+saveFileName);
+		
+		if(file.renameTo(fileToMove)){//이동시 true리턴
+			file.delete();
+		}else{
+			System.out.println("::::fileMove Fail");
+		}
+		
+	}
+	
+	/**
 	 * @param request
+	 * @param path
+	 * @param folderName
 	 * @return
 	 * @throws Exception
 	 */
@@ -84,7 +102,7 @@ public class FileUpload {
 			String saveFileName = FileUpload.getMakeFileName() + extention;
 			
 			//폴성 생성
-			getMakeFolder(path, folderName, saveFileName);
+			setMakeFolder(path, folderName);
 			
 			if(mfile != null){//생성 및 파일저장
 				mfile.transferTo(new File(path + folderName + File.separator + saveFileName));
