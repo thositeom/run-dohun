@@ -54,3 +54,8 @@ function boardDetailForm(boardIdx){
 	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
 }
 
+function boardFileDownload(boardIdx, fileIdx){
+	var data = {"boardIdx":boardIdx, "fileIdx":fileIdx};
+	customAjax("/fileDownload.do",data,successBoard,errorBoard);	
+}
+

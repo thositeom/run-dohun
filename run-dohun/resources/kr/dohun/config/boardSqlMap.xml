@@ -113,6 +113,13 @@
 		FROM BOARD_FILE WHERE BOARD_IDX = #boardIdx#
 	</select>
 	
+	<!-- 파일정보 가져오기 -->
+	<select id="boardFileInfo" parameterClass="board" resultMap="boardFileMap">
+		SELECT BOARD_IDX,FILE_IDX,FILE_NAME,FILE_ORIG_NAME,FILE_PATH
+			,FILE_SIZE,FILE_EXTENTION,CREATEDATE,UPDATEDATE
+		FROM BOARD_FILE WHERE BOARD_IDX = #boardIdx# AND FILE_IDX = #fileIdx# 
+	</select>
+	
 
 <!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
 <!-- 		UPDATE  -->

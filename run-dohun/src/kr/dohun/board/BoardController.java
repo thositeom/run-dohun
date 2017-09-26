@@ -1,5 +1,6 @@
 package kr.dohun.board;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.dohun.file.DownloadUtil;
+import kr.dohun.file.FileUpload;
 
 @Controller
 public class BoardController {
@@ -227,5 +232,20 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/fileDownload.do")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		try {
+			
+			BoardVO boardVo = boardService.boardFileInfo(vo);
+			File file = new File(boardVo.getFilePath() + boardVo.getFileName());
+			DownloadUtil.download(request, response, file);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

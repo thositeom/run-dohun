@@ -130,4 +130,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.boardFileList(vo);
 	}
 
+	@Override
+	public BoardVO boardFileInfo(BoardVO vo) throws Exception {
+		return boardDao.boardFileInfo(vo);
+	}
+
 }

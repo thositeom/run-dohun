@@ -54,5 +54,8 @@ public class BoardDao {
 		return (List) sqlMapClientTemplate.queryForList("boardSqlMap.boardFileList",vo);
 	}
 	
+	public BoardVO boardFileInfo(BoardVO vo) throws Exception{
+		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardFileInfo",vo);
+	}
 	
 }

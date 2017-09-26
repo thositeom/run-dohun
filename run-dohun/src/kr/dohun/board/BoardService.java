@@ -27,6 +27,8 @@ public interface BoardService {
 	public List fileUpload(BoardVO vo, HttpServletRequest request) throws Exception;
 	/** 게시판 파일목록 */
 	public List boardFileList(BoardVO vo) throws Exception;
+	/** 게시판 파일정보 */
+	public BoardVO boardFileInfo(BoardVO vo) throws Exception;
 	
 	
 //	public void boardInsertFile(BoardVO vo) throws Exception;

@@ -49,7 +49,7 @@
 				<c:forEach items="${boardFileList }" var="i">
 					<div class="fileDown" id="uploadFile' + id + '">
 		              	<span>
-		              	<a href="${i.filePath }${i.fileName }" class="btn-sm">
+		              	<a href="#" class="btn-sm" onclick="boardFileDownload(${boardVo.boardIdx},${i.fileIdx });">
 		              		<span class="glyphicon glyphicon-save-file"></span> 다운로드
 		              	</a>
 		              	<a href="${i.filePath }${i.fileName }">파일명 : ${i.fileOrigName }</a>
