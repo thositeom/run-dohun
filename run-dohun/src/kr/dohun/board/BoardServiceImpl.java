@@ -1,5 +1,6 @@
 package kr.dohun.board;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,6 +134,15 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO boardFileInfo(BoardVO vo) throws Exception {
 		return boardDao.boardFileInfo(vo);
+	}
+
+	@Override
+	public void fileDelete(BoardVO vo, HttpServletRequest request) throws Exception {
+		String fileString = request.getParameter("fileString");
+		String[] fileInfo= fileString.split("//");
+		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더
+		
+		FileUpload.setRemoveFile(TEMP_PATH, folderName, fileInfo[0]);
 	}
 
 }

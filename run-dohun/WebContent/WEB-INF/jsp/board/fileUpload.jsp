@@ -188,7 +188,7 @@
 		 	var fileString = data.fileList[i].saveFileName +"//"+ data.fileList[i].origName +"//"+
 		 					 data.fileList[i].fileSize +"//"+ data.fileList[i].extention;
 		 	
-          	$('#hiddenForm').append('<input type="hidden" name="fileUploadList" value="'+fileString+'"/>');
+          	$('#hiddenForm').append('<input type="hidden" id="fileUpload'+id+'" name="fileUploadList" value="'+fileString+'"/>');
           };
           
         },
@@ -212,10 +212,22 @@
         }
       });
       
+      
+      function fileDeleteSuccess(){
+    	  
+      }
+      
+	  function fileDeleteError(){
+    	  
+      }
       //임시업로드삭제
-      function btnFileDelete(fileDivId){
-    	  var removeDiv = "#uploadFile"+fileDivId; 
-    	  $(removeDiv).remove();
+      function btnFileDelete(id){
+    	  var data = {"fileString":$("#fileUpload"+id).val()};
+    	  
+    	  customAjax("/fileDelete.do", data, fileDeleteSuccess, fileDeleteError);
+    	  
+    	  $("#fileUpload"+id).remove();	//전송할 데이터 삭제
+    	  $("#uploadFile"+id).remove(); //UI삭제
       }
     </script>
     

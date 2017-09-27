@@ -23,5 +23,19 @@
  		<tag-class>kr.dohun.common.tags.IsNotLogin</tag-class>
  		<body-content>JSP</body-content>
  	</tag>
+ 	
+ 	<tag>
+ 		<description>단위환산(data)</description>
+ 		<name>dataConversion</name>
+ 		<tag-class>kr.dohun.common.tags.DataConversion</tag-class>
+ 		<body-content>JSP</body-content>
+ 		<attribute>
+	 		<description>변환전 데이터용량(bytes)</description>
+	 		<name>value</name>
+	 		<required>true</required><!--속성의 필수 여부를 지정, 필수일 경우 true 아닌 경우 false를 값으로 지정, 기본값은 false-->
+	 		<rtexprvalue>true</rtexprvalue><!-- JSP Expression, EL 등의 허용여부 -->
+ 		</attribute>
+ 	</tag>
+ 	
  
 </taglib>

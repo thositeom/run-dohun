@@ -34,7 +34,7 @@ public class DownloadUtil {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public static void download(HttpServletRequest request, HttpServletResponse response, File file) throws ServletException, IOException {
+	public static void download(HttpServletRequest request, HttpServletResponse response, File file, String fileOrigName) throws ServletException, IOException {
 	 
 	    String mimetype = request.getSession().getServletContext().getMimeType(file.getName());
 	 
@@ -46,7 +46,7 @@ public class DownloadUtil {
 	 
 	    try {
 	      is = new FileInputStream(file);
-	      download(request, response, is, file.getName(), file.length(), mimetype);
+	      download(request, response, is, fileOrigName, file.length(), mimetype);
 	    } finally {
 	      try {
 	        is.close();
@@ -57,21 +57,16 @@ public class DownloadUtil {
 	 
 	  /**
 	   * 해당 입력 스트림으로부터 오는 데이터를 다운로드 한다.
-	   * 
 	   * @param request
 	   * @param response
-	   * @param is
-	   *            입력 스트림
-	   * @param filename
-	   *            파일 이름
-	   * @param filesize
-	   *            파일 크기
-	   * @param mimetype
-	   *            MIME 타입 지정
+	   * @param is 입력 스트림
+	   * @param fileOrigName 원본 파일 이름
+	   * @param filesize 파일 크기
+	   * @param mimetype MIME 타입 지정
 	   * @throws ServletException
 	   * @throws IOException
 	   */
-	  public static void download(HttpServletRequest request, HttpServletResponse response, InputStream is, String filename, long filesize, String mimetype) throws ServletException, IOException {
+	  public static void download(HttpServletRequest request, HttpServletResponse response, InputStream is, String fileOrigName, long filesize, String mimetype) throws ServletException, IOException {
 	    String mime = mimetype;
 	 
 	    if (mimetype == null || mimetype.length() == 0) {
@@ -88,11 +83,11 @@ public class DownloadUtil {
 	 
 	    // attachment; 가 붙으면 IE의 경우 무조건 다운로드창이 뜬다. 상황에 따라 써야한다.
 	    if (userAgent != null && userAgent.indexOf("MSIE 5.5") > -1) { // MS IE 5.5 이하
-	      response.setHeader("Content-Disposition", "filename=" + URLEncoder.encode(filename, "UTF-8") + ";");
+	      response.setHeader("Content-Disposition", "filename=" + URLEncoder.encode(fileOrigName, "UTF-8") + ";");
 	    } else if (userAgent != null && userAgent.indexOf("MSIE") > -1) { // MS IE (보통은 6.x 이상 가정)
-	      response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(filename, "UTF-8") + ";");
+	      response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(fileOrigName, "UTF-8") + ";");
 	    } else { // 모질라나 오페라
-	      response.setHeader("Content-Disposition", "attachment; filename=" + new String(filename.getBytes(CHARSET), "latin1") + ";");
+	      response.setHeader("Content-Disposition", "attachment; filename=" + new String(fileOrigName.getBytes(CHARSET), "latin1") + ";");
 	    }
 	 
 	    // 파일 사이즈가 정확하지 않을때는 아예 지정하지 않는다.

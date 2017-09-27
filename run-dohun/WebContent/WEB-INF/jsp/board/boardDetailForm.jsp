@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ taglib prefix="tlds" uri="http://run-dohun.kr/tlds" %>
 <style>
-
 	#fileList {
 		width: 100%;
 		height:127px;
@@ -18,7 +16,6 @@
 	  width: 100%;
 	  margin-top: 10px;
 	}
-	
 </style>
 
 <script type="text/javascript" src="/resources/js/board.js"></script>
@@ -49,14 +46,14 @@
 				<c:forEach items="${boardFileList }" var="i">
 					<div class="fileDown" id="uploadFile' + id + '">
 		              	<span>
-		              	<a href="#" class="btn-sm" onclick="boardFileDownload(${boardVo.boardIdx},${i.fileIdx });">
+		              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }" class="btn-sm">
 		              		<span class="glyphicon glyphicon-save-file"></span> 다운로드
 		              	</a>
-		              	<a href="${i.filePath }${i.fileName }">파일명 : ${i.fileOrigName }</a>
-		              	(${i.fileSize }) bytes
+		              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }">파일명 : ${i.fileOrigName }</a>
+		              		<tlds:dataConversion value="${i.fileSize}" />
 		              	</span>
+		              	
 		            </div>
-					
 					<%-- ${i.fileOrigName }
 					${i.fileIdx }
 					${i.fileName }

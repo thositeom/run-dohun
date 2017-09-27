@@ -45,6 +45,7 @@ public class FileUpload {
 	 */
 	public static void setRemoveFolder(String path, String folderName) throws Exception{
 		File serverFile = new File(path + folderName);
+		serverFile.delete();
 	}
 	
 	/**
@@ -54,9 +55,9 @@ public class FileUpload {
 	 * @param saveFileName
 	 * @throws Exception
 	 */
-	public static void setMoveFolder(String fromPath, String toPath, String saveFileName) throws Exception{
-		File file = new File(fromPath+saveFileName);
-		File fileToMove = new File(toPath+saveFileName);
+	public static void setMoveFolder(String fromPath, String toPath, String fileName) throws Exception{
+		File file = new File(fromPath+fileName);
+		File fileToMove = new File(toPath+fileName);
 		
 		if(file.renameTo(fileToMove)){//이동시 true리턴
 			file.delete();
@@ -65,6 +66,18 @@ public class FileUpload {
 		}
 		
 	}
+	
+	/**
+	 * 파일삭제
+	 * @param path
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public static void setRemoveFile(String path, String folderName ,String fileName) throws Exception{
+		File serverFile = new File(path + folderName+ File.separator + fileName);
+		serverFile.delete();
+	}
+	
 	
 	/**
 	 * @param request

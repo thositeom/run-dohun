@@ -134,6 +134,29 @@
 	    </script>
 	    </div>
 	    
+	    <div class="col-sm-6">
+	    <h4>데이터변환 bytes -> KB,MB,GB,TB,EB</h4>
+	    <label for="dataConversion">입력:</label>
+	    <input type="text" id="bytes" onchange="dataConversion();">
+	    </br>
+	    <label for="dataConversion2">true/false:</label>
+	    <input type="text" id="si" onchange="dataConversion();">
+	    <p id="dataConversion"></p>
+	    <script type="text/javascript">
+	    function dataConversion(){
+	    	var bytes = $("#bytes").val().trim();
+	    	var si = $("#si").val().trim();
+	    	var data = {"bytes":bytes,"si":si};
+	    	customAjax("/dataConversion.do", data, successLucyXssCallback, errorLucyXssCallback);
+	    }
+	    function successLucyXssCallback(result){
+	    	$("#dataConversion").text(result.dataConversion);
+	    }
+	    function errorLucyXssCallback(){
+	    }
+	    </script>
+	    </div>
+	    
 	    
     </div>
 </form>

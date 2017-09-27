@@ -226,7 +226,7 @@ public class BoardController {
 	public ModelAndView fileDelete(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
-//			boardService.fileUpload(vo, request);
+			boardService.fileDelete(vo, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -234,15 +234,19 @@ public class BoardController {
 		return mv;
 	}
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @param vo
+	 * 통합게시판 파일 다운로드
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		try {
-			
 			BoardVO boardVo = boardService.boardFileInfo(vo);
-			File file = new File(boardVo.getFilePath() + boardVo.getFileName());
-			DownloadUtil.download(request, response, file);
-			
+			DownloadUtil.download(request, response, new File(boardVo.getFilePath() + boardVo.getFileName()), boardVo.getFileOrigName());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

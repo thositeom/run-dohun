@@ -25,6 +25,8 @@ public interface BoardService {
 	public BoardVO boardPage(BoardVO vo, HttpServletRequest request) throws Exception;
 	/** 게시판 파일업로드 */
 	public List fileUpload(BoardVO vo, HttpServletRequest request) throws Exception;
+	/** 게시판 임시파일삭제 */
+	public void fileDelete(BoardVO vo, HttpServletRequest request) throws Exception;
 	/** 게시판 파일목록 */
 	public List boardFileList(BoardVO vo) throws Exception;
 	/** 게시판 파일정보 */
