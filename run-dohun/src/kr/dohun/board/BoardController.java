@@ -255,17 +255,19 @@ public class BoardController {
 	@RequestMapping(value = "/boardRecommended.do")
 	public ModelAndView boardRecommended(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		Map resultMap = new HashMap();
+		
 		try {
 			
 			if(!boardService.boardRecommended(vo)){
 				System.out.println("@");
-				JavaScript.alert("중복입니다.").execute(response, request);
+				resultMap.put("msg", "Duplication.");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		mv.addAllObjects(resultMap);
 		mv.setViewName("jsonView");
 		return mv;
 	}

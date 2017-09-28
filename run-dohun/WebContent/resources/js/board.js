@@ -65,7 +65,7 @@ $("a").click(function(){
 });
 
 function successBoardRecommended(result){
-	alert(result);
+	alert(result.msg);
 }
 function errorBoardRecommended(result,status,error){
 	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
