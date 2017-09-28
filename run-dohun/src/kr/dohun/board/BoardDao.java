@@ -42,6 +42,10 @@ public class BoardDao {
 		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardDetailInfo", vo);
 	}
 	
+	public int boardViewCount(BoardVO vo) throws Exception{
+		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardViewCount", vo);
+	}
+	
 	public int boardUpdateInfo(BoardVO vo) throws Exception{
 		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardUpdateInfo", vo);
 	}
@@ -57,5 +61,14 @@ public class BoardDao {
 	public BoardVO boardFileInfo(BoardVO vo) throws Exception{
 		return (BoardVO) sqlMapClientTemplate.queryForObject("boardSqlMap.boardFileInfo",vo);
 	}
+	
+	public int boardRecommendedDuple(BoardVO vo) throws Exception{
+		return  (int) sqlMapClientTemplate.queryForObject("boardSqlMap.boardRecommendedDuple", vo);
+	}
+	
+	public int boardRecommendedInsert(BoardVO vo) throws Exception{
+		return (int) sqlMapClientTemplate.update("boardSqlMap.boardRecommendedInsert",vo);
+	}
+	
 	
 }

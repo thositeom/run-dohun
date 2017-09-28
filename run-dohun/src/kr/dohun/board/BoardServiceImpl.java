@@ -1,6 +1,5 @@
 package kr.dohun.board;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +38,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void boardInsertInfo(BoardVO vo, HttpServletRequest request) throws Exception {
 		if(vo.getBoardCreateUser() == null){
-			vo.setBoardCreateUser("guest");
+			vo.setUserIdx(10); //사용자 Idx
+			vo.setBoardCreateUser("guest");//사용자 아이디
+			vo.setUserName("게스트"); //사용자 이름
 		}
 		
 		commonService.commonUpdateSeq("BOARD_SEQ"); //boardIdx 시퀀스증가
@@ -76,6 +77,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO boardDetailInfo(BoardVO vo) throws Exception{
+		boardDao.boardViewCount(vo);
 		return boardDao.boardDetailInfo(vo);
 	}
 
@@ -143,6 +145,35 @@ public class BoardServiceImpl implements BoardService {
 		String folderName = request.getRequestedSessionId(); //세션ID 임시폴더
 		
 		FileUpload.setRemoveFile(TEMP_PATH, folderName, fileInfo[0]);
+	}
+
+	@Override
+	public boolean boardRecommended(BoardVO vo) throws Exception {
+		/*추천 비추천 
+		 * 추천 안햇으면 추천테이블등록
+		 * 추천 시퀀스 증가, 저장할 시퀀스 가져오기
+		 * -저장할 데이터 생성 idx, type, boarD_id, 게시판 인덱스 , 멤버 아이디, 생성일자
+		 * -추전 비추천 업데이트
+		*/
+		
+		if(boardDao.boardRecommendedDuple(vo) > 0){
+			return false;	//중복일때
+		}
+		
+		commonService.commonUpdateSeq("BOARD_RECOMMENDED"); //추천or비추천 시퀀스 증가
+		vo.setBoardRecommendedIdx(commonService.commonSeqCnt("BOARD_RECOMMENDED"));
+		vo.setBoardRecommendedType("B");
+		
+		System.out.println(vo.getBoardRecommendedIdx());
+		System.out.println(vo.getBoardRecommendedType());
+		System.out.println(vo.getBoardId());
+		System.out.println(vo.getBoardIdx());
+		System.out.println(vo.getUserIdx());
+					
+		
+		boardDao.boardRecommendedInsert(vo);
+		
+		return true;
 	}
 
 }

@@ -4,47 +4,43 @@
 	<typeAlias alias="honey" type="kr.dohun.honey.HoneyVO" />
 
 	<resultMap id="honeyMap" class="honey">
-		<result property="honeyId" column="H_ID" columnIndex="1" />
-		<result property="honeyUserId" column="H_USERID" columnIndex="2" />
-		<result property="honeyOrderDate" column="H_ORDERDATE" columnIndex="3" />
-		<result property="honeyPayment" column="H_PAYMENT" columnIndex="4" />
-		<result property="honeyOrderList" column="H_ORDERLIST" columnIndex="5" />
-		<result property="honeyQty" column="H_QTY" columnIndex="6" />
-		<result property="honeyCost" column="H_COST" columnIndex="7" />
-		<result property="honeyAmount" column="H_AMOUNT" columnIndex="8" />
-		<result property="honeyWaybill" column="H_WAYBILL" columnIndex="9" />
-		<result property="honeyDeliveryDate" column="H_DELIVERYDATE" columnIndex="10" />
-		<result property="honeyEtc01" column="H_ETC01" columnIndex="11" />
+		<result property="honeyId" column="HONEY_ID" columnIndex="1" />
+		<result property="honeyUserId" column="HONEY_USERID" columnIndex="2" />
+		<result property="honeyOrderDate" column="HONEY_ORDERDATE" columnIndex="3" />
+		<result property="honeyPayment" column="HONEY_PAYMENT" columnIndex="4" />
+		<result property="honeyOrderList" column="HONEY_ORDERLIST" columnIndex="5" />
+		<result property="honeyQty" column="HONEY_QTY" columnIndex="6" />
+		<result property="honeyCost" column="HONEY_COST" columnIndex="7" />
+		<result property="honeyAmount" column="HONEY_AMOUNT" columnIndex="8" />
+		<result property="honeyWaybill" column="HONEY_WAYBILL" columnIndex="9" />
+		<result property="honeyDeliveryDate" column="HONEY_DELIVERYDATE" columnIndex="10" />
+		<result property="honeyEtc01" column="HONEY_ETC01" columnIndex="11" />
 	</resultMap>
 
-	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM TEST WHERE ID = #id#
-	</select> -->
-	
 	<select id="honeyList" parameterClass="honey" resultMap="honeyMap">
 		SELECT *
 		  FROM (SELECT *
 		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
 		                  FROM (SELECT *
 		                          FROM HONEY
-		                         WHERE H_USERID = #honeyUserId#) A,
+		                         WHERE HONEY_USERID = #honeyUserId#) A,
 		                       (SELECT @ROWNUM := 0) B) C
 		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
 	</select>
 	
 	<select id="honeyListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-		SELECT COUNT(*) FROM HONEY WHERE H_USERID = #honeyUserId#
+		SELECT COUNT(*) FROM HONEY WHERE HONEY_USERID = #honeyUserId#
 	</select>
 	
 	<select id="honeyInfo" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM HONEY WHERE H_ID = #honeyId#
+		SELECT * FROM HONEY WHERE HONEY_ID = #honeyId#
 	</select>
 
 	<insert id="honeyInsertInfo" parameterClass="honey">
 		INSERT INTO HONEY 
-		(H_ID,H_USERID,H_ORDERDATE,H_PAYMENT,H_ORDERLIST,H_QTY
-		,H_COST,H_AMOUNT,H_WAYBILL,H_DELIVERYDATE,H_ETC01) 
+		(HONEY_ID,HONEY_USERID,HONEY_ORDERDATE,HONEY_PAYMENT,HONEY_ORDERLIST,HONEY_QTY
+		,HONEY_COST,HONEY_AMOUNT,HONEY_WAYBILL,HONEY_DELIVERYDATE,HONEY_ETC01) 
 		VALUES 
 		(#honeyId#,#honeyUserId#,#honeyOrderDate#,#honeyPayment#,#honeyOrderList#,#honeyQty#
 		,#honeyCost#,#honeyAmount#,#honeyWaybill#,#honeyDeliveryDate#,#honeyEtc01#)
@@ -52,20 +48,20 @@
 
 	<update id="honeyUpdateInfo" parameterClass="honey">
 		UPDATE HONEY SET 
-			H_PAYMENT=#honeyPayment#,
-			H_ORDERDATE=#honeyOrderDate#,
-			H_ORDERLIST=#honeyOrderList#,
-			H_QTY=#honeyQty#,
-			H_COST=#honeyCost#,
-			H_AMOUNT=#honeyAmount#,
-			H_WAYBILL=#honeyWaybill#,
-			H_DELIVERYDATE=#honeyDeliveryDate#,
-			H_ETC01=#honeyEtc01#
-		WHERE H_ID=#honeyId# 
+			HONEY_PAYMENT=#honeyPayment#,
+			HONEY_ORDERDATE=#honeyOrderDate#,
+			HONEY_ORDERLIST=#honeyOrderList#,
+			HONEY_QTY=#honeyQty#,
+			HONEY_COST=#honeyCost#,
+			HONEY_AMOUNT=#honeyAmount#,
+			HONEY_WAYBILL=#honeyWaybill#,
+			HONEY_DELIVERYDATE=#honeyDeliveryDate#,
+			HONEY_ETC01=#honeyEtc01#
+		WHERE HONEY_ID=#honeyId# 
 	</update>	
  
 	<delete id="honeyDeleteInfo" parameterClass="honey">
-		DELETE FROM HONEY WHERE H_ID = #honeyId#
+		DELETE FROM HONEY WHERE HONEY_ID = #honeyId#
 	</delete>
 
 </sqlMap>

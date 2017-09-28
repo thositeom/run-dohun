@@ -8,6 +8,9 @@ public class BoardVO {
 	private int endRow = 10;
 	private int currentPage=1;
 	private int rows;
+	
+	private int userIdx;
+	private String userName;
 
 	private int boardIdx;//boardIdx
 	private String boardId;//게시판Id
@@ -28,6 +31,8 @@ public class BoardVO {
 	private String boardCategory03;
 	private String boardCount;//조회수
 	private String boardAnswerCnt;//답변수
+	private String createUser;
+	private String updateUser;
 	
 	private MultipartFile fileUpload;
 	private String fileUploadList[];
@@ -40,6 +45,22 @@ public class BoardVO {
 	private String createDate;
 	private String updateDate;
 	
+	private int boardRecommendedIdx;	//추천여부Idx
+	private String boardRecommendedType;	//추천여부 Type 추천:B 신고:W
+	
+	
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
 	public int getStartRow() {
 		return startRow;
 	}
@@ -63,6 +84,18 @@ public class BoardVO {
 	}
 	public void setRows(int rows) {
 		this.rows = rows;
+	}
+	public int getUserIdx() {
+		return userIdx;
+	}
+	public void setUserIdx(int userIdx) {
+		this.userIdx = userIdx;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getBoardIdx() {
 		return boardIdx;
@@ -238,7 +271,18 @@ public class BoardVO {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
+	public int getBoardRecommendedIdx() {
+		return boardRecommendedIdx;
+	}
+	public void setBoardRecommendedIdx(int boardRecommendedIdx) {
+		this.boardRecommendedIdx = boardRecommendedIdx;
+	}
+	public String getBoardRecommendedType() {
+		return boardRecommendedType;
+	}
+	public void setBoardRecommendedType(String boardRecommendedType) {
+		this.boardRecommendedType = boardRecommendedType;
+	}
 	
 	
 }

@@ -6,6 +6,8 @@
 	<resultMap id="boardMap" class="board">
 		<result property="boardIdx" column="BOARD_IDX" />
 		<result property="boardId" column="BOARD_ID" />
+		<result property="userIdx" column="MEMBER_IDX" />
+		<result property="userName" column="MEMBER_NAME" />
 		<result property="boardParentIdx" column="PARENT_IDX" />
 		<result property="boardType" column="BOARD_TYPE" />
 		<result property="boardTitle" column="TITLE" />
@@ -51,20 +53,21 @@
 	<select id="boardListCnt" parameterClass="java.lang.String" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM BOARD
 	</select>
-	
+
 	<!-- 게시판 등록 -->
 	<insert id="boardInsertInfo" parameterClass="board">
 		INSERT INTO BOARD
-		(BOARD_IDX,BOARD_ID,PARENT_IDX,BOARD_TYPE,TITLE
-		,CONTENT,NOTICE,SECRET,CREATEDATE,CRATEUSER
-		,UPDATEDATE,UPDATEUSER,BEST,WOST,CATEGORY01
+		(BOARD_IDX,BOARD_ID,MEMBER_IDX,MEMBER_NAME,PARENT_IDX
+		,BOARD_TYPE,TITLE,CONTENT,NOTICE,SECRET
+		,CREATEDATE,CRATEUSER,UPDATEDATE,UPDATEUSER,CATEGORY01
 		,CATEGORY02,CATEGORY03
 		) 
 		VALUES 
-		(#boardIdx#,#boardId#,#boardParentIdx#,#boardType#,#boardTitle#
-		,#boardContent#,#boardNotice#,#boardSecret#,NOW(),#boardCreateUser#
-		,NOW(),#boardUpdateUser#,#boardBest#,#boardWost#,#boardCategory01#
-		,#boardCategory02#,#boardCategory03#)
+		(#boardIdx#,#boardId#,#userIdx#,#userName#,#boardParentIdx#
+		,#boardType#,#boardTitle#,#boardContent#,#boardNotice#,#boardSecret#
+		,NOW(),#boardCreateUser#,NOW(),#boardUpdateUser#,#boardCategory01#
+		,#boardCategory02#,#boardCategory03#
+		)
 	</insert>	
 	
 	<!-- 게시판 삭제 -->
@@ -77,21 +80,29 @@
 	
 	<!-- 게시판 상세보기 -->
 	<select id="boardDetailInfo" parameterClass="board" resultMap="boardMap">
-		SELECT BOARD_IDX,BOARD_ID,PARENT_IDX,BOARD_TYPE,TITLE
-			,CONVERT(CONTENT USING utf8) AS CONTENT
-			,NOTICE,SECRET,CREATEDATE,CRATEUSER,UPDATEDATE 
-			,UPDATEUSER,BEST,WOST,CATEGORY01,CATEGORY02 
-			,CATEGORY03,BOARD_CNT,ANSWER_CNT 
+		SELECT BOARD_IDX,BOARD_ID,MEMBER_IDX,MEMBER_NAME,PARENT_IDX
+			,BOARD_TYPE,TITLE,CONVERT(CONTENT USING utf8) AS CONTENT,NOTICE,SECRET
+			,CREATEDATE,CRATEUSER,UPDATEDATE,UPDATEUSER,BEST
+			,WOST,CATEGORY01,CATEGORY02,CATEGORY03,BOARD_CNT
+			,ANSWER_CNT 
 		FROM BOARD WHERE BOARD_IDX = #boardIdx#
 	</select>
+	
+	<!-- 게시판 뷰카운트 증가 -->
+	<update id="boardViewCount" parameterClass="board">
+		UPDATE BOARD
+		SET BOARD_CNT = (SELECT VIEW.* 
+							FROM (SELECT BOARD_CNT+1 AS VIEW_CNT FROM BOARD WHERE BOARD_IDX = #boardIdx#) VIEW
+		                 ) 
+		WHERE BOARD_IDX = #boardIdx#
+	</update>
 	
 	<!-- 게시판 수정 -->
 	<update id="boardUpdateInfo" parameterClass="board">
 		UPDATE BOARD SET 
 		TITLE=#boardTitle#, CONTENT=#boardContent#, NOTICE=#boardNotice#
 		, SECRET=#boardSecret#, UPDATEDATE=NOW(),UPDATEUSER=#boardUpdateUser#
-		, BEST=#boardBest#, WOST=#boardWost#, CATEGORY01=#boardCategory01#
-		, CATEGORY02=#boardCategory02#, CATEGORY03=#boardCategory03#
+		, CATEGORY01=#boardCategory01#, CATEGORY02=#boardCategory02#, CATEGORY03=#boardCategory03#
 		WHERE BOARD_IDX = #boardIdx# 
 	</update>	
 	
@@ -120,6 +131,20 @@
 		FROM BOARD_FILE WHERE BOARD_IDX = #boardIdx# AND FILE_IDX = #fileIdx# 
 	</select>
 	
+	<!-- 추천여부 중복체크 -->
+	<select id="boardRecommendedDuple" parameterClass="board" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM BOARD_RECOMMENDED 
+		WHERE BOARD_IDX = #boardIdx# AND MEMBER_IDX = #userIdx#
+	</select>
+	
+	<!-- 추천여부 등록 -->
+	<insert id="boardRecommendedInsert" parameterClass="board" >
+		INSERT INTO BOARD_RECOMMENDED(
+		   RECOMMENDED_IDX,RECOMMENDED_TYPE,BOARD_ID,BOARD_IDX,MEMBER_IDX,CREATEDATE
+		) VALUES (
+		   #boardRecommendedIdx#,#boardRecommendedType#,#boardId#,#boardIdx#,#userIdx#,NOW()
+		)
+	</insert>
 
 <!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
 <!-- 		UPDATE  -->

@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.dohun.common.JavaScript;
 import kr.dohun.file.DownloadUtil;
-import kr.dohun.file.FileUpload;
 
 @Controller
 public class BoardController {
@@ -252,4 +251,23 @@ public class BoardController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value = "/boardRecommended.do")
+	public ModelAndView boardRecommended(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		try {
+			
+			if(!boardService.boardRecommended(vo)){
+				System.out.println("@");
+				JavaScript.alert("중복입니다.").execute(response, request);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 }

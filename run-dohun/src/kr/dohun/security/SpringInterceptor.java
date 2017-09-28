@@ -70,6 +70,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"fileUpload.do")||
 				reqUrl.equals(context+"fileDelete.do")||
 				reqUrl.equals(context+"dataConversion.do")||
+				reqUrl.equals(context+"boardRecommended.do")||
 				
 				reqUrl.equals(context+"memberLogin.do")
 		){

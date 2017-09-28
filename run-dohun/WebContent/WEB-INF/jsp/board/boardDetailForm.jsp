@@ -16,61 +16,70 @@
 	  width: 100%;
 	  margin-top: 10px;
 	}
+	
+	div .content{
+		height:260px;
+	}
+	
+	div .viewCount{
+		height:30px;
+		float: right;
+		margin-right: 40px;
+	}
+	/* div span > span{
+		font-size:20px;
+	} */
 </style>
 
 <script type="text/javascript" src="/resources/js/board.js"></script>
 <form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent" value='${boardVo.boardContent}'>
 	<input type="hidden" id="boardIdx" name="boardIdx" value='${boardVo.boardIdx}'>
+	<input type="hidden" id="boardId" name="boardId" value='${boardVo.boardId}'>
+	<input type="hidden" id="userIdx" name="userIdx" value='${boardVo.userIdx}'>
 	
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판-읽기</h1>
-	    <p>나는 게시판. 나는 글을쓴다. 너도 글을쓴다.</p>
-	    <hr>
-		<div class="form-group">
-		    <label for="제목">제목:</label>
-		    <input type="text" class="form-control" id="boardTitle" name="boardTitle" value='${boardVo.boardTitle}'>
-		</div>
-		<!-- CKEditor -->
-		<div class="form-group">
-			<textarea name="editor1" id="editor1" >
-	        </textarea>
-	        <script>
-	            CKEDITOR.replace("editor1");
-	            CKEDITOR.instances.editor1.setData($("#boardContent").val());
-	        </script>
-        </div>
-        
-        <div class="panel panel-default">
-        	<div class="form-group" id="fileList">
-				<c:forEach items="${boardFileList }" var="i">
-					<div class="fileDown" id="uploadFile' + id + '">
-		              	<span>
-		              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }" class="btn-sm">
-		              		<span class="glyphicon glyphicon-save-file"></span> 다운로드
-		              	</a>
-		              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }">파일명 : ${i.fileOrigName }</a>
-		              		<tlds:dataConversion value="${i.fileSize}" />
-		              	</span>
-		              	
-		            </div>
-					<%-- ${i.fileOrigName }
-					${i.fileIdx }
-					${i.fileName }
-					${i.filePath }
-					${i.fileSize }
-					${i.fileExtention } --%>
-					
-				</c:forEach>
-				<c:if test="${empty boardFileList}">
-					<h2>등록된 파일이 없습니다.</h2>
-				</c:if>
+	    <p>나는 게시판. 나는 글을읽는다. 너도 글을읽는다.</p>
+	    <hr>${boardVo.boardIdx}||${boardVo.userIdx}
+	    <div class="row">
+	  	    <div class="viewCount">
+		    	<span><span class="glyphicon glyphicon-eye-open"></span>&nbsp;${boardVo.boardCount}</span>
+		    	<a href="#" id="boardBest" data-toggle="tooltip" title="클릭시 일따봉!">
+		    		<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;${boardVo.boardBest}
+		    	</a>
+		    	<a href="#" id="boardWost" data-toggle="tooltip" title="클릭시 부~우">
+		    		<span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;${boardVo.boardWost}
+		    	</a>
+		    </div>
+	    </div>
+	    
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>${boardVo.boardTitle}</b></div>
+		    <div class="panel-body content">${boardVo.boardContent}</div>
+	    </div>
+	  	<div class="panel panel-default">
+			<div class="panel-body">
+		    	<div class="form-group" id="fileList">
+					<c:forEach items="${boardFileList }" var="i">
+						<div class="fileDown" id="uploadFile' + id + '">
+			              	<span>
+			              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }" class="btn-sm">
+			              		<span class="glyphicon glyphicon-save-file"></span> 다운로드
+			              	</a>
+			              	<a href="fileDownload.do?boardIdx=${boardVo.boardIdx}&fileIdx=${i.fileIdx }">파일명 : ${i.fileOrigName }</a>
+			              		<tlds:dataConversion value="${i.fileSize}" />
+			              	</span>
+			              	
+			            </div>
+					</c:forEach>
+					<c:if test="${empty boardFileList}">
+						<h2>등록된 파일이 없습니다.</h2>
+					</c:if>
+				</div>
 			</div>
-	        <!-- <div class="panel panel-default col-sm-6">
-        		
-	        </div>
-	         -->	
-		</div>
+	    </div>   
+        
 		<div class="modal-footer">
 			<button type="button" id="boardUpdate" name="boardUpdate" class="btn btn-default" >수정</button> 
 			<button type="button" id="boardList" name="boardList" class="btn btn-default">목록</button>

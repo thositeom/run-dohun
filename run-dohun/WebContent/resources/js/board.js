@@ -49,6 +49,28 @@ $("button").click(function(){
 	
 });
 
+$("a").click(function(){
+	var data;
+	switch ($(this).attr("id")) {
+	case "boardBest" :
+		url="/boardRecommended.do";
+		break;
+	case "boardWost" :
+		url="/boardRecommended.do";
+		break;
+	default:
+		break;
+	}
+	customAjaxForm(url,"boardForm",data,successBoardRecommended,errorBoardRecommended);
+});
+
+function successBoardRecommended(result){
+	alert(result);
+}
+function errorBoardRecommended(result,status,error){
+	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
+}
+
 function boardDetailForm(boardIdx){
 	var data = {"boardIdx":boardIdx};
 	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	

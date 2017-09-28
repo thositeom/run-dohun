@@ -31,6 +31,8 @@ public interface BoardService {
 	public List boardFileList(BoardVO vo) throws Exception;
 	/** 게시판 파일정보 */
 	public BoardVO boardFileInfo(BoardVO vo) throws Exception;
+	/** 게시판 추천/비추천 */
+	public boolean boardRecommended(BoardVO vo) throws Exception;
 	
 	
 //	public void boardInsertFile(BoardVO vo) throws Exception;

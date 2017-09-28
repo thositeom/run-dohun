@@ -4,17 +4,17 @@
 	<typeAlias alias="member" type="kr.dohun.member.MemberVO" />
 
 	<resultMap id="memberMap" class="member">
-		<result property="userId" column="M_ID" columnIndex="2" />
-		<result property="userName" column="M_NAME" columnIndex="3" />
-		<result property="userEmail" column="M_EMAIL" columnIndex="4" />
-		<result property="userPhone" column="M_PHONE" columnIndex="5" />
-		<result property="userAddress" column="M_ADDRESS" columnIndex="6" />
-		<result property="userPassword" column="M_PASSWORD" columnIndex="7" />
-		<result property="userEtc01" column="M_ETC01" columnIndex="8" />
-		<result property="userEtc02" column="M_ETC02" columnIndex="9" />
-		<result property="userEtc03" column="M_ETC03" columnIndex="10" />
-		<result property="userEtc04" column="M_ETC04" columnIndex="11" />
-		<result property="userEtc05" column="M_ETC05" columnIndex="12" />
+		<result property="userId" column="MEMBER_ID" columnIndex="2" />
+		<result property="userName" column="MEMBER_NAME" columnIndex="3" />
+		<result property="userEmail" column="MEMBER_EMAIL" columnIndex="4" />
+		<result property="userPhone" column="MEMBER_PHONE" columnIndex="5" />
+		<result property="userAddress" column="MEMBER_ADDRESS" columnIndex="6" />
+		<result property="userPassword" column="MEMBER_PASSWORD" columnIndex="7" />
+		<result property="userEtc01" column="MEMBER_ETC01" columnIndex="8" />
+		<result property="userEtc02" column="MEMBER_ETC02" columnIndex="9" />
+		<result property="userEtc03" column="MEMBER_ETC03" columnIndex="10" />
+		<result property="userEtc04" column="MEMBER_ETC04" columnIndex="11" />
+		<result property="userEtc05" column="MEMBER_ETC05" columnIndex="12" />
 	</resultMap>
 
 	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
@@ -26,51 +26,51 @@
 	</select>
 	
 	<select id="memberInfo" parameterClass="java.lang.String" resultMap="memberMap">
-		SELECT * FROM MEMBER WHERE M_ID = #userId#
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #userId#
 	</select>
 
 	<insert id="memberInsertInfo" parameterClass="member">
 		INSERT INTO MEMBER 
-		(M_ID,M_NAME,M_EMAIL,M_PHONE,M_ADDRESS
-		,M_PASSWORD,M_CREATEDATE
-		,M_ETC01,M_ETC02,M_ETC03,M_ETC04,M_ETC05) 
+		(MEMBER_IDX,MEMBER_ID,MEMBER_NAME,MEMBER_EMAIL,MEMBER_PHONE,MEMBER_ADDRESS
+		,MEMBER_PASSWORD,MEMBER_CREATEDATE
+		,MEMBER_ETC01,MEMBER_ETC02,MEMBER_ETC03,MEMBER_ETC04,MEMBER_ETC05) 
 		VALUES 
-		(#userId#,#userName#,#userEmail#,#userPhone#,#userAddress#
+		(#userIdx#,#userId#,#userName#,#userEmail#,#userPhone#,#userAddress#
 		,#userPassword#,NOW()
 		,#userEtc01#,#userEtc02#,#userEtc03#,#userEtc04#,#userEtc05#)
 	</insert>
 	
 	<update id="memberUpdateInfo" parameterClass="member">
 		UPDATE MEMBER SET 
-			M_NAME=#userName#,
-<!-- 			M_EMAIL=#userEmail#, -->
-			M_PHONE=#userPhone#,
-			M_ADDRESS=#userAddress#,
-<!-- 			M_PASSWORD=#userPassword#, -->
-			M_ETC01=#userEtc01#
-		WHERE M_ID=#userId# 
+			MEMBER_NAME=#userName#,
+<!-- 			MEMBER_EMAIL=#userEmail#, -->
+			MEMBER_PHONE=#userPhone#,
+			MEMBER_ADDRESS=#userAddress#,
+<!-- 			MEMBER_PASSWORD=#userPassword#, -->
+			MEMBER_ETC01=#userEtc01#
+		WHERE MEMBER_ID=#userId# 
 	</update>	
  
 	<delete id="memberDeleteInfo" parameterClass="member">
-		DELETE FROM MEMBER WHERE M_ID = #userId#
+		DELETE FROM MEMBER WHERE MEMBER_ID = #userId#
 	</delete>
 	
 	<select id="memberHoneyList" parameterClass="member" resultMap="memberMap">
-		<!-- M_ETC02 = 'A' 장부 가입자만 조회 -->
+		<!-- MEMBER_ETC02 = 'A' 장부 가입자만 조회 -->
 		SELECT *
 		  FROM (SELECT *
 		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
 		                  FROM (  SELECT *
 		                            FROM thositeom.MEMBER
-		                           WHERE M_ETC02 = 'A'
-		                        ORDER BY M_ID DESC) A,
+		                           WHERE MEMBER_ETC02 = 'A'
+		                        ORDER BY MEMBER_ID DESC) A,
 		                       (SELECT @ROWNUM := 0) B) C
 		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
 	</select>
 	
 	<select id="memberHoneyListCnt" parameterClass="member" resultClass="java.lang.Integer">
-	  SELECT COUNT(*) FROM MEMBER WHERE M_ETC02 = 'A'
+	  SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ETC02 = 'A'
 	</select>
 
 </sqlMap>

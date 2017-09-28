@@ -5,12 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.dohun.common.CommonService;
+
 
 @Service("MemberServiceImpl")
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	MemberDao memberDao;
+	private CommonService commonService;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	@Override
 	public List memberList() throws Exception {
@@ -26,7 +31,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int memberInsertInfo(MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
+		commonService.commonUpdateSeq("MEMBER_SEQ");
+		vo.setUserIdx(commonService.commonSeqCnt("MEMBER_SEQ")); 
 		return memberDao.memberInsertInfo(vo);
 	}
 
