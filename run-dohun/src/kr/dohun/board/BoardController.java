@@ -2,6 +2,7 @@ package kr.dohun.board;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,6 +117,10 @@ public class BoardController {
 		try {
 			
 			String[] boardCheck = request.getParameterValues("boardCheck");
+//			if(boardCheck == null){
+//				JavaScript.alert("삭제할 게시물을 선택해 주세요.").execute(response, request);
+//				return null;
+//			}
 			
 			Map hm = new HashMap();
 			hm.put("boardCheck", boardCheck);
@@ -144,7 +149,6 @@ public class BoardController {
 		try {
 			mv.addObject("boardVo", boardService.boardDetailInfo(vo));
 			mv.addObject("boardFileList", boardService.boardFileList(vo));
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -164,9 +168,15 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			
+			System.out.println(vo.getBoardTitle() );
+			System.out.println(vo.getBoardIdx() );
+			System.out.println(vo.getBoardContent());
+			System.out.println(vo.toString());
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		mv.addObject("boardVo",vo);
 		mv.setViewName("board/boardUpdateForm");
 		return mv;
 	}
@@ -255,19 +265,19 @@ public class BoardController {
 	@RequestMapping(value = "/boardRecommended.do")
 	public ModelAndView boardRecommended(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		Map resultMap = new HashMap();
-		
 		try {
-			
 			if(!boardService.boardRecommended(vo)){
-				System.out.println("@");
-				resultMap.put("msg", "Duplication.");
+				mv.addObject("status", "error");
+			}else{
+				mv.addObject("status", "success");
+				mv.addObject("boardRecommendedType", vo.getBoardRecommendedType());
+				mv.addObject("boardVo", boardService.boardDetailInfo(vo));
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.addAllObjects(resultMap);
+		
 		mv.setViewName("jsonView");
 		return mv;
 	}

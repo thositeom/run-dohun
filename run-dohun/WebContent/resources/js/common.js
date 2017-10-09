@@ -7,7 +7,10 @@ function customAjaxForm(url, formId, data, successCallback, errorCallback){
 	if(data === undefined || data == null){
 		data={};
 	}
-	$("#"+formId).ajaxSubmit({ 
+	
+//	history.pushState(data,formId,url); <- 데이터 부분에 Ajax로 요청하는 URL을 넣는다
+	
+	$("#"+formId).ajaxSubmit({
 	    url: url, 
 	    type: "POST",
 	    processData: false,
@@ -100,8 +103,22 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
 * javascript library(연관배열 방식 사용)
 */
 (function(window){
-	
-	/*Validation*/
+	/* 익스플로러 뒤로가기 버튼막기 */
+	history.pushState(null, null, location.href);
+	window.onpopstate = function(event) {
+		history.go(1);
+	};
+	/* 키보드 뒤로가기 버튼막기 */
+    $(document).keydown(function(e){   
+        if(e.target.nodeName != "INPUT" && e.target.nodeName != "TEXTAREA"){       
+            if(e.keyCode === 8){   
+            return false;
+            }
+        }
+    });
+    window.history.forward(0);
+    
+    /*Validation*/
 	var uValidation = {
 			ualert : function(){
 				alert("@@하이룽");	

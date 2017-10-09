@@ -145,7 +145,29 @@
 		   #boardRecommendedIdx#,#boardRecommendedType#,#boardId#,#boardIdx#,#userIdx#,NOW()
 		)
 	</insert>
-
+	
+	<!-- 게시판 추천여부 카운트 증가 -->
+	<update id="boardRecommendedCountUp" parameterClass="board">
+		UPDATE BOARD
+		SET	<isEqual property="boardRecommendedType" compareValue="B" >
+				BEST
+			</isEqual>
+			<isEqual property="boardRecommendedType" compareValue="W" >
+				WOST
+			</isEqual>
+			  = (SELECT VIEW.* 
+							FROM (	<isEqual property="boardRecommendedType" compareValue="B" >
+										SELECT BEST+1 AS BEST_CNT
+									</isEqual>
+									<isEqual property="boardRecommendedType" compareValue="W" >
+										SELECT WOST+1 AS WOST_CNT
+									</isEqual>
+									FROM BOARD 
+									WHERE BOARD_IDX = #boardIdx#) VIEW
+		                 ) 
+		WHERE BOARD_IDX = #boardIdx#
+	</update>
+	
 <!-- 	<update id="boardUpdateSeq" parameterClass="java.lang.String" > -->
 <!-- 		UPDATE  -->
 <!-- 			SEQ_MANAGER a, (SELECT MAX(SEQ) AS SEQ FROM SEQ_MANAGER WHERE SEQ_ID = #seqId#) B -->

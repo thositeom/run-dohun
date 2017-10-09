@@ -70,5 +70,9 @@ public class BoardDao {
 		return (int) sqlMapClientTemplate.update("boardSqlMap.boardRecommendedInsert",vo);
 	}
 	
+	public int boardRecommendedCountUp(BoardVO vo) throws Exception{
+		return  (int) sqlMapClientTemplate.update("boardSqlMap.boardRecommendedCountUp", vo);
+	}
+	
 	
 }

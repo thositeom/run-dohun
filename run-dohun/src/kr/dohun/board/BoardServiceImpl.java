@@ -149,29 +149,15 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean boardRecommended(BoardVO vo) throws Exception {
-		/*추천 비추천 
-		 * 추천 안햇으면 추천테이블등록
-		 * 추천 시퀀스 증가, 저장할 시퀀스 가져오기
-		 * -저장할 데이터 생성 idx, type, boarD_id, 게시판 인덱스 , 멤버 아이디, 생성일자
-		 * -추전 비추천 업데이트
-		*/
-		
 		if(boardDao.boardRecommendedDuple(vo) > 0){
 			return false;	//중복일때
 		}
 		
 		commonService.commonUpdateSeq("BOARD_RECOMMENDED"); //추천or비추천 시퀀스 증가
 		vo.setBoardRecommendedIdx(commonService.commonSeqCnt("BOARD_RECOMMENDED"));
-		vo.setBoardRecommendedType("B");
 		
-		System.out.println(vo.getBoardRecommendedIdx());
-		System.out.println(vo.getBoardRecommendedType());
-		System.out.println(vo.getBoardId());
-		System.out.println(vo.getBoardIdx());
-		System.out.println(vo.getUserIdx());
-					
-		
-		boardDao.boardRecommendedInsert(vo);
+		boardDao.boardRecommendedInsert(vo);	//중복 추천방지위해 정보저장
+		boardDao.boardRecommendedCountUp(vo);	//추천, 비추천 수 증가(추천:B, 비추천:W)
 		
 		return true;
 	}

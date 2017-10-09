@@ -1,5 +1,6 @@
 package kr.dohun.board;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
@@ -49,6 +50,10 @@ public class BoardVO {
 	private String boardRecommendedType;	//추천여부 Type 추천:B 신고:W
 	
 	
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 	public String getCreateUser() {
 		return createUser;
 	}

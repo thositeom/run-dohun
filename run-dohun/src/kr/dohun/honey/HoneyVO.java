@@ -1,5 +1,7 @@
 package kr.dohun.honey;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class HoneyVO {
 
 	private String no;
@@ -19,6 +21,10 @@ public class HoneyVO {
 	private int startRow = 1;
 	private int endRow = 11;
 	
+	
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 	public String getNo() {
 		return no;
 	}

@@ -13,7 +13,6 @@ $("button").click(function(){
 	var url;
 	var formId="boardForm";
 	var data;
-	
 	switch ($(this).attr("id")) {
 		case "boardWriteForm" :
 			url="/boardWriteForm.do";
@@ -32,10 +31,14 @@ $("button").click(function(){
 		case "boardDelete" :
 			url="/boardDelete.do";
 			// 체크 되어 있는 값 추출
-			/*$("input[name=boardCheck]:checked").each(function() {
-				var test = $(this).val();
-				console.log(test);
-			});*/
+			var count = 0;
+			$("input[name=boardCheck]:checked").each(function() {
+				count++;
+			});
+			if(count == 0 ){
+				alert("삭제할 게시물을 선택해 주세요.");
+				return null;
+			}
 			break;
 		case "boardList" :
 			url="/boardList.do";
@@ -46,30 +49,38 @@ $("button").click(function(){
 	
 	/*customAjaxFrom(url,formId,successBoard,errorBoard);*/
 	customAjaxForm(url,formId,data,successBoard,errorBoard);
-	
 });
 
-$("a").click(function(){
+
+function successBoardRecommended(result){
+	if(result.status == "error"){
+		alert("추천 비추천은 한번만!");	
+	}else if(result.status == "success"){
+		if(result.boardRecommendedType == "B"){
+			$("#bestResult").html(result.boardVo.boardBest);
+		}else if(result.boardRecommendedType == "W"){
+			$("#wostResult").html(result.boardVo.boardWost);
+		}
+	}
+}
+$(".viewCount > a").click(function(){
 	var data;
 	switch ($(this).attr("id")) {
 	case "boardBest" :
 		url="/boardRecommended.do";
+		data={"BoardRecommendedType": "B"};
 		break;
 	case "boardWost" :
 		url="/boardRecommended.do";
+		data={"BoardRecommendedType": "W"}
 		break;
 	default:
 		break;
 	}
-	customAjaxForm(url,"boardForm",data,successBoardRecommended,errorBoardRecommended);
+	customAjaxForm(url,"boardForm",data,successBoardRecommended,errorBoard);
 });
 
-function successBoardRecommended(result){
-	alert(result.msg);
-}
-function errorBoardRecommended(result,status,error){
-	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
-}
+
 
 function boardDetailForm(boardIdx){
 	var data = {"boardIdx":boardIdx};

@@ -1,5 +1,7 @@
 package kr.dohun.member;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class MemberVO {
 	
 	private int userIdx;
@@ -18,7 +20,9 @@ public class MemberVO {
 	private int startRow = 1;
 	private int endRow = 11;
 	
-	
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 	public int getUserIdx() {
 		return userIdx;
 	}
