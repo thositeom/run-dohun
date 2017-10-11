@@ -1,36 +1,37 @@
 package kr.dohun.parser;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class JsoupParser {
 
 	public static void main(String[] args) {
 		
-		String url = "http://bis.gumi.go.kr/moMap/mBusStopResult.do?station_id=188&route_id=&searchType=S&searchKeyword=%EC%9B%90%ED%98%B8&serivce_id=&searchType=S";
-		 Document document;
+		String url = "http://bis.gumi.go.kr/moMap/mBusStopResult.do?station_id=678&route_id=&searchType=N&searchKeyword=10678&serivce_id=&searchType=N";
+		Document document;
+		
+		List list = new ArrayList(); 
+
 		try {
-			
 			document = Jsoup.connect(url).get();
-			String title = document.title();
+			Elements infos = document.select(".stops_list01 li");
+
+			for (int i = 0; i < infos.size(); i++) {
+				System.out.println(infos.get(i).select(".con_view01").text());
+				System.out.println(infos.get(i).select(".con_view02").text());
+				System.out.println(infos.get(i).select(".con_view03").text());
+			}
 			
-			document.getElementsByClass("con_view01").first();
-			System.out.println("::::::::::::"+ title);
-			
-//			System.out.println("::::::::::::"+ document.getElementsByTag("span"));
-			
-			System.out.println("::::::::::::"+ document.select(".con_view01 span") );
-			/*System.out.println("::::::::::::"+ document.getElementsByClass("con_view01"));
-			System.out.println("::::::::::::"+ document.getElementsByClass("con_view02"));
-			System.out.println("::::::::::::"+ document.getElementsByClass("con_view03"));*/
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 
 	}
-	
 	
 }
