@@ -1,5 +1,9 @@
 package kr.dohun.sample;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -62,6 +66,62 @@ public class SampleController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "/excelViewDown.do")
+	public ModelAndView excelViewDown(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<String> headerList = new ArrayList<String>();
+		
+		headerList.add("Title");
+		headerList.add("name");
+		headerList.add("id");
+		
+		List<SampleVO> list = new ArrayList<SampleVO>();
+		list.add(new SampleVO("Effective Java", "Joshua Bloch", "0321356683"));
+		list.add(new SampleVO("Head First Java", "Kathy Sierra & Bert Bates", "0321356684"));
+		list.add(new SampleVO("Java Generics and Collections", "Philip Wadler", "0321356685"));
+		list.add(new SampleVO("Thinking in Java", "Bruce Eckel", "0596527756"));
+		list.add(new SampleVO("Spring in Action", "Craig Walls", "1935182358"));
+		
+		mv.addObject("headerList", headerList);
+		mv.addObject("list", list);
+		mv.setViewName("excelView");
+		return mv;
+	}
+	
+	//Object KEY, VALUE 확인
+	public static void main(String[] args) {
+//		public void objectSample(){
+			List<SampleVO> list = new ArrayList<SampleVO>();
+			list.add(new SampleVO("Effective Java", "Joshua Bloch", "0321356683"));
+			list.add(new SampleVO("Head First Java", "Kathy Sierra & Bert Bates", "0321356683"));
+			list.add(new SampleVO("Java Generics and Collections", "Philip Wadler", "0321356683"));
+			list.add(new SampleVO("Thinking in Java", "Bruce Eckel", "0596527756"));
+			list.add(new SampleVO("Spring in Action", "Craig Walls", "1935182358"));
+			try {
+				
+			for(int i = 0; i < list.size(); i++) {
+				Object obj = list.get(i);
+				for (Field field : obj.getClass().getDeclaredFields()){
+		            field.setAccessible(true);
+					System.out.println(field.getName()+" : "+field.get(obj));
+		        }
+			}
+			
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+//	}
+	
+	
+	
 	
 	
 	

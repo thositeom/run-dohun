@@ -68,11 +68,19 @@
  	<bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" >
 		<property name="order" value="0"/>
 	</bean>
-	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"></bean>
-
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
+	<!-- ExcelView -->
+	<bean id="excelViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="1"/>
+    </bean>
+	<bean id="excelView" class="kr.dohun.excel.ExcelBuilder"/>
+	
+	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10000000"/>
 	</bean>
+
 
 </beans>
 	

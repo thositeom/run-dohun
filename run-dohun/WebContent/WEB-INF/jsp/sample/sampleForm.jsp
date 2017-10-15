@@ -157,6 +157,12 @@
 	    </script>
 	    </div>
 	    
+	    <div class="col-sm-6">
+	    <h4>excelView Download</h4>
+	    <h3><a href="/excelViewDown.do">Download Excel Document</a></h3>
+	    <p id="emailResult"></p>
+	    
+	    </div>
 	    
     </div>
 </form>
