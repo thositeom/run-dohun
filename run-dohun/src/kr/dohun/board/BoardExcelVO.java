@@ -1,18 +1,9 @@
 package kr.dohun.board;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.web.multipart.MultipartFile;
+public class BoardExcelVO {
 
-public class BoardVO {
-
-	private int startRow = 1;
-	private int endRow = 10;
-	private int currentPage=1;
-	private int rows;
-	
 	private int userIdx;
 	private String userName;
-
 	private int boardIdx;//boardIdx
 	private String boardId;//게시판Id
 	private int boardParentIdx;//부모Idx
@@ -35,68 +26,10 @@ public class BoardVO {
 	private String createUser;
 	private String updateUser;
 	private String excelView;
-	
-	private MultipartFile fileUpload;
-	private String fileUploadList[];
-	private int fileIdx;	//파일idx
-	private String fileName;	//파일명(변경된파일명)
-	private String fileOrigName;	//파일명(변경된파일명)
-	private String filePath;
-	private String fileSize;
-	private String fileExtention;
-	private String createDate;
-	private String updateDate;
-	
 	private int boardRecommendedIdx;	//추천여부Idx
 	private String boardRecommendedType;	//추천여부 Type 추천:B 신고:W
 	
 	
-
-	public String getExcelView() {
-		return excelView;
-	}
-	public void setExcelView(String excelView) {
-		this.excelView = excelView;
-	}
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-	public String getCreateUser() {
-		return createUser;
-	}
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-	public String getUpdateUser() {
-		return updateUser;
-	}
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
-	}
-	public int getStartRow() {
-		return startRow;
-	}
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
-	public int getEndRow() {
-		return endRow;
-	}
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
-	public int getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-	public int getRows() {
-		return rows;
-	}
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
 	public int getUserIdx() {
 		return userIdx;
 	}
@@ -223,65 +156,23 @@ public class BoardVO {
 	public void setBoardAnswerCnt(String boardAnswerCnt) {
 		this.boardAnswerCnt = boardAnswerCnt;
 	}
-	public MultipartFile getFileUpload() {
-		return fileUpload;
+	public String getCreateUser() {
+		return createUser;
 	}
-	public void setFileUpload(MultipartFile fileUpload) {
-		this.fileUpload = fileUpload;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
-	public String[] getFileUploadList() {
-		return fileUploadList;
+	public String getUpdateUser() {
+		return updateUser;
 	}
-	public void setFileUploadList(String[] fileUploadList) {
-		this.fileUploadList = fileUploadList;
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
-	public int getFileIdx() {
-		return fileIdx;
+	public String getExcelView() {
+		return excelView;
 	}
-	public void setFileIdx(int fileIdx) {
-		this.fileIdx = fileIdx;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getFileOrigName() {
-		return fileOrigName;
-	}
-	public void setFileOrigName(String fileOrigName) {
-		this.fileOrigName = fileOrigName;
-	}
-	public String getFilePath() {
-		return filePath;
-	}
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-	public String getFileSize() {
-		return fileSize;
-	}
-	public void setFileSize(String fileSize) {
-		this.fileSize = fileSize;
-	}
-	public String getFileExtention() {
-		return fileExtention;
-	}
-	public void setFileExtention(String fileExtention) {
-		this.fileExtention = fileExtention;
-	}
-	public String getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-	public String getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
+	public void setExcelView(String excelView) {
+		this.excelView = excelView;
 	}
 	public int getBoardRecommendedIdx() {
 		return boardRecommendedIdx;

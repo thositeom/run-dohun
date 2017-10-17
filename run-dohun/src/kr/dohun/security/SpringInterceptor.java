@@ -97,6 +97,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"honeyJqgridSubList.do")
 				||reqUrl.equals(context+"honeyJqgridSubMerge.do")
 				||reqUrl.equals(context+"excelViewDown.do")
+				||reqUrl.equals(context+"boardExcelDown.do")
+				
 				||reqUrl.equals(context+"fileDownload.do")
 				
 		){

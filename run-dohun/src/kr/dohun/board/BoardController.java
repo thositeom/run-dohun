@@ -1,13 +1,18 @@
 package kr.dohun.board;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.dohun.common.JavaScript;
 import kr.dohun.file.DownloadUtil;
+import kr.dohun.sample.SampleVO;
 
 @Controller
 public class BoardController {
@@ -38,7 +44,7 @@ public class BoardController {
 //				return null;
 //			}
 		
-			mv.addObject("boardList", boardService.boardList(vo, request));
+			mv.addObject("boardList", boardService.boardList(vo));
 			mv.addObject("boardListCnt", boardService.boardListCnt(""));
 			mv.addObject("currentPage",vo.getCurrentPage());
 			mv.setViewName("board/boardForm");
@@ -282,4 +288,54 @@ public class BoardController {
 		return mv;
 	}
 	
+	
+	
+	@RequestMapping(value = "/boardExcelDown.do")
+	public ModelAndView boardExcelDown(HttpServletRequest request, HttpServletResponse response, BoardVO vo) {
+		ModelAndView mv = new ModelAndView();
+		vo.setExcelView("excelView");
+		
+		try {
+			String[] headerList={"userName","boardIdx","boardId","boardParentIdx","boardTitle"
+								,"boardContent","boardCreateDate","boardCreateUser","boardUpdateDate","boardBest"
+								,"boardWost","boardCount","boardAnswerCnt","boardRecommendedIdx"
+			};
+			
+			
+			List<BoardExcelVO> boardList = boardService.boardList(vo);
+			List<HashMap> boardHashMap = new ArrayList();
+			
+			/*for (int i = 0; i < boardList .size(); i++) {
+				HashMap map = new HashMap();
+				map.put("userIdx", boardList.get(i).getUserIdx());
+				map.put("userName", boardList.get(i).getUserName());
+				map.put("boardIdx", boardList.get(i).getBoardIdx());
+				map.put("boardId", boardList.get(i).getBoardId());
+				map.put("boardParentIdx", boardList.get(i).getBoardParentIdx());
+				map.put("boardTitle", boardList.get(i).getBoardTitle());
+				map.put("boardContent", boardList.get(i).getBoardContent());
+				map.put("boardCreateDate", boardList.get(i).getBoardCreateDate());
+				map.put("boardCreateUser", boardList.get(i).getBoardCreateUser());
+				map.put("boardUpdateDate", boardList.get(i).getBoardUpdateDate());
+				map.put("boardBest", boardList.get(i).getBoardBest());
+				map.put("boardWost", boardList.get(i).getBoardWost());
+				map.put("boardCount", boardList.get(i).getBoardCount());
+				map.put("boardAnswerCnt", boardList.get(i).getBoardAnswerCnt());
+				map.put("boardRecommendedIdx", boardList.get(i).getBoardRecommendedIdx());
+				boardHashMap.add(map);
+			}*/
+			
+			
+//			mv.addObject("boardHashMap", boardHashMap);
+			
+			mv.addObject("excelHeaderList", headerList);
+//			mv.addObject("excelList", boardService.boardList(vo));
+			mv.addObject("excelList", boardList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("excelView");
+		return mv;
+	}
 }

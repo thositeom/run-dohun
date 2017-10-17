@@ -66,7 +66,9 @@ $("#boardCheckAll").click(function(){
 		</script>
 		<div id="pager" class="container"></div>
 		
+		
 		<div class="modal-footer">
+			<a class="btn btn-default" href="/boardExcelDown.do">Excel</a>
 			<button type="button" id="boardWriteForm" name="boardWriteForm" class="btn btn-default">글쓰기</button>
 <!-- 			<button type="button" id="boardUpdateForm" name="boardUpdateForm" class="btn btn-default" >수정</button> -->
 			<button type="button" id="boardDelete" name="boardDelete" class="btn btn-default" >삭제</button>

@@ -5,7 +5,7 @@
 <html lang="ko">
  
 <head>
-	<title>run-dohun</title>
+	<title>inma-Nu</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.css">
 	<script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
@@ -90,7 +90,7 @@
     </div>
     <div id="content_div">
 	    <div class="col-sm-8 text-left"> 
-	      <h1>run-dohun</h1>
+	      <h1>inma-Nu</h1>
 	      <p>나는 달린다. 왜냐 살뺄거니까</p>
 	      <hr>
 	    <!-- 모달 -->
@@ -127,7 +127,7 @@
 		      <div class="item active">
 		        <img src="/resources/images/background/buildings-2297210_960_720.jpg" alt="Image">
 		        <div class="carousel-caption">
-		          <h3>run-dohun $</h3>
+		          <h3>inma-Nu $</h3>
 		          <p>running...</p>
 		        </div>      
 		      </div>

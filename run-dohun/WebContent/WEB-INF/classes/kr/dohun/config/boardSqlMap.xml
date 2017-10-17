@@ -39,14 +39,19 @@
 
 	<!-- 게시판 목록 -->
 	<select id="boardList" parameterClass="board" resultMap="boardMap">
-		SELECT *
-		  FROM (SELECT *
-		          FROM (SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
-		                  FROM (SELECT *
-		                          FROM BOARD ORDER BY BOARD_IDX DESC) A,
-		                       (SELECT @ROWNUM := 0) B) C
-		         WHERE C.NO <![CDATA[<=]]> #endRow#) X
+		<isNotEqual property="excelView" compareValue="excelView" >
+			SELECT * FROM (SELECT *
+					          FROM (
+		</isNotEqual>
+				          		SELECT @ROWNUM := @ROWNUM + 1 AS NO, A.*
+				                  FROM (SELECT *
+				                          FROM BOARD ORDER BY BOARD_IDX DESC) A,
+				                       (SELECT @ROWNUM := 0) B
+		<isNotEqual property="excelView" compareValue="excelView" >								
+								) C
+				         WHERE C.NO <![CDATA[<=]]> #endRow#) X
 		 WHERE X.NO <![CDATA[>=]]> #startRow#
+		</isNotEqual>
 	</select>
 	
 	<!-- 게시판 목록Count -->

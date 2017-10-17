@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao;
 	
 	@Override
-	public List boardList(BoardVO vo, HttpServletRequest request) throws Exception {
-		return boardDao.boardList(boardPage(vo, request));
+	public List boardList(BoardVO vo) throws Exception {
+		return boardDao.boardList(boardPage(vo));
 	}
 	
 	@Override
@@ -101,7 +101,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO boardPage(BoardVO vo, HttpServletRequest request) throws Exception {
+	public BoardVO boardPage(BoardVO vo) throws Exception {
 		if(vo.getCurrentPage() != 1){
 			int rows = vo.getRows();
 			int endRow = vo.getCurrentPage()*rows;
