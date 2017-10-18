@@ -7,9 +7,11 @@
 <head>
 	<title>inma-Nu</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.css">
 	<script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
+	<script type="text/javascript" src="/resources/js/board.js"></script>
 	<script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />
@@ -80,13 +82,11 @@
 
 <div class="container-fluid text-center mainContent">    
   <div class="row content"> 
-    <div class="col-sm-2 sidenav navbar-fixed-left">
-      <p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
-      <p><a href="https://w3schools.com" target="_w3schools">W3Schools</a></p>
-      <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
-      <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>
-    </div>
     <div class="col-sm-2 sidenav">
+<!--       <p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p> -->
+<%--       <p><a href="https://w3school<!-- s.com" target="_w3schools">W3Schools</a></p> --%>
+<!--       <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p> -->
+<!--       <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>  -->
     </div>
     <div id="content_div">
 	    <div class="col-sm-8 text-left"> 
@@ -158,17 +158,16 @@
 	      <div class="well">
 	       <p>Some text..</p>
 	      </div>
+	      <br/>
 	    </div>
 		<!-- /  -->
 	    </div>
 	</div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
+    <div class="col-sm-2 sidenav  navbar-fixed-right">
+      	<p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
+	    <p><a href="https://w3school<!-- s.com" target="_w3schools">W3Schools</a></p>
+	    <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
+	    <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p> 
     </div>
   </div>
 </div>

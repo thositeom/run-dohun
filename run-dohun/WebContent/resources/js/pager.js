@@ -12,7 +12,7 @@ function pager(pagerId, currentPage, boardListCnt, rows){
 	var pager = '<div class="container">';
 	pager += '<ul class="pagination pagination-sm">';
 	if(currentPage <= 1){
-		pager += '<li><a href="javascript:pageClick(1);">이전</a></li>';
+		pager += '<li><a href="javascript:pageClick(1,'+rows+');">이전</a></li>';
 	}else{
 		pager += '<li><a href="javascript:pageClick('+prePage+','+rows+');">이전</a></li>';	
 	}

@@ -52,7 +52,15 @@
   
   function gnbSuccessCallback(result){
 	  console.log("success");
+	  
+	  $(".navbar-toggle").addClass("collapsed");
+	  $("button").attr("aria-expanded","false");
+
+	  $("#myNavbar").removeClass("in");
+	  $("#myNavbar").attr("aria-expanded","false");
+	  
 	  $("#content_div").html(result);
+  
   }
   function gnbErrorCallback(request,status,error){
 	  console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

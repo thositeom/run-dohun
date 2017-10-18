@@ -68,4 +68,5 @@ $("#bus_reflush").click(function(){
     	
     </div>
 </form>
+<br/>
 </html>

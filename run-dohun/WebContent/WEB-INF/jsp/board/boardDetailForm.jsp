@@ -31,8 +31,13 @@
 		font-size:20px;
 	} */
 </style>
-
-<script type="text/javascript" src="/resources/js/board.js"></script>
+<script type="text/javascript">
+//버튼클릭 이벤트
+$("button").click(function(){
+	boardEvent($(this).attr("id"));
+});
+</script>
+<!-- <script type="text/javascript" src="/resources/js/board.js"></script> -->
 <form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent" value='${boardVo.boardContent}'>
 	<input type="hidden" id="boardIdx" name="boardIdx" value='${boardVo.boardIdx}'>

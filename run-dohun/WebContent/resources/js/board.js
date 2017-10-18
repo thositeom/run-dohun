@@ -9,11 +9,11 @@ function errorBoard(result,status,error){
 	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
 }
 
-$("button").click(function(){
+function boardEvent(id){
 	var url;
 	var formId="boardForm";
 	var data;
-	switch ($(this).attr("id")) {
+	switch (id) {
 		case "boardWriteForm" :
 			url="/boardWriteForm.do";
 			break;
@@ -49,7 +49,7 @@ $("button").click(function(){
 	
 	/*customAjaxFrom(url,formId,successBoard,errorBoard);*/
 	customAjaxForm(url,formId,data,successBoard,errorBoard);
-});
+};
 
 
 function successBoardRecommended(result){
@@ -81,8 +81,11 @@ $(".viewCount > a").click(function(){
 });
 
 
-
 function boardDetailForm(boardIdx){
 	var data = {"boardIdx":boardIdx};
 	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
+}
+
+function aaa(){
+	alert("AA");
 }

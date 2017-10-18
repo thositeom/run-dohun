@@ -5,13 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>게시판</title>
-</head>
-<script type="text/javascript" src="/resources/js/board.js"></script>
-
 <style type="text/css">
 	ul {list-style-type: :none; }
 	li {display: inline; }
 </style>
+<script type="text/javascript">
+//버튼클릭 이벤트
+$("button").click(function(){
+	boardEvent($(this).attr("id"));
+});
+</script>
+</head>
+<!-- <script type="text/javascript" src="/resources/js/board.js"></script> -->
+
     
 <form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent" value='${boardVo.boardContent}'> 
