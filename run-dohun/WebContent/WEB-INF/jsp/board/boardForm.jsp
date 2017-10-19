@@ -2,8 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- <script type="text/javascript" src="/resources/js/board.js"></script> -->
-<script type="text/javascript">
+<style>
+/* .asdasdasd { */
+/* text-overflow:ellipsis; */
+/* white-space:nowrap; */
+/* word-wrap:normal; */
+/* width:1009px; */
+/* overflow:hidden; */
 
+/* } */
+
+</style>
+<script type="text/javascript">
 //체크박스
 $("#boardCheckAll").click(function(){
 	if($("#boardCheckAll").prop("checked")) {
@@ -28,12 +38,44 @@ boardEvent($(this).attr("id"));
 	    <hr>
 	    <div class="table-responsive">
 		    <table class="table table-condensed">
-		    	<thead>
+		    	<tr>
+		    		<td>
+				    	<div class="container col-sm-12 col-md-12 col-lg-12">
+				    		<div class="pull-left" style="width: 140px;"><b>#302</b></div>
+  							<div class="pull-right">
+						    	<a href="#" id="boardBest" data-toggle="tooltip" title="클릭시 일따봉!">
+						    		<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<span id="bestResult">1</span>
+						    	</a>
+						    	<a href="#" id="boardWost" data-toggle="tooltip" title="클릭시 부~우">
+						    		<span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;<span id="wostResult">5</span>
+						    	</a>
+					    	</div>
+  							<div class="pull-left ">제목내용이 나오고있다아아제목내용이 나오고있다아아제목내용이 나오고있다아아제목내용이 나오고있다아아제목내용이 나오고있다아아제목내용이 나오고있다아아</div>
+						</div>
+		    		</td>
+		    	</tr>
+		    	
+		    	<!-- 
+		    	<div class="pull-left">제목입니다.</div>
+	    		<div class="pull-right">
+			    	<a href="#" id="boardBest" data-toggle="tooltip" title="클릭시 일따봉!">
+			    		<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<span id="bestResult">1</span>
+			    	</a>
+			    	<a href="#" id="boardWost" data-toggle="tooltip" title="클릭시 부~우">
+			    		<span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;<span id="wostResult">5</span>
+			    	</a>
+		    	</div>
+				
+				 -->
+		    	
+		    	
+		    	
+		    	<%-- <thead>
 		    		<tr>
 		    			<th style="width: 23px">
 		    				<input type="checkbox" id="boardCheckAll" />
 		    			</th>
-		    			<th style="width: 70px">boardIdx</th>
+		    			<th style="width: 70px"></th>
 		    			<th style="width: 157px">제목</th>
 		    			<th style="width: 23px">답변수</th>
 		    			<th style="width: 23px">추천수</th>
@@ -60,7 +102,7 @@ boardEvent($(this).attr("id"));
 				    		<td colspan="6">등록된 게시물이 없습니다.</td>
 				    	</tr>				
 					</c:if>
-				</tbody>
+				</tbody> --%>
 		    </table>
 		</div>
 		<!-- Pager -->

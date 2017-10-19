@@ -165,9 +165,11 @@
 	</div>
     <div class="col-sm-2 sidenav  navbar-fixed-right">
       	<p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
-	    <p><a href="https://w3school<!-- s.com" target="_w3schools">W3Schools</a></p>
+	    <p><a href="https://w3schools.com" target="_w3schools">W3Schools</a></p>
 	    <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
-	    <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p> 
+	    <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>
+	    <p><a href="https://www.flaticon.com/search?word=diagonal" target="_javaApi">flaticon</a></p>
+	     
     </div>
   </div>
 </div>

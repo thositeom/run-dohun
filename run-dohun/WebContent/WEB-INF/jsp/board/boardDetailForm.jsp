@@ -36,6 +36,9 @@
 $("button").click(function(){
 	boardEvent($(this).attr("id"));
 });
+$(".viewCount > a").click(function(){
+	boardRecommnded($(this).attr("id"));	
+});
 </script>
 <!-- <script type="text/javascript" src="/resources/js/board.js"></script> -->
 <form id="boardForm">
@@ -92,3 +95,4 @@ $("button").click(function(){
 		</div>
 	</div>
 </form>
+	

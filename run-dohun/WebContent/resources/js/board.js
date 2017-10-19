@@ -8,7 +8,6 @@ function successBoard(result){
 function errorBoard(result,status,error){
 	console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+error);
 }
-
 function boardEvent(id){
 	var url;
 	var formId="boardForm";
@@ -52,6 +51,11 @@ function boardEvent(id){
 };
 
 
+function boardDetailForm(boardIdx){
+	var data = {"boardIdx":boardIdx};
+	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
+}
+
 function successBoardRecommended(result){
 	if(result.status == "error"){
 		alert("추천 비추천은 한번만!");	
@@ -63,9 +67,10 @@ function successBoardRecommended(result){
 		}
 	}
 }
-$(".viewCount > a").click(function(){
+
+function boardRecommnded(id){
 	var data;
-	switch ($(this).attr("id")) {
+	switch (id) {
 	case "boardBest" :
 		url="/boardRecommended.do";
 		data={"BoardRecommendedType": "B"};
@@ -78,14 +83,5 @@ $(".viewCount > a").click(function(){
 		break;
 	}
 	customAjaxForm(url,"boardForm",data,successBoardRecommended,errorBoard);
-});
+};
 
-
-function boardDetailForm(boardIdx){
-	var data = {"boardIdx":boardIdx};
-	customAjax("/boardDetailForm.do",data,successBoard,errorBoard);	
-}
-
-function aaa(){
-	alert("AA");
-}
