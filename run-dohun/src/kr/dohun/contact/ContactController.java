@@ -32,6 +32,7 @@ public class ContactController {
 			Elements infos = document.select(".stops_list01 li");
 			
 			for (int i = 0; i < infos.size(); i++) {
+				System.out.println(infos.get(i).select(".con_view01").text());
 /*				System.out.println(infos.get(i).select(".con_view01").text());
 				System.out.println(infos.get(i).select(".con_view02").text());
 				System.out.println(infos.get(i).select(".con_view03").text());

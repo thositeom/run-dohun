@@ -40,12 +40,25 @@ $("#bus_reflush").click(function(){
 		    <div class="tab-content">
 			    <div id="tap_home" class="tab-pane fade in active">
 			      <h3>버스</h3>
-			      <table>
+			      <table style="font-size: 11px;">
+			      	<tr>
+			      		<th>정류소</th>
+			      		<th>시간</th>
+			      		<th>정류장</th>
+			      	</tr>
 			      	<c:forEach items="${resultParserList }" var="i">
 				      	<tr>
 				      		<td>${i.info01 }</td>
-				      		<td>${i.info02 }</td>
-				      		<td>${i.info03 }</td>
+				      		<td>
+				      			<c:if test="${i.info02 eq '도착정보가 없습니다.' }">
+				      			도착정보 없음
+				      			</c:if>
+				      		</td>
+				      		<td>
+				      			<c:if test="${i.info03 eq '도착정보가 없습니다.' }">
+				      			도착정보 없음
+				      			</c:if>
+				      		</td>
 				      	</tr>
 			      	</c:forEach>
 			      </table>

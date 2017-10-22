@@ -139,8 +139,8 @@
 				<input class="btn btn-default" type="button" value="0">
 		    </div>
 		    <br/>
-		    <input type="text" class="btn btn-default" id="userNum" name="userNum" maxlength="4" size="6">
-		  	숫자4자리 입력 <input type="button" class="btn btn-primary" id="submitBtn" value="입력">
+		    <input type="text" class="btn btn-default" id="userNum" name="userNum" maxlength="4" size="10" placeholder="숫자4자리 입력">
+		  	<input type="button" class="btn btn-primary" id="submitBtn" value="입력">
 		    <div id="resultContent"></div>
 	    </div>
 	    <!--  -->  
@@ -150,11 +150,6 @@
 	  </div>
 	  <hr>
 	</div>
-      
-      
-      <!--  -->
-      
-      
 </form>
 
 </html>

@@ -42,7 +42,11 @@ function boardEvent(id){
 		case "boardList" :
 			url="/boardList.do";
 			break;
+		case "boardDetailForm" :
+			url="/boardDetailForm.do";
+			break;
 		default:
+			return false;
 			break;
 	}
 	
