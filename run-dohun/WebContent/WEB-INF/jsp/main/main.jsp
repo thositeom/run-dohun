@@ -24,6 +24,10 @@
 	<script src="/resources/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/resources/js/pager.js"></script>
+  	<!-- 네이버지도API -->
+<!--   	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=vZbX7ZW_zMbNccbH_O_1&submodules=geocoder"></script> -->
+  	<!-- 다음지도API -->
+  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd33ac52bad6f68a95100d08899b2e92"></script>
   	
   	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */
