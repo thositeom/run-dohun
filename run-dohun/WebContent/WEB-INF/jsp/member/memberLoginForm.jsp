@@ -12,6 +12,8 @@
 <script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!-- 카카오 로그인 API -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <style>
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -281,9 +283,62 @@
 						<br>
 						<button type="submit" class="btn btn-default">Sing in</button>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#joinModal">Sing up</button>
+						<button type="button" class="btn btn-default" onclick="createKaKaoButton();">카카오 로그인</button>
+						<button type="button" class="btn btn-default" onclick="logOutKaKao();">카카오 로그아웃</button>
+						
 					</div>
 				</form>
+				
+				<!-- 카카오 로그인 -->				
+				<div>
+					<a id="kakao-login-btn"></a>
+					<a href="http://developers.kakao.com/logout"></a>
+					<script type='text/javascript'>
+
+				    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+				    Kakao.init('fd33ac52bad6f68a95100d08899b2e92');
+					function createKaKaoButton(){
+						//<![CDATA[
+						
+					    // 카카오 로그인 버튼을 생성합니다.
+					      Kakao.Auth.login({
+					      success: function(authObj) {
+// 					    	  console.log(JSON.stringify(authObj));
+						      console.log("access_token: " + authObj.access_token);
+						      console.log("token_type: " + authObj.token_type);
+						      console.log("refresh_token: " + authObj.refresh_token);
+						      console.log("expires_in: " + authObj.expires_in);
+						      console.log("scope: " + authObj.scope);
+						      
+						      Kakao.API.request({
+									url: '/v1/user/me',
+									success: function(res) {
+										console.log(res.properties.nickname);
+										console.log(res.properties.profile_image);
+										
+									},
+									fail: function(error) {
+										console.log(error);
+									}
+								});
+					      },
+					      fail: function(err) {
+					         alert(JSON.stringify(err));
+					      }
+					    });
+					  //]]>
+					}
+					
+					function logOutKaKao(){
+						//현재 로그인되어 있는 사용자를 로그아웃시키고, Access Token과 Refresh 토큰을 삭제합니다.
+						Kakao.Auth.logout();	
+					}
+					  
+				  </script>
 				</div>
+				<!-- //카카오 로그인 -->
+				</div>
+				
 				<!-- //로그인 -->
 				<!-- Modal -->
 				<div class="modal fade" id="joinModal" role="dialog">
