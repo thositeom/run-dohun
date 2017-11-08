@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> --%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 
@@ -14,6 +14,8 @@
 <script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <!-- 카카오 로그인 API -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- 네이버 로그인 API -->
+<script type="text/javascript" src="/resources/js/naverApi/naverLogin_implicit-1.0.3.js"></script>
 
 <style>
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -226,8 +228,8 @@
 		customAjaxFrom("/memberJoin.do", "createUserForm", successMemberJoin, errorMemberJoin);
 		
 	});
-  
   });
+
   </script>
 
 </head>
@@ -285,11 +287,21 @@
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#joinModal">Sing up</button>
 						<button type="button" class="btn btn-default" onclick="createKaKaoButton();">카카오 로그인</button>
 						<button type="button" class="btn btn-default" onclick="logOutKaKao();">카카오 로그아웃</button>
-						
+						<button type="button" class="btn btn-default" onclick="naverLogin();">네이버 로그인</button>
+						<span id="naver_id_login"></span>
 					</div>
 				</form>
+				<!-- 네아로 API-->
+				<script type="text/javascript">
+					var naver_id_login = new naver_id_login("vZbX7ZW_zMbNccbH_O_1", "http://127.0.0.1/naverLogin.do");
+					var state = naver_id_login.getUniqState();
+					naver_id_login.setButton("green", 2,35);
+					naver_id_login.setDomain("http://127.0.0.1");
+					naver_id_login.setState(state);
+					naver_id_login.init_naver_id_login();
+				</script>
+				<!-- //네아로 초기화 API-->
 				
-				<!-- 카카오 로그인 -->				
 				<div>
 					<a id="kakao-login-btn"></a>
 					<a href="http://developers.kakao.com/logout"></a>

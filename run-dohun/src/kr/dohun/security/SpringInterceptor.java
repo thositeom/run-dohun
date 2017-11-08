@@ -72,6 +72,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"dataConversion.do")||
 				reqUrl.equals(context+"boardRecommended.do")||
 				
+				
 				reqUrl.equals(context+"memberLogin.do")
 		){
 			return true;
@@ -98,7 +99,10 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"honeyJqgridSubMerge.do")
 				||reqUrl.equals(context+"excelViewDown.do")
 				||reqUrl.equals(context+"boardExcelDown.do")
-				
+
+				||reqUrl.equals(context+"naverLogin.do")
+				||reqUrl.equals(context+"memberNaverLogin.do")
+
 				||reqUrl.equals(context+"fileDownload.do")
 				
 		){

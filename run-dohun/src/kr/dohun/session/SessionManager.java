@@ -11,7 +11,7 @@ import kr.dohun.member.MemberVO;
 @Service("SessionManager")
 public class SessionManager{
 	
-	public static boolean userSessionCheck(HttpServletRequest request) {
+	public boolean userSessionCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if(session.getAttribute("_USER_INFO_") == null){
 			//null일때
