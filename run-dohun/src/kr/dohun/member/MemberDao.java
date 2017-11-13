@@ -80,4 +80,14 @@ public class MemberDao {
 		return (int) sqlMapClientTemplate.queryForObject("memberSqlMap.memberHoneyListCnt", vo);
 	}
 	
+	
+	public int naverMergeInfo(MemberVO vo) throws Exception{
+		return sqlMapClientTemplate.update("memberSqlMap.naverMergeInfo", vo);
+	}
+	public MemberVO naverUserInfoUserId(String vo) throws Exception{
+		return (MemberVO) sqlMapClientTemplate.queryForObject("memberSqlMap.naverUserInfoUserId",vo);
+	}	
+	public MemberVO naverUserInfoSnsId(String vo) throws Exception{
+		return (MemberVO) sqlMapClientTemplate.queryForObject("memberSqlMap.naverUserInfoSnsId",vo);
+	}
 }

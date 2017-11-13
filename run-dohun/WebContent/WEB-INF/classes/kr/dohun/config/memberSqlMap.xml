@@ -16,19 +16,26 @@
 		<result property="userEtc04" column="MEMBER_ETC04" columnIndex="11" />
 		<result property="userEtc05" column="MEMBER_ETC05" columnIndex="12" />
 	</resultMap>
-
-	<!-- <select id="testInfo" parameterClass="honey" resultMap="honeyMap">
-		SELECT * FROM TEST WHERE ID = #id#
-	</select> -->
 	
+	
+	<resultMap id="snsMap" class="member">
+		<result property="snsId" column="SNS_ID" columnIndex="1" />
+		<result property="snsType" column="SNS_TYPE" columnIndex="2" />
+		<result property="snsName" column="SNS_NAME" columnIndex="3" />
+		<result property="snsConnectDate" column="SNS_CONNECT_DATE" columnIndex="4" />
+	</resultMap>
+	
+	<!-- 사용자 목록 조회-->
 	<select id="memberList" parameterClass="member" resultMap="memberMap">
 		SELECT * FROM MEMBER
 	</select>
 	
+	<!-- 사용자 정보 조회 -->
 	<select id="memberInfo" parameterClass="java.lang.String" resultMap="memberMap">
 		SELECT * FROM MEMBER WHERE MEMBER_ID = #userId#
 	</select>
 
+	<!-- 사용자 정보 등록 -->
 	<insert id="memberInsertInfo" parameterClass="member">
 		INSERT INTO MEMBER 
 		(MEMBER_IDX,MEMBER_ID,MEMBER_NAME,MEMBER_EMAIL,MEMBER_PHONE,MEMBER_ADDRESS
@@ -40,6 +47,7 @@
 		,#userEtc01#,#userEtc02#,#userEtc03#,#userEtc04#,#userEtc05#)
 	</insert>
 	
+	<!-- 사용자 정보 수정 -->
 	<update id="memberUpdateInfo" parameterClass="member">
 		UPDATE MEMBER SET 
 			MEMBER_NAME=#userName#,
@@ -51,6 +59,7 @@
 		WHERE MEMBER_ID=#userId# 
 	</update>	
  
+	<!-- 사용자 정보 삭제 --> 
 	<delete id="memberDeleteInfo" parameterClass="member">
 		DELETE FROM MEMBER WHERE MEMBER_ID = #userId#
 	</delete>
@@ -72,5 +81,26 @@
 	<select id="memberHoneyListCnt" parameterClass="member" resultClass="java.lang.Integer">
 	  SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ETC02 = 'A'
 	</select>
+	
+	<!-- NAVER(네아로) 사용자 정보 등록 -->
+	<insert id="naverMergeInfo" parameterClass="member">
+		INSERT INTO SNS_INFO(MEMBER_ID,  SNS_ID, SNS_NAME, SNS_TYPE, SNS_PROFILE, SNS_CONNECT_DATE)
+		VALUES(#userId#, #snsId#, #snsName#, #snsType#, #snsProfile#, NOW())
+		ON DUPLICATE KEY
+		UPDATE SNS_NAME =#snsName#, SNS_TYPE =#snsType#, SNS_PROFILE =#snsProfile#, SNS_CONNECT_DATE = NOW();
+	</insert>
+	<!-- NAVER(네아로) MEMBER_ID로 사용자 정보 조회 -->
+	<select id="naverUserInfoUserId" parameterClass="java.lang.String" resultMap="snsMap">
+		SELECT * FROM SNS_INFO WHERE MEMBER_ID = #userId#
+	</select>
+	<!-- NAVER(네아로) SNS_ID로 사용자 정보 조회 -->
+	<select id="naverUserInfoSnsId" parameterClass="java.lang.String" resultMap="snsMap">
+		SELECT * FROM SNS_INFO WHERE MEMBER_ID = #snsId#
+	</select>
+	
+	
+	
+	
+	
 
 </sqlMap>

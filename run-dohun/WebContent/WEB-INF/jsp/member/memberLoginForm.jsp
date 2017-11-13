@@ -285,9 +285,8 @@
 						<br>
 						<button type="submit" class="btn btn-default">Sing in</button>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#joinModal">Sing up</button>
-						<button type="button" class="btn btn-default" onclick="createKaKaoButton();">카카오 로그인</button>
-						<button type="button" class="btn btn-default" onclick="logOutKaKao();">카카오 로그아웃</button>
-						<button type="button" class="btn btn-default" onclick="naverLogin();">네이버 로그인</button>
+						<!-- <button type="button" class="btn btn-default" onclick="createKaKaoButton();">카카오 로그인</button>
+						<button type="button" class="btn btn-default" onclick="logOutKaKao();">카카오 로그아웃</button> -->
 						<span id="naver_id_login"></span>
 					</div>
 				</form>
@@ -295,7 +294,7 @@
 				<script type="text/javascript">
 					var naver_id_login = new naver_id_login("vZbX7ZW_zMbNccbH_O_1", "http://127.0.0.1/naverLogin.do");
 					var state = naver_id_login.getUniqState();
-					naver_id_login.setButton("green", 2,35);
+					naver_id_login.setButton("green", 2,32);
 					naver_id_login.setDomain("http://127.0.0.1");
 					naver_id_login.setState(state);
 					naver_id_login.init_naver_id_login();

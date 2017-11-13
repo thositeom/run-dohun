@@ -60,4 +60,22 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.memberHoneyListCnt(vo);
 	}
 
+	@Override
+	public int naverMergeInfo(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.naverMergeInfo(vo);
+	}
+
+	@Override
+	public MemberVO naverUserInfoUserId(String vo) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.naverUserInfoUserId(vo);
+	}
+
+	@Override
+	public MemberVO naverUserInfoSnsId(String vo) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.naverUserInfoSnsId(vo);
+	}
+
 }

@@ -122,116 +122,66 @@ public class MemberController {
 		return mv;
 	}
 	
+	
+	/**
+	 * 네이버 API 콜백
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/naverLogin.do")
 	public ModelAndView naverLogin(HttpServletRequest request) {
-		System.out.println("naverLogin");
 		ModelAndView mv = new ModelAndView();
-		/*String apiURL = "";
-		try{
-			String clientId = "vZbX7ZW_zMbNccbH_O_1";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://127.0.0.1/memberNaverLogin.do", "UTF-8");
-		    SecureRandom random = new SecureRandom();
-		    String state = new BigInteger(130, random).toString();
-		    apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-		    apiURL += "&client_id=" + clientId;
-		    apiURL += "&redirect_uri=" + redirectURI;
-		    apiURL += "&state=" + state;
-		    
-		    System.out.println(":::apiURL생성::::" + apiURL);
-
-		    //CSRF방지위해 세션저장 로그인 후 비교
-		    createSession(request, "_state_", state);
-		    
-		}catch(Exception e){
-			 System.out.println(e);
-		}
-		mv.addObject("apiURL", apiURL);*/
-		
-		
-		 
-		/*String clientid="YOUR_CLIENT_ID"; 
-		String clientsecret="YOUR_CLIENT_SECRET"; 
-		String code = request.getParameter("code");
-		String state= request.getParameter("state"); 
-		String redirecturi=URLEncoder.encode("YOUR_CALLBACK_URL","utf-8");
-		String apiurl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&"; 
-		apiURL += "&client_id=" + clientId;
-	    apiURL += "&redirect_uri=" + redirectURI;
-		String clientsecret = ""; 
-		String redirecturi = ""; 
-		String code = ""; 
-		String state = ""; 
-		String access_token = ""; 
-		String refresh_token = ""; 
-		System.out.println("apiurl="+apiURL);
-	    
-		
-		
-		try {
-	      URL url = new URL(apiURL);
-	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	      con.setRequestMethod(" get");="" int="" responsecode="con.getResponseCode();" bufferedreader="" br;="" system.out.print("responsecode="+responseCode);
-	      if(responseCode==200) { // 정상 호출
-	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	      } else {  // 에러 발생
-	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	      }
-	      String inputLine;
-	      StringBuffer res = new StringBuffer();
-	      while ((inputLine = br.readLine()) != null) {
-	        res.append(inputLine);
-	      }
-	      br.close();
-	      if(responseCode==200) {
-	        out.println(res.toString());
-	      }
-	    } catch (Exception e) {
-	      System.out.println(e);
-	    }
-	  %>*/
-		
-		
-		
-		
 		mv.setViewName("member/naverLogin");
 		return mv;
 	}
 	
-	public String naverLoginInit(HttpServletRequest request) {
-		String apiURL = "";
-		try{
-			String clientId = "vZbX7ZW_zMbNccbH_O_1";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://127.0.0.1/naverLogin.do", "UTF-8");
-		    SecureRandom random = new SecureRandom();
-		    String state = new BigInteger(130, random).toString();
-		    apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-		    apiURL += "&client_id=" + clientId;
-		    apiURL += "&redirect_uri=" + redirectURI;
-		    apiURL += "&state=" + state;
-		    
-		}catch(Exception e){
-			 System.out.println(e);
-		}
-		return apiURL;
-	}
-	
-	//여기로 콜백
+	/**
+	 * 네아로 사용자 로그인
+	 * @param memberVo
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/memberNaverLogin.do")
 	public ModelAndView memberNaverLogin(MemberVO memberVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		/*String code = request.getParameter("code");//로그인 후 생성된 인증토큰
-		String state = request.getParameter("state");//상태토큰 -> 세션과비교해서 CSRF방지
-*/		
+
+		String accessTokn = request.getParameter("accessTokn");
 		String email = request.getParameter("email");
 		String nickname = request.getParameter("nickname");
-		String accessTokn = request.getParameter("accessTokn");
+		String age = request.getParameter("age");
+		String birthday = request.getParameter("birthday");
+		String nickenc_idame = request.getParameter("nickenc_idame");
+		String gender = request.getParameter("gender");
+		String profile_image = request.getParameter("profile_image");
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
 		
 		System.out.println(accessTokn);
-		System.out.println(nickname);
+		System.out.println(email);
+		System.out.println(age);
+		System.out.println(birthday);
+		System.out.println(nickenc_idame);
+		System.out.println(gender);
+		System.out.println(profile_image);
+		System.out.println(name);
+		System.out.println(id);
 		memberVo.setUserId(email);
-		sessionManager.creatSessoin(memberVo, request, response);
 		
-		mv.setViewName("redirect:/index.do");
+//		memberVo.setUserId(email);	//네이버 가입자는 email을 아이디로 가입시킴
+		memberVo.setSnsId(id);
+//		memberVo.setSnsName(nickname);
+//		memberVo.setSnsProfile(profile_image);
+//		memberVo.setSnsType(snsType);
+		
+		if(memberService.naverUserInfoSnsId(id) == null){
+			mv.setViewName("member/memberNaverJoinForm");
+		}else{
+			memberService.naverMergeInfo(memberVo);
+			sessionManager.creatSessoin(memberVo, request, response);
+			mv.setViewName("redirect:/index.do");	
+		}
 		return mv;
 	}
 	

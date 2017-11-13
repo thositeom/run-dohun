@@ -29,8 +29,6 @@
 		    $('#profile_image').val(naver_id_login.getProfileData('profile_image'));
 		    $('#name').val(naver_id_login.getProfileData('name'));
 		    $('#id').val(naver_id_login.getProfileData('id'));
-// 			var win = window.open("", "_self");
-// 			window.location.href="/memberNaverLogin.do";
 			
 		    $("form").submit();
 
@@ -51,7 +49,6 @@
 	<input type="hidden" id="profile_image" name="profile_image" />
 	<input type="hidden" id="name" name="name" />
 	<input type="hidden" id="id" name="id" />
-	
 </form>
 </body>
 </html>

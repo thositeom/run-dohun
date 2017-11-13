@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class MemberVO {
 	
+	private int startRow = 1;
+	private int endRow = 11;
+	
 	private int userIdx;
 	private String userId;
 	private String userName;
@@ -17,12 +20,57 @@ public class MemberVO {
 	private String userEtc04;
 	private String userEtc05;
 	
-	private int startRow = 1;
-	private int endRow = 11;
+	private String snsId;
+	private String snsType;
+	private String snsName;
+	private String snsProfile;
+	private String snsConnectDate;
+	
 	
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+	
+	public String getSnsId() {
+		return snsId;
+	}
+
+	public void setSnsId(String snsId) {
+		this.snsId = snsId;
+	}
+
+	public String getSnsType() {
+		return snsType;
+	}
+
+	public void setSnsType(String snsType) {
+		this.snsType = snsType;
+	}
+
+	public String getSnsName() {
+		return snsName;
+	}
+
+	public void setSnsName(String snsName) {
+		this.snsName = snsName;
+	}
+
+	public String getSnsProfile() {
+		return snsProfile;
+	}
+
+	public void setSnsProfile(String snsProfile) {
+		this.snsProfile = snsProfile;
+	}
+
+	public String getSnsConnectDate() {
+		return snsConnectDate;
+	}
+
+	public void setSnsConnectDate(String snsConnectDate) {
+		this.snsConnectDate = snsConnectDate;
+	}
+
 	public int getUserIdx() {
 		return userIdx;
 	}
