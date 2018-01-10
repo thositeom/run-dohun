@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 	
 	public List memberList() throws Exception;
-	public MemberVO memberInfo(String vo) throws Exception;
+	public MemberVO memberInfo(String userId) throws Exception;
 	public int memberInsertInfo(MemberVO vo) throws Exception;
 	public int memberUpdateInfo(MemberVO vo) throws Exception;
 	public int memberDeleteInfo(MemberVO vo) throws Exception;
@@ -20,5 +20,8 @@ public interface MemberService {
 	public MemberVO naverUserInfoUserId(String vo) throws Exception;
 	//NAVER(네아로) SNS_ID로 사용자 정보 조회
 	public MemberVO naverUserInfoSnsId(String vo) throws Exception;
+	//NAVER(네아로) 사용자 회원가입
+	public int memberNaverJoin(MemberVO vo) throws Exception;
+	
 	
 }

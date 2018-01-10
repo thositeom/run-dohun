@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<form id="sampleForm" name="sampleForm"  method="post" > 
+ 
     <div class="col-sm-8 text-left">
+    
 	    <h1>Sample</h1>
 	    <p>Sample</p>
 	    <hr>
 	    <h3>Sample</h3>
-	    
+		<form id="sampleForm" name="sampleForm"  method="post" >    
 	    * 영문, 숫자, 특수문자(&lt;, &gt;, (, ), {, }, [, ], ', &quot;, /, \, | 제외)를 각 1자 이상 포함하여 9자 이상 50자 이내로 입력하시기 바랍니다.
 	    
 	    <div class="col-sm-6">
@@ -279,6 +283,51 @@
 		</script>
 		<!-- //다음 지도 API -->
 	    
-	    
+	 </form>
+	 
+	 
+	 <!-- spring form sample -->
+	 <div class="col-sm-6">
+	    <h4>spring form sample</h4>
+	 <form:form commandName="sampleVo" action="/springFormTest.do">
+		<form:label path="">id</form:label>
+		<form:input path="id"/>
+		<form:label path="">이름</form:label>
+		<form:input path="name"/>
+		<form:password path="password"/>
+
+		<form:checkbox path="checkBox" value="Y" label="예" onchange="oneCheckBox(this);" /> &nbsp;
+		<form:checkbox path="checkBox" value="N" label="아니오" onchange="oneCheckBox(this);"/>
+		<%-- <form:checkbox path="checkBox" value="Y"/><label for="checkNews1">예</label>&nbsp; 
+		<form:checkbox path="checkBox" value="N"/><label for="checkNews2">아니요</label> --%>
+		<input type="submit" value="확인" />
+	</form:form>
+	<script type="text/javascript">
+	function oneCheckBox(a){
+		var obj = document.getElementsByName("checkBox");
+        for(var i=0; i<obj.length; i++){
+            if(obj[i] != a){
+                obj[i].checked = false;
+            }
+        }
+	}
+	</script>
+	
+	
+	<div>
+	<!-- $("#topCodeTable > tbody > tr > td > span").click(function(){
+		/* jq input tag 생성 */
+		$("<input></input>").attr({type:"hidden",
+								   name:"user_id", 
+								   value:""
+								}).appendTo($form);
+
+		$("#frm").attr("action","inmanuSubCode.do").submit();
+	});
+ -->	
+	</div>
+	
+		 
+	   
     </div>
-</form>
+

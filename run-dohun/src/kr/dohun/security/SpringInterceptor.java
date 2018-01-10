@@ -71,9 +71,15 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"fileDelete.do")||
 				reqUrl.equals(context+"dataConversion.do")||
 				reqUrl.equals(context+"boardRecommended.do")||
+				reqUrl.equals(context+"memberNaverJoin.do")||
+				reqUrl.equals(context+"memberNameCheck.do")||
+				reqUrl.equals(context+"memberLogin.do")||
+				
+				reqUrl.equals(context+"inmanuSubCode.do")||
+				reqUrl.equals(context+"inmanuTopCodeAdd.do")||
+				reqUrl.equals(context+"inmanuTopCodeDelete.do")
 				
 				
-				reqUrl.equals(context+"memberLogin.do")
 		){
 			return true;
 		}else{
@@ -86,6 +92,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 		 return req.getHeader(ajaxHeader) != null && req.getHeader(ajaxHeader).equals(Boolean.TRUE.toString());
 	}
 	
+	//Ajax 콜이 아닐경우 
 	private boolean isAjaxUrlCheck(HttpServletRequest req){
 		String reqUrl = req.getRequestURL().toString();
 		int pathLength = req.getContextPath() == null?0:req.getContextPath().length();
@@ -99,11 +106,15 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"honeyJqgridSubMerge.do")
 				||reqUrl.equals(context+"excelViewDown.do")
 				||reqUrl.equals(context+"boardExcelDown.do")
-
 				||reqUrl.equals(context+"naverLogin.do")
 				||reqUrl.equals(context+"memberNaverLogin.do")
-
 				||reqUrl.equals(context+"fileDownload.do")
+				
+				||reqUrl.equals(context+"springFormTest.do")
+				
+				||reqUrl.equals(context+"inmanuCodeForm.do")
+
+				||reqUrl.equals(context+"inmanuTopCodeAddPop.do")
 				
 		){
 			return true;

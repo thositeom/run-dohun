@@ -30,8 +30,8 @@ public class MemberDao {
 	 * @throws Exception
 	 * dohun 2017. 6. 13.
 	 */
-	public MemberVO memberInfo(String vo) throws Exception{
-		return (MemberVO) sqlMapClientTemplate.queryForObject("memberSqlMap.memberInfo",vo);
+	public MemberVO memberInfo(String userId) throws Exception{
+		return (MemberVO) sqlMapClientTemplate.queryForObject("memberSqlMap.memberInfo",userId);
 	
 	}
 	

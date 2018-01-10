@@ -95,12 +95,8 @@
 	</select>
 	<!-- NAVER(네아로) SNS_ID로 사용자 정보 조회 -->
 	<select id="naverUserInfoSnsId" parameterClass="java.lang.String" resultMap="snsMap">
-		SELECT * FROM SNS_INFO WHERE MEMBER_ID = #snsId#
+		SELECT * FROM SNS_INFO WHERE SNS_ID = #snsId#
 	</select>
-	
-	
-	
-	
 	
 
 </sqlMap>

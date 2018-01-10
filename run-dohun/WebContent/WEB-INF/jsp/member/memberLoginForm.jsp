@@ -78,70 +78,8 @@
 		  }
 	  });
 	
-	//아이디 입력시 vaildation조회
-	var checkIdStatus = 0;
-	function searchName() {
-		var userId = $("#userId").val().trim();
-		if(userId.length < 1){
-			joinVaildation("userId", "default");
-		}else{
-			$.ajax({
-				url: "/memberNameCheck.do",
-				type: "POST",
-				data: {"userId":userId},
-					success: function(result){
-						if(result.status == "true"){//사용불가
-							joinVaildation("userId", "error");
-							checkIdStatus = 0;
-						}else{//사용가능
-							joinVaildation("userId", "ok");
-							checkIdStatus = 1;
-						}
-					}, 
-					error: function(request,status,error){
-					  console.log("code:"+request.status+" error:"+error);
-					}
-			});
-		}
-    };
 	 
-    //Email vaildation조회
-    function searchEmail(){
-    	var userEmail = $("#userEmail").val().trim();
-
-    	if(userEmail.length < 1){
-    		joinVaildation("userEmail", "default");
-    	}else{
-    		if (!uValidation.checkRegExpEmail(userEmail)){
-    			joinVaildation("userEmail", "error");
-	    	}else{
-	    		joinVaildation("userEmail", "ok");
-	    	}
-    	}
-    };
     
-  	//Pwd vaildation조회
-    function searchPwd(){
-		var userPwd =  $("#userPassword").val().trim();
-		if(userPwd.length < 1){
-			//빈칸
-			joinVaildation("userPassword", "default");
-			return false;
-		}
-		if(userPwd.length < 7){
-			//7자리 이하
-			joinVaildation("userPassword", "error");
-			return false;
-		}
-		if(!uValidation.checkRegExpPassword(userPwd)){
-			//정규식  false
-			joinVaildation("userPassword", "error");
-		}else{
-			//정규식 true
-			joinVaildation("userPassword", "ok");
-		}
-		
-  	};
     
 	$(".form-group > input").keyup(function(){
 		switch($(this).attr("id")) {
@@ -158,37 +96,6 @@
 			
 		}
 	});
-	
-	//css제어
-	function joinVaildation(inputId, status){
-		var id_div  = '#'+inputId+'_div';
-		var id_span = '#'+inputId+'_span';
-		
-		switch(status){
-		case "error":
-			//정규식  false
-			$(id_div).removeClass("has-success has-feedback");
-			$(id_div).addClass("has-error has-feedback");
-			$(id_span).removeClass("glyphicon-ok");
-			$(id_span).addClass("glyphicon-warning-sign");
-			$(id_span).show();
-			break;
-		case "ok":
-			//정규식 true
-    		$(id_div).removeClass("has-error has-feedback");
-    		$(id_div).addClass("has-success has-feedback");
-    		$(id_span).removeClass("glyphicon-warning-sign");
-			$(id_span).addClass("glyphicon-ok");
-			$(id_span).show();
-			break;
-		default :
-			$(id_div).removeClass("has-success has-feedback");
-    		$(id_div).removeClass("has-error has-feedback");
-    		$(id_span).removeClass("glyphicon-ok");
-    		$(id_span).removeClass("glyphicon-warning-sign");
-    		$(id_span).hide();
-		}
-	};
 	
 	//사용자 가입취소
 	$("#closeModal, #closeModal02").click(function(){
@@ -230,7 +137,113 @@
 	});
   });
 
-  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+//css제어
+function joinVaildation(inputId, status){
+	var id_div  = '#'+inputId+'_div';
+	var id_span = '#'+inputId+'_span';
+	
+	switch(status){
+	case "error":
+		//정규식  false
+		$(id_div).removeClass("has-success has-feedback");
+		$(id_div).addClass("has-error has-feedback");
+		$(id_span).removeClass("glyphicon-ok");
+		$(id_span).addClass("glyphicon-warning-sign");
+		$(id_span).show();
+		break;
+	case "ok":
+		//정규식 true
+   		$(id_div).removeClass("has-error has-feedback");
+   		$(id_div).addClass("has-success has-feedback");
+   		$(id_span).removeClass("glyphicon-warning-sign");
+		$(id_span).addClass("glyphicon-ok");
+		$(id_span).show();
+		break;
+	default :
+		$(id_div).removeClass("has-success has-feedback");
+   		$(id_div).removeClass("has-error has-feedback");
+   		$(id_span).removeClass("glyphicon-ok");
+   		$(id_span).removeClass("glyphicon-warning-sign");
+   		$(id_span).hide();
+	}
+};
+	
+
+
+//아이디 입력시 vaildation조회
+var checkIdStatus = 0;
+function searchName() {
+	var userId = $("#userId").val().trim();
+	if(userId.length < 5){
+		joinVaildation("userId", "default");
+	}else{
+		customAjax("/memberNameCheck.do", {"userId":userId}, successIdChceck, errorIdChceck);
+	}
+};
+function successIdChceck(result){
+	if(result.status == "true"){//사용불가
+		joinVaildation("userId", "error");
+		checkIdStatus = 0;
+	}else{//사용가능
+		joinVaildation("userId", "ok");
+		checkIdStatus = 1;
+	}
+};
+function errorIdChceck(request,status,error){
+	console.log("code:"+request.status+" error:"+error);
+};
+
+//Email vaildation조회
+function searchEmail(){
+	var userEmail = $("#userEmail").val().trim();
+
+	if(userEmail.length < 1){
+		joinVaildation("userEmail", "default");
+	}else{
+		if (!uValidation.checkRegExpEmail(userEmail)){
+			joinVaildation("userEmail", "error");
+    	}else{
+    		joinVaildation("userEmail", "ok");
+    	}
+	}
+};
+
+//Pwd vaildation조회
+function searchPwd(){
+	var userPwd =  $("#userPassword").val().trim();
+	if(userPwd.length < 1){
+		//빈칸
+		joinVaildation("userPassword", "default");
+		return false;
+	}
+	if(userPwd.length < 7){
+		//7자리 이하
+		joinVaildation("userPassword", "error");
+		return false;
+	}
+	if(!uValidation.checkRegExpPassword(userPwd)){
+		//정규식  false
+		joinVaildation("userPassword", "error");
+	}else{
+		//정규식 true
+		joinVaildation("userPassword", "ok");
+	}
+};
+  
+  
+  
+  
+  
+</script>
 
 </head>
 <body>

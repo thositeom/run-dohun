@@ -24,9 +24,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO memberInfo(String vo) throws Exception {
+	public MemberVO memberInfo(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return memberDao.memberInfo(vo);
+		return memberDao.memberInfo(userId);
 	}
 
 	@Override
@@ -76,6 +76,16 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO naverUserInfoSnsId(String vo) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.naverUserInfoSnsId(vo);
+	}
+	
+	@Override
+	public int memberNaverJoin(MemberVO vo) throws Exception {
+		
+		memberDao.naverMergeInfo(vo);
+		
+		commonService.commonUpdateSeq("MEMBER_SEQ");
+		vo.setUserIdx(commonService.commonSeqCnt("MEMBER_SEQ")); 
+		return memberDao.memberInsertInfo(vo);
 	}
 
 }

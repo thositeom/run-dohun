@@ -55,6 +55,7 @@ function customAjaxFrom(url, formId, successCallback, errorCallback){
 };
 
 //Ajax data submit;
+//customAjax("/memberNameCheck.do", {"userId":userId}, successIdChceck, errorIdChceck);  
 function customAjax(url, data, successCallback, errorCallback){
 	$.ajax({
 		url: url,
@@ -121,7 +122,6 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
     /*Validation*/
 	var uValidation = {
 			ualert : function(){
-				alert("@@하이룽");	
 			},
 			checkLength : function(length, fieldId, fieldValue){
 				if(fieldId == null || fieldId ==""){

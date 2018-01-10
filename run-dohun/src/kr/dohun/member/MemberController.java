@@ -1,9 +1,5 @@
 package kr.dohun.member;
 
-import java.math.BigInteger;
-import java.net.URLEncoder;
-import java.security.SecureRandom;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -107,21 +103,20 @@ public class MemberController {
 	@RequestMapping(value = "/memberNameCheck.do")
 	public ModelAndView memberNameCheck(MemberVO memberVo, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
-		
-		String tmepId = "thositeom";
-		System.out.println("::::"+memberVo.getUserName());
-		if(memberVo.getUserName().equals("thositeom")){
-			System.out.println("::::사용불가");
-			mv.addObject("status", "true");
-		}else{
-			System.out.println("::::사용가능");
-			mv.addObject("status", "false");
+		try {
+			if(memberService.memberInfo(memberVo.getUserId()) != null){
+				mv.addObject("status", "true");
+			}else{
+				mv.addObject("status", "false");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		mv.setViewName("jsonView");
 		return mv;
 	}
-	
 	
 	/**
 	 * 네이버 API 콜백
@@ -158,23 +153,18 @@ public class MemberController {
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		
-		System.out.println(accessTokn);
-		System.out.println(email);
-		System.out.println(age);
-		System.out.println(birthday);
-		System.out.println(nickenc_idame);
-		System.out.println(gender);
-		System.out.println(profile_image);
-		System.out.println(name);
-		System.out.println(id);
 		memberVo.setUserId(email);
-		
-//		memberVo.setUserId(email);	//네이버 가입자는 email을 아이디로 가입시킴
 		memberVo.setSnsId(id);
-//		memberVo.setSnsName(nickname);
-//		memberVo.setSnsProfile(profile_image);
-//		memberVo.setSnsType(snsType);
+		memberVo.setSnsName(nickname);
+		memberVo.setSnsProfile(profile_image);
 		
+		mv.addObject("email",email);	//네이버 가입자는 email을 아이디로 가입시킴
+		mv.addObject("name",name);
+		mv.addObject("snsId",id);
+		
+		/**
+		 *  snsId 존재하면 네이버아이디로 이미 가입된 사용자.
+		*/
 		if(memberService.naverUserInfoSnsId(id) == null){
 			mv.setViewName("member/memberNaverJoinForm");
 		}else{
@@ -184,5 +174,17 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value = "/memberNaverJoin.do")
+	public ModelAndView memberNaverJoin(MemberVO vo, HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+		try {
+			memberService.memberNaverJoin(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	} 
 	
 }
