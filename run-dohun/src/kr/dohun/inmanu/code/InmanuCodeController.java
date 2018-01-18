@@ -21,7 +21,6 @@ public class InmanuCodeController {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			inmanuCodeService.test001();
 			List<InmanuCodeVO> codeTopList = inmanuCodeService.InmanuCodeTopList();
 			mv.addObject("codeTopList", codeTopList);
 		} catch (Exception e) {

@@ -46,6 +46,8 @@ public class SampleController {
 	@RequestMapping(value = "/sampleForm.do")
 	public ModelAndView sampleForm(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
+		SampleVO sampleVo = new SampleVO();
+		mv.addObject("sampleVo", sampleVo);
 		mv.setViewName("sample/sampleForm");
 		return mv;
 	}

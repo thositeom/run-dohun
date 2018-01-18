@@ -8,7 +8,7 @@
   position: relative;
   display: inline-block;
   width: 27px;
-  height: 16px;
+  height: 15px;
 }
 
 .switch input {display:none;}
@@ -93,11 +93,10 @@ $(".list-group-item-text > a").click(function(){
     		<div class="list-group">
 <!--     			<input type="checkbox" id="boardCheckAll" /> -->
     			<div>
-    			<label class="switch">
-				  <input type="checkbox" id="boardCheckAll">
-				  <span class="slider round"></span>
-				</label>
-				<span>전체선택</span>
+	    			<label class="switch">
+					  <input type="checkbox" id="boardCheckAll">
+					  <span class="slider round"></span>
+					</label>
 				</div>
 				<c:forEach items="${boardList}" var="board">
 				    <!-- 디자인01 -->

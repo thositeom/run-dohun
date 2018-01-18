@@ -21,7 +21,7 @@ $("button").click(function(){
     
 <form id="boardForm">
 	<input type="hidden" id="boardContent" name="boardContent" value='${boardVo.boardContent}'> 
-	
+	<input type="hidden" id="boardIdx" name="boardIdx" value='${boardVo.boardIdx}'>
 	<div class="col-sm-8 text-left"> 
 		<h1>게시판-수정</h1>
 	    <p>나는 게시판. 나는 글을쓴다. 너도 글을쓴다.</p>

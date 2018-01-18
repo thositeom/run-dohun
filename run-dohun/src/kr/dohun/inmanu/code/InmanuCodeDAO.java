@@ -21,11 +21,6 @@ public class InmanuCodeDAO {
 	    this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public void test001(){
-		int rowCount = this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM CODE_TOP");
-		System.out.println(rowCount);
-	}
-	
 	public List<InmanuCodeVO> InmanuCodeTopList(){
 		List<InmanuCodeVO> resultList = this.jdbcTemplate.query(
 				  "SELECT * FROM CODE_TOP",
