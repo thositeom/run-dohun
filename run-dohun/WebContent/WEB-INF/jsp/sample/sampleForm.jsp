@@ -11,38 +11,61 @@
 	    <h1>Sample</h1>
 	    <p>Sample</p>
 	    <hr>
-	    <h3>Sample</h3>
+	    
+	    <hr>
+	    <!-- 모달 -->
+	    <h3>모달팝업</h3>	
+	    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+	    <!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Modal Header</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Some text in the modal.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- /모달 -->
+	    <hr>
+	    
+	    <!-- 정규식 -->
+	    <h3>정규식</h3>	
 		<form id="sampleForm" name="sampleForm"  method="post" >    
-	    * 영문, 숫자, 특수문자(&lt;, &gt;, (, ), {, }, [, ], ', &quot;, /, \, | 제외)를 각 1자 이상 포함하여 9자 이상 50자 이내로 입력하시기 바랍니다.
-	    
-	    <div class="col-sm-6">
-	    <h4>정규식</h4>
-	    <p>소문자, 숫자, 특수문자 9~50자리</p>
-	    <p>/^(?=.*\d)(?=.*[~`!@#$%\^&*()+\-/=_?:;,.])(?=.*[a-zA-Z]).{9,50}$/</p>
-	    <label for="password">입력:</label>
-	    <input type="text" id="password" onchange="passwordCheck();">
-	    <p id="passwordResult"></p>
-	    <script type="text/javascript">
-	    function passwordCheck(){
-	    	var regex = /^(?=.*\d)(?=.*[~`!@#$%\^&*()+\-/=_?:;,.])(?=.*[a-zA-Z]).{9,50}$/;
-	    	var password = $("#password").val().trim();
-	    	if(password.match(regex)){
-	    		$("#passwordResult").text("true");
-	    	}else{
-	    		$("#passwordResult").text("false");
-	    	}
-	    }
-	    
-	    </script>
+	    <P>* 영문, 숫자, 특수문자(&lt;, &gt;, (, ), {, }, [, ], ', &quot;, /, \, | 제외)를 각 1자 이상 포함하여 9자 이상 50자 이내로 입력하시기 바랍니다.</P>
+	    <br/>
+	    <div>
+		    <h4><b>01.소문자, 숫자, 특수문자 9~50자리</b></h4>
+		    <p>/^(?=.*\d)(?=.*[~`!@#$%\^&*()+\-/=_?:;,.])(?=.*[a-zA-Z]).{9,50}$/</p>
+		    <label for="password">입력:</label>
+		    <input type="text" id="password" onchange="passwordCheck();">
+		    <p id="passwordResult"></p>
+		    <script type="text/javascript">
+		    function passwordCheck(){
+		    	var regex = /^(?=.*\d)(?=.*[~`!@#$%\^&*()+\-/=_?:;,.])(?=.*[a-zA-Z]).{9,50}$/;
+		    	var password = $("#password").val().trim();
+		    	if(password.match(regex)){
+		    		$("#passwordResult").text("true");
+		    	}else{
+		    		$("#passwordResult").text("false");
+		    	}
+		    }
+		    </script>
 	    </div>
-	    
-	    <div class="col-sm-6">
-	    <h4>정규식</h4>
-	    <p>이메일</p>
-	    <p>/[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/</p>
-	    <label for="email">입력:</label>
-	    <input type="text" id="email" onchange="emailCheck();">
-	    <p id="emailResult"></p>
+	    <div>
+		    <h4><b>02.이메일</b></h4>
+		    <p>/[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/</p>
+		    <label for="email">입력:</label>
+		    <input type="text" id="email" onchange="emailCheck();">
+		    <p id="emailResult"></p>
 	    <script type="text/javascript">
 	    function emailCheck(){
 	    	var regex = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
@@ -55,9 +78,13 @@
 	    }
 	    </script>
 	    </div>
-	    
-	    <div class="col-sm-6">
-	    	<h4>XSS체크</h4>
+		<hr/>	    
+	    <!-- /정규식 -->
+	    <!-- XSS체크 -->
+		<h3>XSS 필터</h3>
+		<br/>	    
+	    <div>
+	    	<h4><b>01.XSS체크</b></h4>
 		    <label for="xss">입력:</label>
 		    <input type="text" id="xss" onchange="xssStart();">
 		    <p id="xssResult"></p>
@@ -115,9 +142,8 @@
 		    </script>
 	    </div>
 	    
-	    
-	    <div class="col-sm-6">
-	    <h4>lucy-xss체크</h4>
+	    <div>
+	    <h4><b>02.lucy-xss체크</b></h4>
 	    <label for="lucyXss">입력:</label>
 	    <input type="text" id="lucyXss" onchange="lucyXssCheck();">
 	    <p id="lucyXssResult"></p>
@@ -137,6 +163,8 @@
 	    }
 	    </script>
 	    </div>
+	    <hr/>
+	    <!-- XSS체크 -->
 	    
 	    <div class="col-sm-6">
 	    <h4>데이터변환 bytes -> KB,MB,GB,TB,EB</h4>
@@ -302,6 +330,7 @@
 		<form:checkbox path="checkBox" value="N"/><label for="checkNews2">아니요</label> --%>
 		<input type="submit" value="확인" />
 	</form:form>
+	</div>
 	<script type="text/javascript">
 	function oneCheckBox(a){
 		var obj = document.getElementsByName("checkBox");
@@ -327,7 +356,15 @@
  -->	
 	</div>
 	
-		 
+	<div class="col-sm-6">
+	    <h4>뿜뿜뿜</h4>
+		<input>
+	</div>
+	<script type="text/javascript">
+		function aaa(){
+			
+		}
+	</script>
 	   
-    </div>
+</div>
 

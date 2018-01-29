@@ -29,48 +29,6 @@
   	<!-- 다음지도API -->
   	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd33ac52bad6f68a95100d08899b2e92"></script>
   	
-  	<style>
-    /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-	/* .row.content {height: 450px} */
-    .row.content {height: 750px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-    
-    /* nav navbar-fixed-top 사용으로인해 margin추가 */
-    .mainContent {margin-top: 50px}
-    
-    /* naver-fix-left 왼쪽 바고정*/
-    .navbar-fixed-left{
-    	  position: fixed;
-		  right: 0;
-		  left: 0;
-		  z-index: 1020;
-		  padding-right: 15px;
-		  padding-left: 15px;
-		  
-    	}
-  	</style>
-  	
   	<!-- 구글애드샌스 광고 무료수익 -->
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
@@ -79,10 +37,103 @@
 // 	    enable_page_level_ads: true
 // 	  });
 	</script>
+	<style type="text/css">
+	
+	
+	/* Slideshow container */
+	#myCarousel {
+	  max-width: 100%;
+	  position: relative;
+	  margin: auto;	
+	}
+	
+	/* banner */
+	/* Remove margins and padding from the list */
+	#todoListDiv > ul {
+	  margin: 0;
+	  padding: 0;
+	}
+	/* Style the list items */
+	#todoListDiv > ul li {
+	  cursor: pointer;
+	  position: relative;
+	  padding: 12px 8px 12px 40px;
+	  list-style-type: none;
+	  background: #eee;
+	  font-size: 18px;
+	  transition: 0.2s;
+	  
+	  /* make the list items unselectable */
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+	
+	/* When clicked on, add a background color and strike out text */
+	#todoListDiv > ul li.checked {
+	  background: #888;
+	  color: #fff;
+	  text-decoration: line-through;
+	}
+	
+	/* Add a "checked" mark when clicked on */
+	#todoListDiv > ul li.checked::before {
+	  content: '';
+	  position: absolute;
+	  border-color: #fff;
+	  border-style: solid;
+	  border-width: 0 2px 2px 0;
+	  top: 10px;
+	  left: 16px;
+	  transform: rotate(45deg);
+	  height: 15px;
+	  width: 7px;
+	}
+	
+	
+	/* //banner */
+	</style>
 </head>
 
 <body>
 <jsp:include page="/WEB-INF/jsp/common/layout/gnb.jsp"></jsp:include>
+
+<div>
+	<!-- img광고 -->
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	    <!-- Indicators 배너이미지와 안맞아서 임시주석-->
+	    <!-- <ol class="carousel-indicators">
+	      <li data-target="#myCarousel" data-slide-to="0" class="active" style="margin-bottom: -30px"></li>
+	      <li data-target="#myCarousel" data-slide-to="1" style="margin-bottom: -30px"></li>
+	    </ol> -->
+	    <!-- Wrapper for slides -->
+	    <div class="carousel-inner" role="listbox">
+	      <div class="item active">
+	        <img src="/resources/images/background/inmanu_banner01.png" alt="Image" style="width:100%">
+	        <div class="carousel-caption">
+<!-- 		          <h3>inma-Nu $</h3> -->
+<!-- 		          <p>running...</p> -->
+	        </div>      
+	      </div>
+	      <div class="item">
+	        <img src="/resources/images/background/inmanu_banner02.png" alt="Image" style="width:100%">
+	        <div class="carousel-caption">
+	        </div>
+	      </div>
+	    </div>
+	    <!-- Left and right controls -->
+	    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="background-image: url('');">
+	      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="background-image: url('');">
+	      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	</div>
+	<!-- /img광고 -->
+</div>
 
 <div class="container-fluid text-center mainContent">    
   <div class="row content"> 
@@ -92,91 +143,157 @@
 <!--       <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p> -->
 <!--       <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>  -->
     </div>
+
+	<!-- 본문 -->   
     <div id="content_div">
-	    <div class="col-sm-8 text-left"> 
-	      <h1>inma-Nu</h1>
-	      <p>나는 달린다. 왜냐 살뺄거니까</p>
-	      <hr>
-	    <!-- 모달 -->
-	      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-	    	<!-- Modal -->
-		  <div class="modal fade" id="myModal" role="dialog">
-		    <div class="modal-dialog">
-		      <!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Modal Header</h4>
-		        </div>
-		        <div class="modal-body">
-		          <p>Some text in the modal.</p>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        </div>
-		      </div>
-		    </div>
+	    <div class="col-sm-8 text-left">
+	   
+	    <!-- To Do List -->
+	    <div id="todoListDiv" class="well">
+		    <h3>To Do List</h3>
+		    <div style="background-color: #f44336; padding: 30px 40px; color: white; text-align: center;">
+			  <input type="text" id="toDoListInput" placeholder="Title...">
+			  <span onclick="newElement()" class="addBtn">추가</span>
+			</div>
+	
+			<ul id="toDoListUL">
+			  <li>Hit the gym</li>
+			  <li class="checked">Pay bills</li>
+			  <li>Meet George</li>
+			  <li>Buy eggs</li>
+			  <li>Read a book</li>
+			  <li>Organize office</li>
+			</ul>
 		</div>
-		<!-- /모달 -->
+		<script>
+		// Create a "close" button and append it to each list item
+		var myNodelist = document.getElementsByTagName("LI");
+		alert(myNodelist.length);
+		var i;
+		for (i = 0; i < myNodelist.length; i++) {
+		  var span = document.createElement("SPAN");
+		  var txt = document.createTextNode("\u00D7");
+		  span.className = "close";
+		  span.appendChild(txt);
+		  myNodelist[i].appendChild(span);
+		}
 		
-		<!-- img광고 -->
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		    <!-- Indicators -->
-		    <ol class="carousel-indicators">
-		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		      <li data-target="#myCarousel" data-slide-to="1"></li>
-		    </ol>
-		    <!-- Wrapper for slides -->
-		    <div class="carousel-inner" role="listbox">
-		      <div class="item active">
-		        <img src="/resources/images/background/buildings-2297210_960_720.jpg" alt="Image">
-		        <div class="carousel-caption">
-		          <h3>inma-Nu $</h3>
-		          <p>running...</p>
-		        </div>      
-		      </div>
-		      <div class="item">
-		        <img src="/resources/images/background/landscape-2211587_960_720.jpg" alt="Image">
-		        <div class="carousel-caption">
-		          <h3>fun-run $</h3>
-		          <p>ing...</p>
-		        </div>
-		      </div>
-		    </div>
-		    <!-- Left and right controls -->
-		    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		      <span class="sr-only">Previous</span>
-		    </a>
-		    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		      <span class="sr-only">Next</span>
-		    </a>
-		</div>
-		<!-- /img광고 -->
-		<!--  -->
-		<div class="sidenav">
+		// Click on a close button to hide the current list item
+		var close = document.getElementsByClassName("close");
+		var i;
+		for (i = 0; i < close.length; i++) {
+		  close[i].onclick = function() {
+		    var div = this.parentElement;
+		    div.style.display = "none";
+		  }
+		}
+		
+		// Add a "checked" symbol when clicking on a list item
+		var list = document.querySelector('#todoListDiv > ul');
+		list.addEventListener('click', function(ev) {
+		  if (ev.target.tagName === 'LI') {
+		    ev.target.classList.toggle('checked');
+		  }
+		}, false);
+		
+		// Create a new list item when clicking on the "Add" button
+		function newElement() {
+		  var li = document.createElement("li");
+		  var inputValue = document.getElementById("toDoListInput").value;
+		  var t = document.createTextNode(inputValue);
+		  li.appendChild(t);
+		  if (inputValue === '') {
+		    alert("You must write something!");
+		  } else {
+		    document.getElementById("toDoListUL").appendChild(li);
+		  }
+		  document.getElementById("toDoListInput").value = "";
+		
+		  var span = document.createElement("SPAN");
+		  var txt = document.createTextNode("\u00D7");
+		  span.className = "close";
+		  span.appendChild(txt);
+		  li.appendChild(span);
+		
+		  for (i = 0; i < close.length; i++) {
+		    close[i].onclick = function() {
+		      var div = this.parentElement;
+		      div.style.display = "none";
+		    }
+		  }
+		}
+		</script>
+		<!-- //To Do List -->
+	     
+		<!-- 북마크 -->
 	      <div class="well">
-	       <p>Some text..</p>
+	       <h3>북마크 바로가기</h3>
+	       <input type="text" id="bookmarkInput" onkeyup="bookmarkFunction();" placeholder="이름검색" title="즐겨찾기 검색" class="form-control">
+				<table class="table" id="bookmarTable">
+				  <tr class="header">
+				    <th style="width:60%;">검색 키워드</th>
+				    <th style="width:40%;">바로가기</th>
+				  </tr>
+				  <tr>
+				    <td>W3Schools</td>
+				    <td><a href="https://www.w3schools.com/bootstrap/default.asp" target="_w3schools">https://www.w3schools.com/bootstrap/default.asp</a></td>
+				  </tr>
+				  <tr>
+				    <td>Garmin Connect</td>
+				    <td><a href="http://connect.garmin.com" target="_garmin">http://connect.garmin.com</a></td>
+				  </tr>
+				  <tr>
+				    <td>Java Standard Edition 8 API</td>
+				    <td><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">https://docs.oracle.com/javase/8/docs/api/</a></td>
+				  </tr>
+				  <tr>
+				    <td>Tistory</td>
+				    <td><a href="http://thositeom.tistory.com" target="_tistory">http://thositeom.tistory.com</a></td>
+				  </tr>
+				  <tr>
+				    <td>Naver 네이버</td>
+				    <td><a href="https://developers.naver.com/main/" target="_naver">https://developers.naver.com/main/</a></td>
+				  </tr>
+				  <tr>
+				    <td>pixlr 웹포토샵</td>
+				    <td><a href="https://pixlr.com/editor/" target="_pixlr">https://pixlr.com/editor/</a></td>
+				  </tr>
+				  <tr>
+				    <td>dafont 폰트</td>
+				    <td><a href="https://www.dafont.com/" target="_dafont">https://www.dafont.com/</a></td>
+				  </tr>
+				  <tr>
+				    <td>Paris specialites</td>
+				    <td>France</td>
+				  </tr>
+				</table>
+				<script>
+				function bookmarkFunction() {
+				  var input, filter, table, tr, td, i;
+				  input = document.getElementById("bookmarkInput");
+				  filter = input.value.toUpperCase();
+				  table = document.getElementById("bookmarTable");
+				  tr = table.getElementsByTagName("tr");
+				  for (i = 0; i < tr.length; i++) {
+				    td = tr[i].getElementsByTagName("td")[0];
+				    if (td) {
+				      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				        tr[i].style.display = "";
+				      } else {
+				        tr[i].style.display = "none";
+				      }
+				    }       
+				  }
+				}
+				</script>
 	      </div>
-	      <div class="well">
-	       <p>Some text..</p>
 	      </div>
-	      <br/>
-	    </div>
-		<!-- /  -->
+		<!-- //북마크  -->
 	    </div>
 	</div>
-    <div class="col-sm-2 sidenav  navbar-fixed-right">
-      	<p><a href="http://connect.garmin.com" target="_garmin">Garmin Connect</a></p>
-	    <p><a href="https://w3schools.com" target="_w3schools">W3Schools</a></p>
-	    <p><a href="http://thositeom.tistory.com" target="_tistory">Tistory</a></p>
-	    <p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_javaApi">Java Standard Edition 8 API</a></p>
-	    <p><a href="https://www.flaticon.com/search?word=diagonal" target="_flaticon">flaticon</a></p>
-	    <p><a href="https://developers.naver.com/main/" target="_naver">네이버</a></p>
-	    
-    </div>
+	<!-- //본문 -->
   </div>
+  
 </div>
 <jsp:include page="/WEB-INF/jsp/common/layout/footer.jsp"></jsp:include>
 </body>

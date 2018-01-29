@@ -5,8 +5,8 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-	  $(".nav.navbar-nav > li").click(function(){
-		  $(".nav.navbar-nav > li").removeAttr("class");
+	  $("#gnbNabar > ul > li").click(function(){
+		  $("#gnbNabar > ul > li").removeAttr("class");
 		  $("#"+$(this).attr("id")).addClass("active");
 		  
 		  var menuName = $(this).attr("id");
@@ -48,7 +48,8 @@
 			  customAjax(menuUrl, data, gnbSuccessCallback, gnbErrorCallback);
 		  }
 	  });
-	});
+  
+  });
   
   function gnbSuccessCallback(result){
 	  console.log("success");
@@ -68,7 +69,8 @@
 	  $(location).attr('href',"/memberLoginForm.do");
   }
   </script>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+  
+<nav class="navbar navbar-inverse" style="margin-bottom: 0px">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -79,19 +81,21 @@
       <a class="navbar-brand" href="/index.html"><img alt="logo" src="/resources/images/background/backpacker-running.png" width="35px" height="25px"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+      <div id="gnbNabar">
       <ul class="nav navbar-nav">
         <li id="home" class="active"><a href="#">Home</a></li>
         <tlds:isLogin>
 	        <li id="honey"><a href="#">Honey</a></li>
         </tlds:isLogin>
-        <li id="game"><a href="#">Game</a></li>
+       	<li id="game"><a href="#">Game</a></li>
         <li id="about"><a href="#">About</a></li>
         <li id="board"><a href="#">Board</a></li>
         <li id="projects"><a href="#">Projects</a></li>
         <li id="contact"><a href="#">Contact</a></li>
         <li id="sample"><a href="#">Sample</a></li>
+        <li id="sample"><a href="#">관리자</a></li>
       </ul>
-      
+      </div>
       <ul class="nav navbar-nav navbar-right">
        	<tlds:isLogin>
         	<li id="logOut"><a href="/memberLogOut.do"><span class="glyphicon"></span>LogOut</a></li>
