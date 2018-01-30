@@ -74,7 +74,6 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"memberNaverJoin.do")||
 				reqUrl.equals(context+"memberNameCheck.do")||
 				reqUrl.equals(context+"memberLogin.do")||
-				
 				reqUrl.equals(context+"inmanuTopCodeAdd.do")||
 				reqUrl.equals(context+"inmanuTopCodeDelete.do")
 				
@@ -111,6 +110,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"inmanuCodeForm.do")
 				||reqUrl.equals(context+"inmanuTopCodeAddPop.do")
 				||reqUrl.equals(context+"inmanuSubCode.do")
+				||reqUrl.equals(context+"inmanuBannerForm.do")
+				
 				
 		){
 			return true;

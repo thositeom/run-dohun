@@ -90,6 +90,10 @@
 	  height: 15px;
 	  width: 7px;
 	}
+		/* Set all odd list items to a different color (zebra-stripes) */
+	#todoListDiv > ul li:nth-child(odd) {
+	  background: #f9f9f9;
+	}
 	
 	
 	/* //banner */
@@ -151,9 +155,14 @@
 	    <!-- To Do List -->
 	    <div id="todoListDiv" class="well">
 		    <h3>To Do List</h3>
-		    <div style="background-color: #f44336; padding: 30px 40px; color: white; text-align: center;">
-			  <input type="text" id="toDoListInput" placeholder="Title...">
-			  <span onclick="newElement()" class="addBtn">추가</span>
+		    <div class="input-group" style="background-color: red; padding: 30px 30px">
+			  <div class="input-group">
+		      <input type="text" id="toDoListInput" class="form-control" size="200" placeholder="Title..." >
+		      <div class="input-group-btn">
+		        <span onclick="newElement()" class="btn btn-warning">등록이요</span>
+		      </div>
+		    </div>
+			  
 			</div>
 	
 			<ul id="toDoListUL">
@@ -167,8 +176,8 @@
 		</div>
 		<script>
 		// Create a "close" button and append it to each list item
-		var myNodelist = document.getElementsByTagName("LI");
-		alert(myNodelist.length);
+		var mynodeId = document.getElementById("todoListDiv"); 
+		var myNodelist = mynodeId.getElementsByTagName("LI");
 		var i;
 		for (i = 0; i < myNodelist.length; i++) {
 		  var span = document.createElement("SPAN");
@@ -294,7 +303,6 @@
 	<!-- //본문 -->
   </div>
   
-</div>
 <jsp:include page="/WEB-INF/jsp/common/layout/footer.jsp"></jsp:include>
 </body>
 </html>
