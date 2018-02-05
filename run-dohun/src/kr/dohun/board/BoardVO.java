@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 
+	/** Page */
 	private int startRow = 1;
 	private int endRow = 10;
 	private int currentPage=1;

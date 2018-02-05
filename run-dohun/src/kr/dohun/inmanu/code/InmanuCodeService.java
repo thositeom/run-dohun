@@ -6,9 +6,7 @@ public interface InmanuCodeService {
 	public void test001() throws Exception;
 	public List<InmanuCodeVO> InmanuCodeTopList() throws Exception;
 	public List<InmanuCodeVO> InmanuCodeSubList(String topCode) throws Exception;
-	
+
 	public void inmanuTopCodeAdd(InmanuCodeVO vo) throws Exception;
 	public void inmanuTopCodeDelete(InmanuCodeVO vo) throws Exception;
-	
-	
 }

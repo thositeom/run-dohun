@@ -25,10 +25,10 @@ public class InmanuCodeManager {
 		try {
 			inmanuCodeService.test001();
 			List<InmanuCodeVO> codeTopList = inmanuCodeService.InmanuCodeTopList();
-			List<InmanuCodeVO> codeSubList = inmanuCodeService.InmanuCodeSubList();
+//			List<InmanuCodeVO> codeSubList = inmanuCodeService.InmanuCodeSubList();
 			
 			mv.addObject("codeTopList", codeTopList);
-			mv.addObject("codeSubList", codeSubList);
+//			mv.addObject("codeSubList", codeSubList);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

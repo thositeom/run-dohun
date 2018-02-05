@@ -154,7 +154,7 @@ $(".list-group-item-text > a").click(function(){
 	    
 		<!-- Pager -->
 		<script type="text/javascript">
-			pager("pager" ,${currentPage}, ${boardListCnt}, 10);
+			pager("pager" ,${currentPage}, ${boardListCnt}, 10, "boardForm", "/boardForm.do");
 		</script>
 		<div id="pager" class="container"></div>
 		

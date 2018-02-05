@@ -13,13 +13,17 @@
 <script type="text/javascript" src="/resources/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
-<script type="text/javascript" src="/resources/js/pager.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	/* 목록버튼*/
+	$("#inmanuBannerForm").click(function(){
+		$("#bannerForm").attr("action","inmanuBannerForm.do").submit();
+	});
+	
 	/* 등록버튼 */
-	$("#inmanuBannerWriteForm").click(function(){
-		$("#bannerForm").attr("action","inmanuBannerWriteForm.do").submit();
+	$("#inmanuBannerWrite").click(function(){
+		$("#bannerForm").attr("action","inmanuBannerWrite.do").submit();
 	});
 	
 }); //$(document).ready()
@@ -56,44 +60,33 @@ $(document).ready(function() {
 	<form id="bannerForm">
 		<div class="col-sm-8"> 
 			<h1>inma-Nu</h1>
-	   		<p>관리자 - Banner</p>
+	   		<p>관리자 - Banner 등록화면</p>
 		    <hr>
-			
-			<table id="topCodeTable" class="table table-condensed" >
-				<tbody align="left">
-					<tr>
-						<th>no</th>
-						<th>배너명</th>
-						<th>배너링크</th>
-						<th>배너타입</th>
-						<th>설명</th>
-					</tr>
-					<c:if test="${!empty bannerList}">
-						<c:forEach items="${bannerList }" var="i">
-							<tr>
-								<td>${i.bannerIdx}</td>
-								<td>${i.bannerName}</td>
-								<td>${i.bannerUrl}</td>
-								<td>${i.bannerType}</td>
-								<td>${i.bannerDesc}</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
+		    	<div class="form-group text-left">
+			    	<label for="sel1">배너구분:</label>
+				    <select class="form-control" name="bannerType">
+				        <option value="0">메인화면 상단배너</option>
+				        <option value="1">메인화면 우측배너</option>
+				        <option value="2">메인화면 하단배너</option>
+				        <option value="3">메인화면 왼쪽배너</option>
+				    </select>
+				</div>    
+				<div class="form-group text-left">
+					<label for="bannerName">배너명(필수):</label>
+					<input type="text" name="bannerName" class="form-control" >
+				</div>
+				<div class="form-group text-left">					
+					<label for="bannerUrl">배너링크:</label>
+					<input type="text" name="bannerUrl" class="form-control" >
+				</div>
+				<div class="form-group text-left">					
+					<label for="bannerDesc">설명:</label>
+ 					<textarea class="form-control" rows="5" name="bannerDesc"></textarea>
+				</div>
 
-			<!-- Pager -->
-			<!-- Pager -->
-			<script type="text/javascript">
-				pager("pager" ,${currentPage}, ${bannerListCnt}, 10, "bannerForm", "/inmanuBannerForm.do");
-			</script>
-			<div id="pager" class="container"></div>
-			<!-- //Pager -->		
-			
 			<div class="modal-footer">
-<!-- 				<a class="btn btn-default" href="/boardExcelDown.do">Excel</a> -->
-				<button type="button" id="inmanuBannerWriteForm" name="inmanuBannerWriteForm" class="btn btn-default">등록</button>
-				<button type="button" id="boardDelete" name="boardDelete" class="btn btn-default">삭제</button>
+				<button type="button" id="inmanuBannerWrite" name="inmanuBannerWrite" class="btn btn-default">등록</button>
+				<button type="button" id="inmanuBannerForm" name="inmanuBannerForm" class="btn btn-default">목록</button>
 			</div>
 		</div>
 	</form>

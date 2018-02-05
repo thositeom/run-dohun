@@ -111,6 +111,8 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"inmanuTopCodeAddPop.do")
 				||reqUrl.equals(context+"inmanuSubCode.do")
 				||reqUrl.equals(context+"inmanuBannerForm.do")
+				||reqUrl.equals(context+"inmanuBannerWriteForm.do")
+				||reqUrl.equals(context+"inmanuBannerWrite.do")
 				
 				
 		){

@@ -13,7 +13,7 @@ public class InmanuCodeServiceImpl implements InmanuCodeService {
 	
 	@Override
 	public void test001() throws Exception {
-		inmanuCodeDao.test001();
+		((InmanuCodeService) inmanuCodeDao).test001();
 	}
 
 	@Override
