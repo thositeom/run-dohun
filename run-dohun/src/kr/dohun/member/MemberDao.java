@@ -32,7 +32,6 @@ public class MemberDao {
 	 */
 	public MemberVO memberInfo(String userId) throws Exception{
 		return (MemberVO) sqlMapClientTemplate.queryForObject("memberSqlMap.memberInfo",userId);
-	
 	}
 	
 	/**

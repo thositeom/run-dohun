@@ -75,8 +75,9 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"memberNameCheck.do")||
 				reqUrl.equals(context+"memberLogin.do")||
 				reqUrl.equals(context+"inmanuTopCodeAdd.do")||
-				reqUrl.equals(context+"inmanuTopCodeDelete.do")
-				
+				reqUrl.equals(context+"inmanuTopCodeDelete.do")||
+				reqUrl.equals(context+"todoListDelete.do")||
+				reqUrl.equals(context+"todoListWrite.do")
 		){
 			return true;
 		}else{

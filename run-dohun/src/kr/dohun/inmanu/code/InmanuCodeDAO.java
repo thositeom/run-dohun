@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,14 +13,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository("InmanuCodeDAO")
 public class InmanuCodeDAO {
-
+	
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 	    this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
+	
 	public List<InmanuCodeVO> InmanuCodeTopList(){
 		List<InmanuCodeVO> resultList = this.jdbcTemplate.query(
 				  "SELECT * FROM CODE_TOP",
@@ -34,9 +35,7 @@ public class InmanuCodeDAO {
 				  });
 		return resultList;
 	}
-
 	
-
 	public List<InmanuCodeVO> InmanuCodeSubList(String topCode){
 		List<InmanuCodeVO> resultList = this.jdbcTemplate.query(
 				  "SELECT * FROM CODE_SUB WHERE CODE_TOP = ? ORDER BY CODE_ORDER ASC ",
@@ -55,7 +54,7 @@ public class InmanuCodeDAO {
 				  });
 		return resultList;
 	}
-
+	
 	public void inmanuTopCodeAdd(InmanuCodeVO vo){
 		this.jdbcTemplate.update(
 				"INSERT INTO CODE_TOP(CODE, CODE_NAME, CODE_DESC) VALUES (?, ?, ?)",
@@ -65,7 +64,7 @@ public class InmanuCodeDAO {
 						vo.getTopCodeDesc()
 				});
 	}
-
+	
 	public void inmanuTopCodeDelete(InmanuCodeVO vo){
 		this.jdbcTemplate.update(
 				"DELETE FROM CODE_TOP WHERE CODE = ? ",
@@ -73,7 +72,7 @@ public class InmanuCodeDAO {
 						vo.getTopCode(),
 				});
 	}
-
+	
 	public void inmanuSubCodeDelete(InmanuCodeVO vo){
 		this.jdbcTemplate.update(
 				"DELETE FROM CODE_SUB WHERE CODE_TOP = ? ",

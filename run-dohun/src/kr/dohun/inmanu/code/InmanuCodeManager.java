@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.dohun.member.MemberService;
-
 @Controller
 public class InmanuCodeManager {
 
@@ -23,12 +21,9 @@ public class InmanuCodeManager {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			inmanuCodeService.test001();
 			List<InmanuCodeVO> codeTopList = inmanuCodeService.InmanuCodeTopList();
-//			List<InmanuCodeVO> codeSubList = inmanuCodeService.InmanuCodeSubList();
 			
 			mv.addObject("codeTopList", codeTopList);
-//			mv.addObject("codeSubList", codeSubList);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

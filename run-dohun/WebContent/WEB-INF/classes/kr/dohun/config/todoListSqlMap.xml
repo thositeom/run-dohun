@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="todoListSqlMap">
+
+	<typeAlias alias="ToDoListVO" type="kr.dohun.todoList.ToDoListVO" />
+	
+	<resultMap id="todoListMap" class="ToDoListVO">
+		<result property="userIdx" column="USER_IDX" />
+		<result property="userId" column="USER_ID" />
+		<result property="userName" column="USER_NAME" />
+		<result property="todoListIdx" column="TODOLIST_IDX" />
+		<result property="todoLisTitle" column="TODOLIST_TITLE" />
+		<result property="todoLisContent" column="TODOLIST_CONTENT" />
+		<result property="createDate" column="CREATEDATE" />
+		<result property="updateDate" column="UPDATEDATE" />
+	</resultMap>
+	
+	<!-- ToDoList Max Index -->
+	<select id="todoListMaxIndex" resultClass="java.lang.Integer">
+		SELECT IFNULL(MAX(TODOLIST_IDX), 0) AS TODOLIST_IDX FROM TODOLIST
+	</select>
+		
+	<!-- ToDoList 추가 -->
+	<insert id="todoListWrite" parameterClass="ToDoListVO">
+	INSERT INTO TODOLIST
+		(USER_IDX,USER_ID,USER_NAME,TODOLIST_IDX
+		,TODOLIST_TITLE ,TODOLIST_CONTENT,CREATEDATE,UPDATEDATE
+		) 
+		VALUES 
+		(
+		#userIdx#,#userIdx#,#userName#,#todoListIdx#
+		,#todoLisTitle#,#todoLisContent#,NOW(),NOW()
+		)
+	</insert>
+	
+	<!-- ToDoList 삭제 -->
+	<delete id="todoListDelete" parameterClass="ToDoListVO">
+		DELETE FROM TODOLIST WHERE TODOLIST_IDX = #todoListIdx# 
+	</delete> 
+	
+	<!-- ToDoList 목록 -->
+	<select id="todoList" resultMap="todoListMap">
+		SELECT * FROM TODOLIST
+	</select>
+	
+	<!-- ToDoList Cnt -->
+	<select id="todoListCnt" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM TODOLIST
+	</select>
+</sqlMap>

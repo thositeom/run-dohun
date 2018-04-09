@@ -159,19 +159,25 @@
 			  <div class="input-group">
 		      <input type="text" id="toDoListInput" class="form-control" size="200" placeholder="Title..." >
 		      <div class="input-group-btn">
-		        <span onclick="newElement()" class="btn btn-warning">등록이요</span>
+		        <span onclick="fnNewElement();" class="btn btn-warning">등록이요</span>
 		      </div>
 		    </div>
 			  
 			</div>
-	
 			<ul id="toDoListUL">
-			  <li>Hit the gym</li>
-			  <li class="checked">Pay bills</li>
-			  <li>Meet George</li>
-			  <li>Buy eggs</li>
-			  <li>Read a book</li>
-			  <li>Organize office</li>
+				<c:if test="${!empty todoListResult}">
+					<c:forEach items="${todoListResult}" var="i">
+						<li id="${i.todoListIdx}">
+							<span >[${i.todoListIdx}] </span>${i.todoLisTitle}
+						</li>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty todoListResult}">
+					<h3 style="text-align: center; margin-top: 20px;">등록된 데이터가 없습니다.</h3>
+				</c:if>
+<!-- 			  <li>Hit the gym</li> -->
+<!-- 			  <li class="checked">Pay bills</li> -->
+<!-- 			  <li>Meet George</li> -->
 			</ul>
 		</div>
 		<script>
@@ -188,12 +194,14 @@
 		}
 		
 		// Click on a close button to hide the current list item
+		// To Do List 삭제
 		var close = document.getElementsByClassName("close");
 		var i;
 		for (i = 0; i < close.length; i++) {
-		  close[i].onclick = function() {
-		    var div = this.parentElement;
-		    div.style.display = "none";
+			close[i].onclick = function() {
+				var div = this.parentElement;
+			    div.style.display = "none";
+				customAjax("/todoListDelete.do", {"todoListIdx":div.id}, successTodoListDeleteCallback, errorToDoListCallback);
 		  }
 		}
 		
@@ -205,32 +213,45 @@
 		  }
 		}, false);
 		
-		// Create a new list item when clicking on the "Add" button
-		function newElement() {
+		// ToDoList 추가
+		function fnNewElement() {
 		  var li = document.createElement("li");
 		  var inputValue = document.getElementById("toDoListInput").value;
-		  var t = document.createTextNode(inputValue);
-		  li.appendChild(t);
-		  if (inputValue === '') {
-		    alert("You must write something!");
-		  } else {
-		    document.getElementById("toDoListUL").appendChild(li);
-		  }
-		  document.getElementById("toDoListInput").value = "";
-		
-		  var span = document.createElement("SPAN");
-		  var txt = document.createTextNode("\u00D7");
-		  span.className = "close";
-		  span.appendChild(txt);
-		  li.appendChild(span);
-		
-		  for (i = 0; i < close.length; i++) {
-		    close[i].onclick = function() {
-		      var div = this.parentElement;
-		      div.style.display = "none";
-		    }
-		  }
+		  customAjax("/todoListWrite.do", {"todoLisTitle":inputValue}, successToDoListCallback, errorToDoListCallback);
 		}
+		
+		function successToDoListCallback(){
+			var li = document.createElement("li");
+			var inputValue = document.getElementById("toDoListInput").value;
+			var t = document.createTextNode(inputValue);
+			li.appendChild(t);
+			if (inputValue === '') {
+			  alert("You must write something!");
+			} else {
+			  document.getElementById("toDoListUL").appendChild(li);
+			}
+			document.getElementById("toDoListInput").value = "";
+			
+			var span = document.createElement("SPAN");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			li.appendChild(span);
+			
+			for (i = 0; i < close.length; i++) {
+			  close[i].onclick = function() {
+			    var div = this.parentElement;
+			    div.style.display = "none";
+			  }
+			}
+		}
+		function successTodoListDeleteCallback(){
+// 			location.reload();
+		}
+		function errorToDoListCallback(){
+			alert("실패 ");
+		}
+		
 		</script>
 		<!-- //To Do List -->
 	     

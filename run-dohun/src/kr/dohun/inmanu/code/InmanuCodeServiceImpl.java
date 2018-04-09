@@ -12,11 +12,6 @@ public class InmanuCodeServiceImpl implements InmanuCodeService {
 	InmanuCodeDAO inmanuCodeDao;
 	
 	@Override
-	public void test001() throws Exception {
-		((InmanuCodeService) inmanuCodeDao).test001();
-	}
-
-	@Override
 	public List<InmanuCodeVO> InmanuCodeTopList() throws Exception {
 		return inmanuCodeDao.InmanuCodeTopList();
 	}
