@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="attendanceSqlMap">
+
+	<typeAlias alias="AttendanceVO" type="kr.dohun.attendance.AttendanceVO" />
+	
+	<resultMap id="attendanceMap" class="AttendanceVO">
+		<result property="attendIdx" column="ATTEND_IDX" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="attentTimeStart" column="ATTENT_TIME_START" />
+		<result property="attentTimeEnd" column="ATTENT_TIME_END" />
+		<result property="attentStatus" column="ATTENT_STATUS" />
+		<result property="createDate" column="CREATEDATE" />
+	</resultMap>
+	
+	<!-- 근태출근 추가 -->
+	<insert id="attendanceInsert" parameterClass="AttendanceVO">
+	INSERT INTO ATTENDANCE
+		(ATTEND_IDX,MEMBER_ID,MEMBER_NAME,ATTENT_TIME_START<!-- ,ATTENT_TIME_END -->,ATTENT_STATUS,CREATEDATE) 
+		VALUES 
+		((SELECT MAX(ATTEND_IDX)+1 AS SEQ FROM ATTENDANCE A)
+		,#memberId#
+		,#memberName#
+		,NOW()
+		<!-- ,#attentTimeEnd# -->
+		,#attentStatus#
+		,NOW()
+		)
+	</insert>
+	
+	<!-- 근태 목록 -->
+	<select id="attendanceSelect" parameterClass="AttendanceVO" resultMap="attendanceMap">
+		SELECT ATTEND_IDX, MEMBER_ID, MEMBER_NAME, ATTENT_TIME_START ,ATTENT_TIME_END, ATTENT_STATUS, DATE_FORMAT(CREATEDATE,'%Y-%m-%d:%h:%m:%s')
+		FROM ATTENDANCE 
+		WHERE MEMBER_ID = 'guest'
+	</select>
+	
+	<!-- 근태 목록 Cnt -->
+	<select id="attendanceSelectCnt" parameterClass="AttendanceVO" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM ATTENDANCE
+	</select>
+	
+	<!-- 근태 수정 -->
+	<update id="attendanceUpdate" parameterClass="AttendanceVO">
+		UPDATE ATTENDANCE
+		SET <!-- MEMBER_ID = #memberId# 
+			,MEMBER_NAME = #memberName# -->
+    		,ATTENT_TIME_END = NOW()
+			,ATTENT_STATUS = #attentStatus#
+		WHERE ATTEND_IDX = #attendIdx#
+	</update>
+
+	<!-- 근태 삭제 -->
+	<delete id="attendanceDelete" parameterClass="AttendanceVO">
+		DELETE FROM ATTENDANCE WHERE ATTEND_IDX = #attendIdx#
+	</delete> 
+	
+</sqlMap>

@@ -242,7 +242,7 @@
 				<div class="browser">
 	            <label>
 	              <span>Click to open the file Browser</span>
-	              <input type="file" name="files[]" multiple="multiple" title='Click to add Files'>
+	              <input type="file" name="files[]" multiple="multiple" title='Click to add Files' accept="file_extension|audio/*|video/*|image/*|media_type">
 	            </label>
 	          </div>
 			</div>

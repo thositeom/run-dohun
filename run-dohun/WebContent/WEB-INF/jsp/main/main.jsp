@@ -153,6 +153,7 @@
 	    <div class="col-sm-8 text-left">
 	   
 	    <!-- To Do List -->
+	    <form name="todoForm" id="todoForm" method="post">
 	    <div id="todoListDiv" class="well">
 		    <h3>To Do List</h3>
 		    <div class="input-group" style="background-color: red; padding: 30px 30px">
@@ -180,6 +181,7 @@
 <!-- 			  <li>Meet George</li> -->
 			</ul>
 		</div>
+		</form>
 		<script>
 		// Create a "close" button and append it to each list item
 		var mynodeId = document.getElementById("todoListDiv"); 
@@ -216,35 +218,21 @@
 		// ToDoList 추가
 		function fnNewElement() {
 		  var li = document.createElement("li");
-		  var inputValue = document.getElementById("toDoListInput").value;
-		  customAjax("/todoListWrite.do", {"todoLisTitle":inputValue}, successToDoListCallback, errorToDoListCallback);
+		  var inputValue = document.getElementById("toDoListInput").value.trim();
+		  if (inputValue === '') {
+			  alert("You must write something!");
+		  }else{
+			  var input = document.createElement("INPUT");
+			  input.setAttribute("type", "hidden");
+			  input.setAttribute("name", "todoLisTitle");
+			  input.setAttribute("value", inputValue);
+			  document.todoForm.appendChild(input);
+			  document.todoForm.action="/todoListWrite.do"
+			  document.todoForm.submit();
+		  } 
+		  
 		}
 		
-		function successToDoListCallback(){
-			var li = document.createElement("li");
-			var inputValue = document.getElementById("toDoListInput").value;
-			var t = document.createTextNode(inputValue);
-			li.appendChild(t);
-			if (inputValue === '') {
-			  alert("You must write something!");
-			} else {
-			  document.getElementById("toDoListUL").appendChild(li);
-			}
-			document.getElementById("toDoListInput").value = "";
-			
-			var span = document.createElement("SPAN");
-			var txt = document.createTextNode("\u00D7");
-			span.className = "close";
-			span.appendChild(txt);
-			li.appendChild(span);
-			
-			for (i = 0; i < close.length; i++) {
-			  close[i].onclick = function() {
-			    var div = this.parentElement;
-			    div.style.display = "none";
-			  }
-			}
-		}
 		function successTodoListDeleteCallback(){
 // 			location.reload();
 		}
@@ -258,7 +246,7 @@
 		<!-- 북마크 -->
 	      <div class="well">
 	       <h3>북마크 바로가기</h3>
-	       <input type="text" id="bookmarkInput" onkeyup="bookmarkFunction();" placeholder="이름검색" title="즐겨찾기 검색" class="form-control">
+	       <input type="text" id="bookmarkInput" onkeyup="fnBookmark();" placeholder="이름검색" title="즐겨찾기 검색" class="form-control">
 				<table class="table" id="bookmarTable">
 				  <tr class="header">
 				    <th style="width:60%;">검색 키워드</th>
@@ -298,7 +286,7 @@
 				  </tr>
 				</table>
 				<script>
-				function bookmarkFunction() {
+				function fnBookmark() {
 				  var input, filter, table, tr, td, i;
 				  input = document.getElementById("bookmarkInput");
 				  filter = input.value.toUpperCase();

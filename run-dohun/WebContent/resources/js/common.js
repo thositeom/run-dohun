@@ -145,20 +145,23 @@ function serializeObjectAjax(url, formId, successCallback, errorCallback){
 				}
 			},
 			checkRegExp : function(regExp, fieldValue){
-				return fieldValue.match(regExp); 
+				return fieldValue.trim().match(regExp); 
+			},
+			checkRegNumber : function(fieldValue){
+				var regExp= /[^0-9]/g;
+				return fieldValue.trim().match(regExp); 
 			},
 			checkRegExpEmail : function(fieldValue){
 				var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-				return fieldValue.match(regExp); 
+				return fieldValue.trim().match(regExp); 
 			},
 			checkRegExpPassword : function(fieldValue){
 				var regExp = /^(?=.*\d)(?=.*[~`!@#$%\^&*()-])(?=.*[a-zA-Z]).{7,20}$/;
-				return fieldValue.match(regExp); 
+				return fieldValue.trim().match(regExp); 
 			}
 	
 	};
 	window.uValidation= uValidation;
-	
 	
 	/*Cookie*/
 	var uCookie = {

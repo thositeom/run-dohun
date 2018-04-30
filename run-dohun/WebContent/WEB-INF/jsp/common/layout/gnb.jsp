@@ -36,9 +36,12 @@
 		  case "sample":
 			  menuUrl ="/sampleForm.do";
 			  break;
-		 /*  case "projects":
-			  menuUrl ="/projectsForm.do";
-			  break; */
+		  case "coupons":
+			  menuUrl ="/couponsForm.do";
+			  break;
+		  case "attendance":
+			  menuUrl ="/attendanceForm.do";
+			  break;
 		  default:
 // 			  menuUrl ="/memberLoginForm.do";
 			  menuUrl ="/projectsForm.do";
@@ -93,7 +96,8 @@
         <li id="projects"><a href="#">Projects</a></li>
         <li id="contact"><a href="#">Contact</a></li>
         <li id="sample"><a href="#">Sample</a></li>
-        <li id="sample"><a href="#">관리자</a></li>
+        <li id="coupons"><a href="#">Coupons</a></li>
+        <li id="attendance"><a href="#">Attendance</a></li>
       </ul>
       </div>
       <ul class="nav navbar-nav navbar-right">

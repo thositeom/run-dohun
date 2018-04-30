@@ -10,6 +10,7 @@
 	<sqlMap resource="kr/dohun/config/boardSqlMap.xml" />
 	<sqlMap resource="kr/dohun/config/commonSqlMap.xml" />
 	<sqlMap resource="kr/dohun/config/todoListSqlMap.xml" />
+	<sqlMap resource="kr/dohun/config/attendanceSqlMap.xml" />
 </sqlMapConfig>
 
  

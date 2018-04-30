@@ -77,7 +77,10 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				reqUrl.equals(context+"inmanuTopCodeAdd.do")||
 				reqUrl.equals(context+"inmanuTopCodeDelete.do")||
 				reqUrl.equals(context+"todoListDelete.do")||
-				reqUrl.equals(context+"todoListWrite.do")
+				reqUrl.equals(context+"couponsForm.do")||
+				reqUrl.equals(context+"attendanceForm.do")||
+				reqUrl.equals(context+"attendanceInsert.do")
+				
 		){
 			return true;
 		}else{
@@ -114,7 +117,7 @@ public class SpringInterceptor extends HandlerInterceptorAdapter{
 				||reqUrl.equals(context+"inmanuBannerForm.do")
 				||reqUrl.equals(context+"inmanuBannerWriteForm.do")
 				||reqUrl.equals(context+"inmanuBannerWrite.do")
-				
+				||reqUrl.equals(context+"todoListWrite.do")
 				
 		){
 			return true;
